@@ -99,8 +99,7 @@ public class LockItem extends ModItem {
 		}
 		tooltip.add(new TranslationTextComponent("tooltip.label.craftable", craftable));
 
-		String keyList = getKeys().stream().map(e -> e.getName(null).getString())
-				.collect(Collectors.joining(","));
+		String keyList = getKeys().stream().map(e -> e.getName(new ItemStack(e)).getString()).collect(Collectors.joining(","));
 
 		tooltip.add(new TranslationTextComponent("tooltip.label.accepts_keys", TextFormatting.GOLD + keyList));
 	}

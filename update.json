@@ -1,11 +1,12 @@
 {
     "homepage": "https://minecraft.curseforge.com/projects/treasure2",
     "promos": {
-    "1.16.5-latest": "1.0.1",
-    "1.16.5-recommended": "1.0.1"
+    "1.16.5-latest": "1.0.2",
+    "1.16.5-recommended": "1.0.2"
   },
     "1.16.5": {
         "1.0.0": "Initial version release.",
-        "1.0.1": "Fixed Ticking block entity on Bound Soul crash.\nFixed missing Loot Table error (for test.json)."
+        "1.0.1": "Fixed Ticking block entity on Bound Soul crash.\nFixed missing Loot Table error (for test.json).",
+        "1.0.2": "Attempt to fix NPE at com.someguyssoftware.treasure2.item.LockItem.lambda$appendHoverText$0(LockItem.java:102) ~[?:mc1.16.5-f36.1.0-v1.0.1] {re:classloading}"
 	}
 }
