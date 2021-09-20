@@ -73,6 +73,10 @@
 		"pools/treasure"
     ],
     "injectLootTableFolderLocations": [
-    	"inject/uncommon"
+		"inject/common",
+		"inject/uncommon",
+		"inject/scarce",
+		"inject/rare",
+		"inject/epic"
     ]
 }

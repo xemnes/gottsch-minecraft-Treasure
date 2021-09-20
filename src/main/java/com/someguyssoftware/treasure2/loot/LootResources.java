@@ -22,8 +22,7 @@ public class LootResources {
     private List<String> chestLootTableFolderLocations;
     // TODO fix
     private List<String> injectLootTableFolderLocations;
-    // TODO rename
-    private List<String> supportingLootTableFolderLocatoins;
+    private List<String> supportingLootTableFolderLocations;
 	
 	/**
 	 * 
@@ -78,12 +77,12 @@ public class LootResources {
 		this.chestLootTableFolderLocations = chestLootTableFolderLocations;
 	}
 
-	public List<String> getSupportingLootTableFolderLocatoins() {
-		return supportingLootTableFolderLocatoins;
+	public List<String> getSupportingLootTableFolderLocations() {
+		return supportingLootTableFolderLocations;
 	}
 
-	public void setSupportingLootTableFolderLocatoins(List<String> supportingLootTableFolderLocatoins) {
-		this.supportingLootTableFolderLocatoins = supportingLootTableFolderLocatoins;
+	public void setSupportingLootTableFolderLocations(List<String> supportingLootTableFolderLocatoins) {
+		this.supportingLootTableFolderLocations = supportingLootTableFolderLocatoins;
     }
     
     public List<String> getInjectLootTableFolderLocations() {
@@ -96,10 +95,11 @@ public class LootResources {
 
 	@Override
 	public String toString() {
-		return "DecayResources [supportingResources=" + supportingResources + ", chestResources=" + chestResources
+		return "LootResources [supportingResources=" + supportingResources + ", chestResources=" + chestResources
 				+ ", specialResources=" + specialResources + ", specialLootTableFolderLocations="
 				+ specialLootTableFolderLocations + ", chestLootTableFolderLocations="
-				+ chestLootTableFolderLocations + ", supportingLootTableFolderLocatoins="
-				+ supportingLootTableFolderLocatoins + "]";
+				+ chestLootTableFolderLocations + ", supportingLootTableFolderLocations="
+				+ supportingLootTableFolderLocations + ", injectLootTableFolderLocations="
+				+ injectLootTableFolderLocations + "]";
 	}
 }

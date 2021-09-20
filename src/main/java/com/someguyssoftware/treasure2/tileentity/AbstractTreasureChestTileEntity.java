@@ -222,7 +222,6 @@ public abstract class AbstractTreasureChestTileEntity extends AbstractModTileEnt
 	 */
 	@Override
 	public CompoundNBT save(CompoundNBT parentNBT) {
-		Treasure.LOGGER.debug("saving chest TE...");
 		try {
 			parentNBT = super.save(parentNBT);
 

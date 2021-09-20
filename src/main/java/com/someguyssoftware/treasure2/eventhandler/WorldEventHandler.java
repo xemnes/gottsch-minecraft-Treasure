@@ -66,11 +66,10 @@ public class WorldEventHandler {
 			Treasure.LOGGER.info("In world load event for dimension {}", WorldInfo.getDimension(world).toString());
 			if (WorldInfo.isSurfaceWorld(world)) {
 				// called once to initiate world-level properties in the registries
-				TreasureLootTableRegistry.initialize(world);
+				TreasureLootTableRegistry.initialize();
 				TreasureTemplateRegistry.initialize(world);
 
-				// register mod's loot tables
-				TreasureLootTableRegistry.register(mod.getId());
+				TreasureLootTableRegistry.register();
 				TreasureMetaRegistry.register(getMod().getId());
 				TreasureTemplateRegistry.register(getMod().getId());
 				TreasureDecayRegistry.register(getMod().getId());

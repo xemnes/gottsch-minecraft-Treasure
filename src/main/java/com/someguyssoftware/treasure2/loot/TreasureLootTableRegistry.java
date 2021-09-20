@@ -27,6 +27,8 @@ import com.someguyssoftware.gottschcore.json.JSMin;
 import com.someguyssoftware.gottschcore.mod.IMod;
 import com.someguyssoftware.treasure2.Treasure;
 import com.someguyssoftware.treasure2.config.TreasureConfig;
+import com.someguyssoftware.treasure2.enums.Rarity;
+import com.someguyssoftware.treasure2.loot.TreasureLootTableMaster2.ManagedTableType;
 
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.world.server.ServerWorld;
@@ -39,19 +41,21 @@ import net.minecraft.world.server.ServerWorld;
 public final class TreasureLootTableRegistry {
 	public static final Logger LOGGER = LogManager.getLogger(Treasure.LOGGER.getName());
 
-	private static final String DEFAULT_RESOURCES_LIST_PATH = "loot_tables/default_loot_tables_list.json";	
+	private static final String DEFAULT_RESOURCES_LIST_PATH = "loot_tables/treasure2/default_loot_tables_list.json";	
 	private static final String CUSTOM_LOOT_TABLES_RESOURCE_PATH = "/loot_tables/";		
 	private static final List<String> REGISTERED_MODS = new ArrayList<>();
 	private static LootResources lootResources;
 
 	private static TreasureLootTableMaster2 lootTableMaster;
 
+	// TODO addon mods will have to provide their own lootResources to a register() call.
 	static {
 		// load master loot resources lists
 		try {
 			lootResources = readLootResourcesFromFromStream(
 					Objects.requireNonNull(Treasure.instance.getClass().getClassLoader().getResourceAsStream(DEFAULT_RESOURCES_LIST_PATH))
 					);
+			Treasure.LOGGER.debug(lootResources);
 		}
 		catch(Exception e) {
 			Treasure.LOGGER.warn("Unable to expose loot tables");
@@ -68,14 +72,15 @@ public final class TreasureLootTableRegistry {
 	 * Convenience wrapper
 	 * @param world
 	 */
-	public static void initialize(ServerWorld world) {
-		lootTableMaster.init(world);
+	public static void initialize() {
+		lootTableMaster.init();
 	}
 	
 	/**
 	 * 
 	 * @param modID
 	 */
+	@Deprecated
 	private static void buildAndExpose(String modID) {
 		lootTableMaster.buildAndExpose(CUSTOM_LOOT_TABLES_RESOURCE_PATH, modID, lootResources.getChestResources());
 		lootTableMaster.buildAndExpose(CUSTOM_LOOT_TABLES_RESOURCE_PATH, modID, lootResources.getSpecialResources());
@@ -84,35 +89,64 @@ public final class TreasureLootTableRegistry {
 	}
 
 	/**
-	 * Called during WorldEvent.Load event
+	 * Called during WorldEvent.Load event for this mod only
 	 * @param modID
 	 */
-	public static void register(final String modID) {
-		if (!REGISTERED_MODS.contains(modID)) {
-			if (TreasureConfig.GENERAL.enableDefaultLootTablesCheck.get()) {
-				buildAndExpose(modID);
-				// copy all folders/files from config to world data
-				lootTableMaster.moveLootTables(modID, "");
-			}
-			lootTableMaster.registerChests(modID, lootResources.getChestLootTableFolderLocations());
-			lootTableMaster.registerSpecials(modID, lootResources.getSpecialLootTableFolderLocations());
-			lootTableMaster.registerInjects(modID, lootResources.getInjectLootTableFolderLocations());
-		}
+	public static void register() {
+		register(Treasure.MODID, lootResources);
+		
+//		if (!REGISTERED_MODS.contains(modID)) {
+//			REGISTERED_MODS.add(modID);
+//			if (TreasureConfig.GENERAL.enableDefaultLootTablesCheck.get()) {
+//				Treasure.LOGGER.debug("buildAndExpose() and moveLootTables should be called...");
+//				buildAndExpose(modID);
+//				// copy all folders/files from config to world data
+//				lootTableMaster.moveLootTables(modID, "");
+//			}
+//			lootTableMaster.registerChests(modID, lootResources.getChestLootTableFolderLocations());
+//			lootTableMaster.registerSpecials(modID, lootResources.getSpecialLootTableFolderLocations());
+//			lootTableMaster.registerInjects(modID, lootResources.getInjectLootTableFolderLocations());
+//		}
 	}
 
+	public static void register(final String modID, LootResources lootResources) {
+		if (!REGISTERED_MODS.contains(modID)) {
+			REGISTERED_MODS.add(modID);
+//			if (TreasureConfig.GENERAL.enableDefaultLootTablesCheck.get()) {
+//				Treasure.LOGGER.debug("buildAndExpose() and moveLootTables should be called...");
+//				buildAndExpose(modID);
+//				getLootTableMaster().getLootTableByRarity(TreasureLootTableMaster2.ManagedTableType.CHEST, Rarity.EPIC);
+//				// copy all folders/files from config to world data
+//				lootTableMaster.moveLootTables(modID, "");
+//				getLootTableMaster().getLootTableByRarity(TreasureLootTableMaster2.ManagedTableType.CHEST, Rarity.EPIC);
+//			}
+//			lootTableMaster.registerChests(modID, lootResources.getChestLootTableFolderLocations());
+			lootTableMaster.registerChests(modID, lootResources.getChestResources());
+			Treasure.LOGGER.debug("after register chest");
+			getLootTableMaster().getLootTableByRarity(TreasureLootTableMaster2.ManagedTableType.CHEST, Rarity.EPIC);
+			lootTableMaster.registerSpecials(modID, lootResources.getSpecialResources());
+			Treasure.LOGGER.debug("after register special");
+			getLootTableMaster().getLootTableByRarity(TreasureLootTableMaster2.ManagedTableType.CHEST, Rarity.EPIC);
+			lootTableMaster.registerInjects(modID, lootResources.getInjectResources());
+			Treasure.LOGGER.debug("after register inject");
+			getLootTableMaster().getLootTableByRarity(TreasureLootTableMaster2.ManagedTableType.CHEST, Rarity.EPIC);
+		}
+	}
+	
 	/**
 	 * 
 	 * @param modID
 	 * @param customFolders
 	 */
-	public static void register(final String modID, final @Nullable List<String> customFolders) {
-		if (!REGISTERED_MODS.contains(modID)) {
-			if (customFolders != null && !customFolders.isEmpty()) {
-				lootTableMaster.buildAndExpose(CUSTOM_LOOT_TABLES_RESOURCE_PATH, modID, customFolders);
-			}
-			register(modID);
-		}
-	}
+//	@Deprecated
+//	public static void register(final String modID, final @Nullable List<String> customFolders) {
+//		if (!REGISTERED_MODS.contains(modID)) {
+//			if (customFolders != null && !customFolders.isEmpty()) {
+//				lootTableMaster.buildAndExpose(CUSTOM_LOOT_TABLES_RESOURCE_PATH, modID, customFolders);
+//			}
+//			register(modID);
+//		}
+//	}
 
 	/**
 	 * @param inputStream

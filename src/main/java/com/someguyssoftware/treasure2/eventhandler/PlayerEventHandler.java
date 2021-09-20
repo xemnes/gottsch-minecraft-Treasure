@@ -26,10 +26,14 @@ import com.someguyssoftware.treasure2.item.IWishable;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundNBT;
+import net.minecraftforge.event.LootTableLoadEvent;
 import net.minecraftforge.event.entity.item.ItemTossEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
+import net.minecraftforge.fml.event.server.FMLServerAboutToStartEvent;
+import net.minecraftforge.fml.event.server.FMLServerStartedEvent;
+import net.minecraftforge.fml.event.server.FMLServerStartingEvent;
 
 /**
  * 
@@ -59,4 +63,23 @@ public class PlayerEventHandler {
 			stack.setTag(nbt);			
 		}		
 	}
+	
+//	@SubscribeEvent
+//    @SuppressWarnings("unused")
+//    public static void onLootTableLoad(LootTableLoadEvent event) {
+//		Treasure.LOGGER.debug("on LootTableLoadEvent -> {}", event.getTable().getLootTableId().toString());
+//	}
+//	
+//	@SubscribeEvent
+//	public static void onServerAboutToStartEvent(final FMLServerAboutToStartEvent event) {
+//		Treasure.LOGGER.info("in serverAboutToStartEvent");
+//	}
+//	@SubscribeEvent
+//	public static void onServerStartingEvent(final FMLServerStartingEvent event) {
+//		Treasure.LOGGER.info("in serverStartingEvent");
+//	}
+//	@SubscribeEvent
+//	public static void onServerStartedEvent(final FMLServerStartedEvent event) {
+//		Treasure.LOGGER.info("in serverStartedEvent");
+//	}
 }

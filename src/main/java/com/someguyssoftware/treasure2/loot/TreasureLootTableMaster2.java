@@ -19,6 +19,8 @@
  */
 package com.someguyssoftware.treasure2.loot;
 
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -52,6 +54,10 @@ import com.google.common.collect.HashBasedTable;
 import com.google.common.collect.Table;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.google.gson.JsonIOException;
+import com.google.gson.JsonSyntaxException;
+import com.google.gson.stream.JsonReader;
+import com.someguyssoftware.gottschcore.json.JSMin;
 import com.someguyssoftware.gottschcore.loot.LootTableMaster2;
 import com.someguyssoftware.gottschcore.loot.LootTableShell;
 import com.someguyssoftware.gottschcore.mod.IMod;
@@ -170,7 +176,7 @@ public class TreasureLootTableMaster2 extends LootTableMaster2 {
 
 	// TODO possibly remove or get new name
 	// TEMP
-	public void init(ServerWorld world) {
+	public void init() {
 		Treasure.LOGGER.debug("initializing ...");
 		// initialize the maps
 		for (Rarity r : Rarity.values()) {
@@ -178,105 +184,8 @@ public class TreasureLootTableMaster2 extends LootTableMaster2 {
 			CHEST_LOOT_TABLES_TABLE.put(CUSTOM_LOOT_TABLE_KEY, r, new ArrayList<LootTableShell>());
 		}
 
-		//		Path path = Paths.get(world.getSaveHandler().getWorldDirectory().getPath(), "datapacks", "treasure2");
-		Object save = ObfuscationReflectionHelper.getPrivateValue(MinecraftServer.class, world.getServer(), SAVE_FORMAT_LEVEL_SAVE_SRG_NAME);
-
-		//		List<String> list = Arrays.asList(
-		//				"field_152367_a","field_213219_c"
-		//				,"field_71310_m"
-		//				,"field_240766_e_"
-		//				,"field_240767_f_"
-		//				,"field_110456_c"
-		//				,"field_71311_j"
-		//				,"field_240768_i_"
-		//				,"field_147145_h"
-		//				,"field_71307_n"
-		//				,"field_71322_p"
-		//				,"field_240769_m_"
-		//				,"field_71304_b"
-		//				,"field_147144_o"
-		//				,"field_213220_d"
-		//				,"field_147147_p"
-		//				,"field_147146_q"
-		//				,"field_184112_s"
-		//				"field_71320_r"
-		//				,"field_71319_s"
-		//				,"field_71305_c"
-		//				,"field_71318_t"
-		//				,"field_71317_u"
-		//				,"field_71316_v"
-		//				,"field_71315_w"
-		//				,"field_71325_x"
-		//				,"field_190519_A"
-		//				,"field_71284_A"
-		//				,"field_71285_B"
-		//				,"field_71286_C"
-		//				,"field_71280_D"
-		//				,"field_143008_E"
-		//				,"field_71292_I"
-		//				,"field_71293_J"
-		//				,"field_71288_M"
-		//				,"field_147141_M"
-		//				,"field_175588_P"
-		//				,"field_71296_Q"
-		//				,"field_71299_R"
-		//				,"field_71295_T"
-		//				,"field_104057_T"
-		//				,"field_147143_S"
-		//				,"field_152365_W"
-		//				,"field_152366_X"
-		//				,"field_147142_T"
-		//				,"field_175590_aa"
-		//				,"field_211151_aa"
-		//				,"field_213213_ab"
-		//				,"field_213214_ac"
-		//				,"field_184111_ab"
-		//				,"field_195577_ad"
-		//				,"field_200255_ai"
-		//				,"field_229733_al_"
-		//				,"field_201301_aj"
-		//				,"field_200258_al"
-		//				,"field_213215_ap"
-		//				,"field_205745_an"
-		//				,"field_211152_ao"
-		//				,"field_213217_au"
-		//				,"field_213218_av");
-		//		Field field = ObfuscationReflectionHelper.findField(MinecraftServer.class, "field_213218_av");
-		//		for (String s : list) {
-		//			try {
-		//				Treasure.LOGGER.debug("getting field -> {}", s);
-		//				Field f = world.getServer().getClass().getSuperclass().getDeclaredField(s);
-		////				Field f = b.getClass().getSuperclass().getDeclaredField("i");
-		//		        f.setAccessible(true);
-		//		        Object o = f.get(world.getServer());
-		//		        if (f != null && o != null) {
-		//		        	Treasure.LOGGER.debug("field name -> {}, class -> {}", f.getName(), o.getClass().getSimpleName());
-		//		        }
-		//			} catch (NoSuchFieldException | SecurityException | IllegalArgumentException | IllegalAccessException e) {
-		//				Treasure.LOGGER.error("ERROR", e);
-		//			}			
-		//		}
-
-		//		Treasure.LOGGER.debug("field name -> {}", field.getName());
-		//		Object save = null;
-		//		try {
-		//			save = field.get(world.getServer());
-		//			Treasure.LOGGER.debug("field name -> {}, class -> {}", field.getName(), save.getClass().getSimpleName());
-		//		} catch (IllegalArgumentException e) {
-		//			Treasure.LOGGER.error("ERROR", e);
-		//		} catch (IllegalAccessException e) {
-		//			Treasure.LOGGER.error("ERROR", e);
-		//		}
-
-		if (save instanceof SaveFormat.LevelSave) {
-			Path path = ((SaveFormat.LevelSave) save).getWorldDir().resolve("datapacks").resolve("treasure2");
-			setWorldDataBaseFolder(path.toFile());
-		}
-		else {
-			// TODO throw error
-		}
 		// TODO create pack.mcmeta if not already exist
-		createPack();
+//		createPack();
 		//		new LootContext.Builder(world).build(LootParameterSets.GENERIC);
 	}
 
@@ -294,6 +203,7 @@ public class TreasureLootTableMaster2 extends LootTableMaster2 {
 		INJECT_LOOT_TABLES_RESOURCE_LOCATION_TABLE.clear();
 	}
 
+	@Deprecated
 	protected void createPack() {
 		Path packPath = Paths.get(getWorldDataBaseFolder().getPath(), "pack.mcmeta");
 		try {
@@ -313,27 +223,48 @@ public class TreasureLootTableMaster2 extends LootTableMaster2 {
 	}
 
 	/**
+	 * 
+	 * @param modID
+	 * @param resource
+	 * @return
+	 */
+	public Optional<LootTableShell> loadLootTable(ResourceLocation resource) {
+		Optional<LootTableShell> resourceLootTable = Optional.empty();
+		Path resourceFilePath = Paths.get("data", resource.getNamespace(), "loot_tables", resource.getPath());
+		try (InputStream resourceStream = Treasure.class.getClassLoader().getResourceAsStream(resourceFilePath.toString());
+				Reader reader = new InputStreamReader(resourceStream, StandardCharsets.UTF_8)) {
+			resourceLootTable =  Optional.of(loadLootTable(reader));
+		}
+		catch(Exception e) {
+			Treasure.LOGGER.error(String.format("Couldn't load resource loot table %s ", resourceFilePath), e);
+		}
+		
+		return resourceLootTable;
+	}
+
+	/**
 	 * TODO move this to GottschCore as this will be the defacto way to do it in 1.15+
 	 * NOTE this doesn't check the versions of the resource file vs the file system file - just checks for the existance on the file system.
 	 * @param modID
 	 * @param resourceRelativePaths
 	 */
+	@Deprecated
 	public void buildAndExpose(String basePath, String modID, List<String> resourceRelativePaths) {
 		resourceRelativePaths.forEach(resourceRelativePath -> {
 			Treasure.LOGGER.debug("TreasureLootTableMaster2 | buildAndExpose | processing relative resource path -> {}", resourceRelativePath);
 			// this represents the entire file path
-			Path fileSystemFilePath = Paths.get(getMod().getConfig().getConfigFolder(), getMod().getId(), "mc1_16", basePath, resourceRelativePath);
+			Path fileSystemFilePath = Paths.get(getMod().getConfig().getConfigFolder(), modID, "mc1_16", basePath, resourceRelativePath);
 			Treasure.LOGGER.debug("TreasureLootTableMaster2 | buildAndExpose | file system path -> {}", fileSystemFilePath.toString());
 			try {
 				Path resourcePath = Paths.get("data", modID, basePath, resourceRelativePath);
 				Treasure.LOGGER.debug("TreasureLootTableMaster2 | buildAndExpose | full resource path -> {}", resourcePath.toString());
-				
+
 				// TODO don't like the FileUtils.copyInputStreamToFile is duplicated in both conditions.
 				// TODO don't like that resourcePath is gotten 2x as a stream - once in isFilesystemVersionCurrent and again after that.
-				
+
 				// check if file already exists
 				if (Files.notExists(fileSystemFilePath)) { 
-						FileUtils.copyInputStreamToFile(Objects.requireNonNull(Treasure.class.getClassLoader().getResourceAsStream(resourcePath.toString())),
+					FileUtils.copyInputStreamToFile(Objects.requireNonNull(Treasure.class.getClassLoader().getResourceAsStream(resourcePath.toString())),
 							fileSystemFilePath.toFile());
 					// TODO add a flag if a file was copied over - save it in the manager
 				}
@@ -344,6 +275,8 @@ public class TreasureLootTableMaster2 extends LootTableMaster2 {
 						isCurrent = isFileSystemVersionCurrent(resourcePath, fileSystemFilePath);
 					}
 					catch(Exception e) {
+						// TODO this will add a lot of spam messages to logs if loading an addon loot tables that doesn't match Treasure2's predefined folder list ie /pools/chests/..., /pools/armor/... etc.
+						// TODO the addon mod needs to supply it's own default_loot_tables_list file and only use that in the TreasureLootTableRegistry.buildAndExpose() call.
 						Treasure.LOGGER.warn(e.getMessage(), e);
 						return;
 					}
@@ -405,7 +338,7 @@ public class TreasureLootTableMaster2 extends LootTableMaster2 {
 			result = VersionChecker.checkVersionUsingForge(resourceVersion, fsVersion);
 		}
 		return result;
-		
+
 	}
 
 	/**
@@ -424,33 +357,38 @@ public class TreasureLootTableMaster2 extends LootTableMaster2 {
 	 * @param locations
 	 */
 	public void registerChests(String modID, List<String> locations) {
-		for (String location : locations) {
-			// get loot table files as ResourceLocations from the file system location
-			List<ResourceLocation> resourceLocations = getLootTablesResourceLocations(modID, location);
-			// load each ResourceLocation as LootTable and map it.
-			for (ResourceLocation resourceLocation : resourceLocations) {
-				Path path = Paths.get(resourceLocation.getPath());
-				LOGGER.debug("path to resource loc -> {}", path.toString());
-				// map the loot table resource location
-				Rarity key = Rarity.valueOf(path.getName(path.getNameCount()-2).toString().toUpperCase());
-				// add to resourcemap
-				CHEST_LOOT_TABLES_RESOURCE_LOCATION_TABLE.get(CUSTOM_LOOT_TABLE_KEY, key).add(resourceLocation);
-				// create loot table
-				LOGGER.debug("loading loot table shell resource loc -> {}, {}", getWorldDataBaseFolder().getPath(), path.toString());
-				Optional<LootTableShell> lootTable = loadLootTable(getWorldDataBaseFolder(), resourceLocation);
-				if (lootTable.isPresent()) {
-					// add resource location to table
-					lootTable.get().setResourceLocation(resourceLocation);
-					// add loot table to map
-					CHEST_LOOT_TABLES_TABLE.get(CUSTOM_LOOT_TABLE_KEY, key).add(lootTable.get());
-					LOGGER.debug("tabling loot table: {} {} -> {}", CUSTOM_LOOT_TABLE_KEY, key, resourceLocation);
-					CHEST_LOOT_TABLES_MAP.put(resourceLocation, lootTable.get());
-				}
-				else {
-					LOGGER.debug("unable to load loot table from -> {} : {}", getWorldDataBaseFolder(), resourceLocation);
-				}
-			}		
+		//		for (String location : locations) {
+		// TODO get the resource locations from the default_loot_tables_list.json file - in this case locations = list of explicit resource paths
+		List<ResourceLocation> resourceLocations = getLootTablesResourceLocations(modID, locations);
+		// get loot table files as ResourceLocations from the file system location
+		//			List<ResourceLocation> resourceLocations = getLootTablesResourceLocations(modID, location);
+
+		// load each ResourceLocation as LootTable and map it.
+		for (ResourceLocation resourceLocation : resourceLocations) {
+			Path path = Paths.get(resourceLocation.getPath());
+			LOGGER.debug("path to resource loc -> {}", path.toString());
+			// map the loot table resource location
+			Rarity key = Rarity.valueOf(path.getName(path.getNameCount()-2).toString().toUpperCase());
+			// add to resourcemap
+			CHEST_LOOT_TABLES_RESOURCE_LOCATION_TABLE.get(CUSTOM_LOOT_TABLE_KEY, key).add(resourceLocation);
+			// create loot table
+			LOGGER.debug("loading loot table shell resource loc -> {}, {}", path.toString());
+			// TODO make a version of loadLootTable that loads a shell from the jar file like buildAndExpose does.
+			Optional<LootTableShell> lootTableShell = loadLootTable(resourceLocation);
+//							Optional<LootTableShell> lootTableShell = loadLootTable(getWorldDataBaseFolder(), resourceLocation);
+			if (lootTableShell.isPresent()) {
+				// add resource location to table
+				lootTableShell.get().setResourceLocation(resourceLocation);
+				// add loot table to map
+				CHEST_LOOT_TABLES_TABLE.get(CUSTOM_LOOT_TABLE_KEY, key).add(lootTableShell.get());
+				LOGGER.debug("tabling loot table: {} {} -> {}", CUSTOM_LOOT_TABLE_KEY, key, resourceLocation);
+				CHEST_LOOT_TABLES_MAP.put(resourceLocation, lootTableShell.get());
+			}
+			else {
+				LOGGER.debug("unable to load loot table from -> {} : {}", resourceLocation);
+			}
 		}		
+		//		}		
 	}
 
 	/**
@@ -459,33 +397,35 @@ public class TreasureLootTableMaster2 extends LootTableMaster2 {
 	 * @param locations
 	 */
 	public void registerSpecials(String modID, List<String> locations) {
-		for (String location : locations) {
-			List<ResourceLocation> specialLocations = getLootTablesResourceLocations(modID, location);
-			LOGGER.debug("size of special chest loot table locations -> {}", specialLocations.size());
-			// load each ResourceLocation as LootTable and map it.
-			for (ResourceLocation resourceLocation : specialLocations) {
-				Path path = Paths.get(resourceLocation.getPath());
-				LOGGER.debug("path to special resource loc -> {}", path.toString());
-				// create loot table
-				LOGGER.debug("loading loot table shell resource loc -> {}, {}", getWorldDataBaseFolder().getPath(), path.toString());
-				Optional<LootTableShell> lootTable = loadLootTable(getWorldDataBaseFolder(), resourceLocation);
-				if (lootTable.isPresent()) {
-					// add resource location to table
-					lootTable.get().setResourceLocation(resourceLocation);
-					// add to map
-					SpecialLootTables specialLootTables = SpecialLootTables.valueOf(com.google.common.io.Files.getNameWithoutExtension(path.getName(path.getNameCount()-1).toString().toUpperCase()));
-					LOGGER.debug("special loot tables enum -> {}", specialLootTables);
-					// add to special map
-					SPECIAL_LOOT_TABLES_MAP.put(specialLootTables, lootTable.get());
-					LOGGER.debug("tabling special loot table: {} -> {}", specialLootTables, resourceLocation);
-					// add to the resource location -> lootTableShell map
-					CHEST_LOOT_TABLES_MAP.put(resourceLocation, lootTable.get());
-				}
-				else {
-					LOGGER.debug("unable to load special loot table from -> {} : {}", getWorldDataBaseFolder(), resourceLocation);
-				}
+		//		for (String location : locations) {
+		//			List<ResourceLocation> specialLocations = getLootTablesResourceLocations(modID, location);
+		List<ResourceLocation> specialLocations = getLootTablesResourceLocations(modID, locations);
+		LOGGER.debug("size of special chest loot table locations -> {}", specialLocations.size());
+		// load each ResourceLocation as LootTable and map it.
+		for (ResourceLocation resourceLocation : specialLocations) {
+			Path path = Paths.get(resourceLocation.getPath());
+			LOGGER.debug("path to special resource loc -> {}", path.toString());
+			// create loot table
+			LOGGER.debug("loading loot table shell resource loc -> {}, {}", path.toString());
+//			Optional<LootTableShell> lootTable = loadLootTable(getWorldDataBaseFolder(), resourceLocation);
+			Optional<LootTableShell> lootTable = loadLootTable(resourceLocation);
+			if (lootTable.isPresent()) {
+				// add resource location to table
+				lootTable.get().setResourceLocation(resourceLocation);
+				// add to map
+				SpecialLootTables specialLootTables = SpecialLootTables.valueOf(com.google.common.io.Files.getNameWithoutExtension(path.getName(path.getNameCount()-1).toString().toUpperCase()));
+				LOGGER.debug("special loot tables enum -> {}", specialLootTables);
+				// add to special map
+				SPECIAL_LOOT_TABLES_MAP.put(specialLootTables, lootTable.get());
+				LOGGER.debug("tabling special loot table: {} -> {}", specialLootTables, resourceLocation);
+				// add to the resource location -> lootTableShell map
+				CHEST_LOOT_TABLES_MAP.put(resourceLocation, lootTable.get());
+			}
+			else {
+				LOGGER.debug("unable to load special loot table from -> {} : {}",resourceLocation);
 			}
 		}
+		//		}
 	}
 
 	/**
@@ -494,42 +434,44 @@ public class TreasureLootTableMaster2 extends LootTableMaster2 {
 	 * @param locations
 	 */
 	public void registerInjects(String modID, List<String> locations) {
-		for (String location : locations) {
-			List<ResourceLocation> resourceLocations = getLootTablesResourceLocations(modID, location);
-			for (ResourceLocation resourceLocation : resourceLocations) {
-				Path path = Paths.get(resourceLocation.getPath());
-				LOGGER.debug("path to inject resource loc -> {}", path.toString());
-				// map the loot table resource location
-				Rarity rarity = Rarity.valueOf(path.getName(path.getNameCount()-2).toString().toUpperCase());
-				// load loot table to get categories
-				// create loot table
-				LOGGER.debug("loading loot table shell resource loc -> {}, {}", getWorldDataBaseFolder().getPath(), path.toString());
-				Optional<LootTableShell> lootTable = loadLootTable(getWorldDataBaseFolder(), resourceLocation);
-				if (lootTable.isPresent()) {
-					// add resource location to table
-					lootTable.get().setResourceLocation(resourceLocation);
-					LOGGER.debug("loaded inject loot table shell -> {}", resourceLocation);
-					List<String> keys = lootTable.get().getCategories();
-					keys.forEach(key -> {
-						LOGGER.debug("using inject key to table -> {}", key);
-						key = key.isEmpty() ? "general" : key;
-						if (!INJECT_LOOT_TABLES_RESOURCE_LOCATION_TABLE.containsRow(key)) {
-							// initialize 
-							for (Rarity r : Rarity.values()) {
-								INJECT_LOOT_TABLES_RESOURCE_LOCATION_TABLE.put(key, r, new ArrayList<ResourceLocation>());
-								INJECT_LOOT_TABLES_TABLE.put(key, r, new ArrayList<LootTableShell>());
-							}
+		//		for (String location : locations) {
+		//			List<ResourceLocation> resourceLocations = getLootTablesResourceLocations(modID, location);
+		List<ResourceLocation> resourceLocations = getLootTablesResourceLocations(modID, locations);
+		for (ResourceLocation resourceLocation : resourceLocations) {
+			Path path = Paths.get(resourceLocation.getPath());
+			LOGGER.debug("path to inject resource loc -> {}", path.toString());
+			// map the loot table resource location
+			Rarity rarity = Rarity.valueOf(path.getName(path.getNameCount()-2).toString().toUpperCase());
+			// load loot table to get categories
+			// create loot table
+			LOGGER.debug("loading loot table shell resource loc -> {}, {}", path.toString());
+//			Optional<LootTableShell> lootTable = loadLootTable(getWorldDataBaseFolder(), resourceLocation);
+			Optional<LootTableShell> lootTable = loadLootTable(resourceLocation);
+			if (lootTable.isPresent()) {
+				// add resource location to table
+				lootTable.get().setResourceLocation(resourceLocation);
+				LOGGER.debug("loaded inject loot table shell -> {}", resourceLocation);
+				List<String> keys = lootTable.get().getCategories();
+				keys.forEach(key -> {
+					LOGGER.debug("using inject key to table -> {}", key);
+					key = key.isEmpty() ? "general" : key;
+					if (!INJECT_LOOT_TABLES_RESOURCE_LOCATION_TABLE.containsRow(key)) {
+						// initialize 
+						for (Rarity r : Rarity.values()) {
+							INJECT_LOOT_TABLES_RESOURCE_LOCATION_TABLE.put(key, r, new ArrayList<ResourceLocation>());
+							INJECT_LOOT_TABLES_TABLE.put(key, r, new ArrayList<LootTableShell>());
 						}
-						INJECT_LOOT_TABLES_RESOURCE_LOCATION_TABLE.get(key, rarity).add(resourceLocation);	
-						INJECT_LOOT_TABLES_TABLE.get(key, rarity).add(lootTable.get());
-						LOGGER.debug("tabling inject loot table: {} {} -> {}", key, rarity, resourceLocation);
-					});
-				}
-				else {
-					LOGGER.debug("unable to load inject loot table from -> {} : {}", getWorldDataBaseFolder(), resourceLocation);
-				}
+					}
+					INJECT_LOOT_TABLES_RESOURCE_LOCATION_TABLE.get(key, rarity).add(resourceLocation);	
+					INJECT_LOOT_TABLES_TABLE.get(key, rarity).add(lootTable.get());
+					LOGGER.debug("tabling inject loot table: {} {} -> {}", key, rarity, resourceLocation);
+				});
+			}
+			else {
+				LOGGER.debug("unable to load inject loot table from -> {} : {}", resourceLocation);
 			}
 		}
+		//		}
 	}
 
 	//	/**
@@ -650,7 +592,9 @@ public class TreasureLootTableMaster2 extends LootTableMaster2 {
 	 * @param modID
 	 * @param location
 	 */
+	@Deprecated
 	protected void moveLootTables(String modID, String location) {
+		LOGGER.debug("moving loot tables for mod -> {}", modID);
 		Path configFilePath = Paths.get(getMod().getConfig().getConfigFolder(), modID, "mc1_16", LOOT_TABLES_FOLDER, location).toAbsolutePath();
 		//		Path worldDataFilePath = Paths.get(getWorldDataBaseFolder().toString(), modID, location).toAbsolutePath();
 		Path worldDataFilePath = Paths.get(getWorldDataBaseFolder().toString(), "data", modID, "loot_tables", location).toAbsolutePath();

@@ -248,9 +248,9 @@ public interface IChestGenerator {
 			LOGGER.debug("processing pool (from poolShell) -> {}", pool.getName());
 			// go get the vanilla managed pool
 			LootPool lootPool = lootTable.getPool(pool.getName());
-//			LOGGER.debug("loot pool object (from lootTable) -> {}", lootPool);
-			
+
 			if (lootPool != null) {
+				LOGGER.debug("loot pool object (from lootTable) -> {}", lootPool.getName());
 				// geneate loot from pools
 				if (pool.getName().equalsIgnoreCase("treasure") ||
 						pool.getName().equalsIgnoreCase("charms")) {

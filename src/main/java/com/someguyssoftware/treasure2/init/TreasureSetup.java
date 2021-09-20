@@ -80,6 +80,10 @@ public class TreasureSetup implements IModSetup {
 	 * @param event
 	 */
 	public static void clientSetup(final FMLClientSetupEvent event) {
+//		TreasureLootTableRegistry.initialize();
+//		// buildAndExpose and register loot tables
+//		TreasureLootTableRegistry.register();
+		
 		// create the gem property getter
 		IItemPropertyGetter gemGetter = (stack, world, living) -> {
 			AtomicDouble d = new AtomicDouble(0);

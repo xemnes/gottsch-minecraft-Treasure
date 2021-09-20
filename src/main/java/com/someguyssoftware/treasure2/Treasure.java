@@ -1,3 +1,22 @@
+/*
+ * This file is part of  Treasure2.
+ * Copyright (c) 2021, Mark Gottschling (gottsch)
+ * 
+ * All rights reserved.
+ *
+ * Treasure2 is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU Lesser General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * Treasure2 is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU Lesser General Public License for more details.
+ *
+ * You should have received a copy of the GNU Lesser General Public License
+ * along with Treasure2.  If not, see <http://www.gnu.org/licenses/lgpl>.
+ */
 package com.someguyssoftware.treasure2;
 
 import org.apache.logging.log4j.LogManager;
@@ -16,6 +35,7 @@ import com.someguyssoftware.treasure2.eventhandler.IEquipmentCharmHandler;
 
 import com.someguyssoftware.treasure2.eventhandler.WorldEventHandler;
 import com.someguyssoftware.treasure2.init.TreasureSetup;
+import com.someguyssoftware.treasure2.loot.TreasureLootTableRegistry;
 import com.someguyssoftware.treasure2.network.TreasureNetworking;
 import com.someguyssoftware.treasure2.particle.TreasureParticles;
 
@@ -31,6 +51,9 @@ import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLDedicatedServerSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLLoadCompleteEvent;
 import net.minecraftforge.fml.event.lifecycle.InterModEnqueueEvent;
+import net.minecraftforge.fml.event.server.FMLServerAboutToStartEvent;
+import net.minecraftforge.fml.event.server.FMLServerStartedEvent;
+import net.minecraftforge.fml.event.server.FMLServerStartingEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.fml.loading.FMLPaths;
 import top.theillusivec4.curios.api.SlotTypeMessage;
@@ -93,7 +116,9 @@ public class Treasure implements IMod {
 		eventBus.addListener(TreasureSetup::clientSetup);
 		eventBus.addListener(this::clientSetup);
 		eventBus.addListener(this::interModComms);
-
+		
+//		eventBus.addListener(this::onDedicatedServerSetupEvent);
+		
 		// needs to be registered here instead of @Mod.EventBusSubscriber because an instance of the handler
 		// is required and constructor arguments may need to be passed in
 		MinecraftForge.EVENT_BUS.register(new WorldEventHandler(getInstance()));
@@ -145,10 +170,12 @@ public class Treasure implements IMod {
 		 Treasure.LOGGER.info("in config event");
 	 }
 	 
-	private void onServerStarted(final FMLDedicatedServerSetupEvent event) {
-		Treasure.LOGGER.info("in onServerStarted");
+	private void onDedicatedServerSetupEvent(final FMLDedicatedServerSetupEvent event) {
+		Treasure.LOGGER.info("in dedicatedServerSetupEvent");
+		TreasureLootTableRegistry.initialize();
+		// buildAndExpose and register loot tables
+		TreasureLootTableRegistry.register();
 	}
-
 
 	@Override
 	public IMod getInstance() {
