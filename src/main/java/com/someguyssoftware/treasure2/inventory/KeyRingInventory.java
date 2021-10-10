@@ -21,7 +21,7 @@ import net.minecraftforge.items.IItemHandler;
  *
  */
 public class KeyRingInventory implements IInventory {
-	public static int INVENTORY_SIZE = 14;
+	public static int INVENTORY_SIZE = 25;
 	
 	/*
 	 * Reference to the owning ItemStack

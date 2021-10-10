@@ -110,8 +110,8 @@ public class TreasureChestTileEntityRenderer extends TileEntitySpecialRenderer<A
 
 		// render the model
 		model.renderAll(te);
-
 		GlStateManager.popMatrix();
+
 		// end of rendering chest entity ////
 
 		// pop the destroy stage matrix
@@ -193,4 +193,7 @@ public class TreasureChestTileEntityRenderer extends TileEntitySpecialRenderer<A
 		this.model = model;
 	}
 
+	public void updateLockScale() {
+		GlStateManager.scale(0.51F, 0.51F, 0.5F);
+	}
 }

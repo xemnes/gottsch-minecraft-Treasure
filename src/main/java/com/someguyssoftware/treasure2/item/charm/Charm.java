@@ -6,6 +6,7 @@ package com.someguyssoftware.treasure2.item.charm;
 import java.util.List;
 import java.util.Optional;
 
+import baubles.api.IBauble;
 import com.someguyssoftware.treasure2.Treasure;
 import com.someguyssoftware.treasure2.util.ResourceLocationUtil;
 
@@ -20,7 +21,7 @@ import net.minecraft.world.World;
 /**
  * @author Mark Gottschling on Apr 25, 2020
  */
-public abstract class Charm implements ICharm {
+public abstract class Charm implements ICharm, IBauble {
 	public static final int TICKS_PER_SECOND = 20;
 
 	private ResourceLocation name;

@@ -3,6 +3,7 @@ package com.someguyssoftware.treasure2.client.model;
 import com.someguyssoftware.treasure2.tileentity.ITreasureChestTileEntity;
 
 import net.minecraft.client.model.ModelBase;
+import net.minecraft.client.model.ModelBox;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.entity.Entity;
 
@@ -25,30 +26,22 @@ public class SkullChestModel extends ModelBase implements ITreasureChestModel {
 		textureWidth = 64;
 		textureHeight = 64;
 
-		top = new ModelRenderer(this, 0, 0);
-		top.addBox(-3F, -6F, -5F, 6, 1, 6);
-		top.setRotationPoint(0F, 21F, 2F);
-		top.setTextureSize(64, 64);
-		top.mirror = true;
-		setRotation(top, 0F, 0F, 0F);
-		head = new ModelRenderer(this, 0, 8);
-		head.addBox(-4F, -5F, -6F, 8, 5, 8);
-		head.setRotationPoint(0F, 21F, 2F);
-		head.setTextureSize(64, 64);
-		head.mirror = true;
-		setRotation(head, 0F, 0F, 0F);
-		jaw = new ModelRenderer(this, 0, 22);
-		jaw.addBox(-3F, 0F, -6F, 6, 1, 6);
-		jaw.setRotationPoint(0F, 21F, 2F);
-		jaw.setTextureSize(64, 64);
-		jaw.mirror = true;
-		setRotation(jaw, 0F, 0F, 0F);
-		jawBottom = new ModelRenderer(this, 0, 30);
-		jawBottom.addBox(-3F, 0F, -5F, 6, 2, 5);
-		jawBottom.setRotationPoint(0F, 22F, 1F);
-		jawBottom.setTextureSize(64, 64);
-		jawBottom.mirror = true;
-		setRotation(jawBottom, 0F, 0F, 0F);
+		top = new ModelRenderer(this);
+		top.setRotationPoint(0.0F, 22.0F, 1.0F);
+		top.cubeList.add(new ModelBox(top, 0, 0, -3.0F, -7.0F, -4.0F, 6, 1, 6, 0.0F, true));
+
+		head = new ModelRenderer(this);
+		head.setRotationPoint(0.0F, 22.0F, 1.0F);
+		head.cubeList.add(new ModelBox(head, 0, 8, -4.0F, -6.0F, -5.0F, 8, 5, 8, 0.0F, true));
+
+		jaw = new ModelRenderer(this);
+		jaw.setRotationPoint(0.0F, 22.0F, 1.0F);
+		jaw.cubeList.add(new ModelBox(jaw, 0, 22, -3.0F, -1.0F, -5.0F, 6, 1, 6, 0.0F, true));
+
+		jawBottom = new ModelRenderer(this);
+		jawBottom.setRotationPoint(0.0F, 22.0F, 1.0F);
+		jawBottom.cubeList.add(new ModelBox(jawBottom, 0, 30, -3.0F, 0.0F, -5.0F, 6, 2, 5, 0.0F, true));
+
 	}
 
 	/**

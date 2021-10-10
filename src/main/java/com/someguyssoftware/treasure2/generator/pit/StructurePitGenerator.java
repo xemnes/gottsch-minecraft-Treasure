@@ -197,11 +197,51 @@ public class StructurePitGenerator extends AbstractPitGenerator {
 			result.getData().setSpawnCoords(genResult.getData().getSpawnCoords());
 			
 			// interrogate info for spawners and any other special block processing (except chests that are handler by caller
+			List<BlockContext> bossChestContexts =
+					(List<BlockContext>) genResult.getData().getMap().get(GenUtil.getMarkerBlock(StructureMarkers.BOSS_CHEST));
+			List<BlockContext> chestContexts =
+					(List<BlockContext>) genResult.getData().getMap().get(GenUtil.getMarkerBlock(StructureMarkers.CHEST));
 			List<BlockContext> spawnerContexts =
 					(List<BlockContext>) genResult.getData().getMap().get(GenUtil.getMarkerBlock(StructureMarkers.SPAWNER));
 			List<BlockContext> proximityContexts =
 					(List<BlockContext>) genResult.getData().getMap().get(GenUtil.getMarkerBlock(StructureMarkers.PROXIMITY_SPAWNER));
-			
+
+
+
+
+
+			/*
+			 *  NOTE currently only 1 chest is allowed per structure - the rest are ignored.
+			 */
+			// check if there is a boss chest(s)
+			BlockContext chestContext = null;
+			if (bossChestContexts != null && bossChestContexts.size() > 0) {
+				if (bossChestContexts.size() > 1) {
+					chestContext = bossChestContexts.get(random.nextInt(bossChestContexts.size()));
+				}
+				else {
+					chestContext = bossChestContexts.get(0);
+				}
+			}
+
+			// TODO turn these checks into methods
+			// if a boss chest wasn't found, search for regular chests
+			if (chestContext == null) {
+				if (chestContexts != null && chestContexts.size() > 0) {
+					if (chestContexts.size() > 1) {
+						chestContext = chestContexts.get(random.nextInt(chestContexts.size()));
+					}
+					else {
+						chestContext = chestContexts.get(0);
+					}
+				}
+			}
+
+			// update with chest context
+			result.getData().setChestContext(chestContext);
+
+
+
 			/*
 			 *  TODO could lookup to some sort of map of structure -> spawner info
 			 *  ex.	uses a Guava Table:

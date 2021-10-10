@@ -6,6 +6,7 @@ package com.someguyssoftware.treasure2.item.charm;
 import java.util.List;
 import java.util.Random;
 
+import baubles.api.BaubleType;
 import com.someguyssoftware.gottschcore.positional.ICoords;
 import com.someguyssoftware.treasure2.Treasure;
 
@@ -67,5 +68,10 @@ public class FireImmunityCharm extends Charm {
 		TextFormatting color = TextFormatting.RED;
 		tooltip.add("  " + color + getLabel(data));
 		tooltip.add(" " + TextFormatting.GRAY +  "" + TextFormatting.ITALIC + I18n.translateToLocalFormatted("tooltip.charm.fire_immunity_rate"));
+	}
+
+	@Override
+	public BaubleType getBaubleType(ItemStack itemStack) {
+		return null;
 	}
 }

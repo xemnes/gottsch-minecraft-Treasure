@@ -36,7 +36,6 @@ public class GravestoneSpawnerBlock extends GravestoneBlock	implements ITileEnti
 		GravestoneProximitySpawnerTileEntity tileEntity = new GravestoneProximitySpawnerTileEntity();
 		return (TileEntity) tileEntity;
 	}
-	
 
 	/**
 	 * Drops standard gravestones.

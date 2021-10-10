@@ -8,6 +8,7 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Random;
 
+import baubles.api.BaubleType;
 import com.google.common.collect.FluentIterable;
 import com.google.common.collect.Iterables;
 import com.someguyssoftware.gottschcore.positional.ICoords;
@@ -85,4 +86,9 @@ public class RuinCharm extends Charm {
         tooltip.add("  " + color + getLabel(data));
         tooltip.add(" " + TextFormatting.GRAY +  "" + TextFormatting.ITALIC + I18n.translateToLocalFormatted("tooltip.charm.ruin_rate", String.valueOf(Math.toIntExact(Math.round(data.getDuration())))));
     }
+
+	@Override
+	public BaubleType getBaubleType(ItemStack itemStack) {
+		return null;
+	}
 }

@@ -7,6 +7,6 @@
 	"themes": ["dungeon"],
 	"rarities": ["common"],
 	"biomeWhiteList": [],
-	"biomeBlackList": ["ocean", "deep_ocean"],
+	"biomeBlackList": ["ocean", "deep_ocean", "desert", "desert_hills", "mutated_desert", "biomesoplenty:xeric_shrubland", "biomesoplenty:oasis"],
 	"includeFog": true
 }

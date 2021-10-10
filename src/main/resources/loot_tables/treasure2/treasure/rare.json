@@ -10,7 +10,7 @@
 					"type": "item",
 					"name": "treasure2:lightning_key",
 					"weight": 10
-				},			
+				},
 				{
 					"entryName": "metallurgists_key",
 					"type": "item",
@@ -34,6 +34,48 @@
 					"type": "item",
 					"name": "treasure2:sapphire_key",
 					"weight": 25
+				},
+				{
+					"entryName": "amber_key",
+					"type": "item",
+					"name": "treasure2:amber_key",
+					"weight": 30
+				},
+				{
+					"entryName": "malachite_key",
+					"type": "item",
+					"name": "treasure2:malachite_key",
+					"weight": 30
+				},
+				{
+					"entryName": "peridot_key",
+					"type": "item",
+					"name": "treasure2:peridot_key",
+					"weight": 25
+				},
+				{
+					"entryName": "amethyst_key",
+					"type": "item",
+					"name": "treasure2:amethyst_key",
+					"weight": 25
+				},
+				{
+					"entryName": "topaz_key",
+					"type": "item",
+					"name": "treasure2:topaz_key",
+					"weight": 25
+				},
+				{
+					"entryName": "tanzanite_key",
+					"type": "item",
+					"name": "treasure2:tanzanite_key",
+					"weight": 25
+				},
+				{
+					"entryName": "onyx_key",
+					"type": "item",
+					"name": "treasure2:onyx_key",
+					"weight": 15
 				},
 				{
 					"entryName": "diamond_key",
@@ -109,7 +151,7 @@
 					"conditions": [
 						{
 							"condition": "random_chance",
-							"chance": 0.30
+							"chance": 0.3
 						}
 					]
 				},
@@ -121,21 +163,111 @@
 					"conditions": [
 						{
 							"condition": "random_chance",
-							"chance": 0.30
+							"chance": 0.3
 						}
 					]
 				},
 				{
+					"entryName": "amethyst",
+					"type": "item",
+					"name": "biomesoplenty:gem",
+					"weight": 15,
+					"functions": [
+						{
+							"function": "set_data",
+							"data": 0
+						}
+					]
+				},
+				{
+					"entryName": "onyx",
+					"type": "item",
+					"name": "treasure2:onyx",
+					"weight": 15
+				},
+				{
 					"entryName": "sapphire",
 					"type": "item",
-					"name": "treasure2:sapphire",
-					"weight": 10
+					"name": "biomesoplenty:gem",
+					"weight": 10,
+					"functions": [
+						{
+							"function": "set_data",
+							"data": 6
+						}
+					]
 				},
 				{
 					"entryName": "ruby",
 					"type": "item",
-					"name": "treasure2:ruby",
-					"weight": 10
+					"name": "biomesoplenty:gem",
+					"weight": 10,
+					"functions": [
+						{
+							"function": "set_data",
+							"data": 1
+						}
+					]
+				},
+				{
+					"entryName": "amber",
+					"type": "item",
+					"name": "biomesoplenty:gem",
+					"weight": 5,
+					"functions": [
+						{
+							"function": "set_data",
+							"data": 7
+						}
+					]
+				},
+				{
+					"entryName": "malachite",
+					"type": "item",
+					"name": "biomesoplenty:gem",
+					"weight": 5,
+					"functions": [
+						{
+							"function": "set_data",
+							"data": 5
+						}
+					]
+				},
+				{
+					"entryName": "tanzanite",
+					"type": "item",
+					"name": "biomesoplenty:gem",
+					"weight": 5,
+					"functions": [
+						{
+							"function": "set_data",
+							"data": 4
+						}
+					]
+				},
+				{
+					"entryName": "topaz",
+					"type": "item",
+					"name": "biomesoplenty:gem",
+					"weight": 5,
+					"functions": [
+						{
+							"function": "set_data",
+							"data": 3
+						}
+					]
+				},
+				{
+					"entryName": "peridot",
+					"type": "item",
+					"name": "biomesoplenty:gem",
+					"weight": 5,
+					"functions": [
+						{
+							"function": "set_data",
+							"data": 2
+						}
+					]
 				},
 				{
 					"entryName": "white_pearl",
@@ -172,8 +304,7 @@
 		{
 			"name": "rare_charms",
 			"rolls": 1,
-			"entries": [
-			]
+			"entries": []
 		}
 	]
 }

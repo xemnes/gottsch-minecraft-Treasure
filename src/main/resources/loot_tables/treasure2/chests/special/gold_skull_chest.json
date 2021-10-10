@@ -38,6 +38,36 @@
 					]
 				},
 				{
+					"entryName": "amber_key",
+					"type": "item",
+					"name": "treasure2:amber_key",
+					"weight": 20,
+					"functions": [
+						{
+							"function": "set_count",
+							"count": {
+								"min": 1,
+								"max": 2
+							}
+						}
+					]
+				},
+				{
+					"entryName": "malachite_key",
+					"type": "item",
+					"name": "treasure2:malachite_key",
+					"weight": 20,
+					"functions": [
+						{
+							"function": "set_count",
+							"count": {
+								"min": 1,
+								"max": 2
+							}
+						}
+					]
+				},
+				{
 					"entryName": "spider_key",
 					"type": "item",
 					"name": "treasure2:spider_key",
@@ -164,12 +194,6 @@
 							}
 						}
 					]
-				},
-				{
-					"entryName": "sapphire",
-					"type": "item",
-					"name": "treasure2:sapphire",
-					"weight": 15
 				}
 			]
 		}

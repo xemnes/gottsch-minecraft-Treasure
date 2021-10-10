@@ -7,6 +7,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Random;
 
+import baubles.api.BaubleType;
 import com.google.common.collect.Lists;
 import com.someguyssoftware.gottschcore.positional.ICoords;
 
@@ -66,5 +67,10 @@ public class DirtWalkCharm extends Charm {
 	public void addInformation(ItemStack stack, World world, List<String> tooltip, ITooltipFlag flag, ICharmData data) {
         TextFormatting color = TextFormatting.DARK_RED;
 		tooltip.add("  " + color + getLabel(data));
+	}
+
+	@Override
+	public BaubleType getBaubleType(ItemStack itemStack) {
+		return null;
 	}
 }

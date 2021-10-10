@@ -7,7 +7,7 @@
 	"themes": ["dungeon"],
 	"rarities": ["common"],
 	"biomeWhiteList": [],
-	"biomeBlackList": ["desert"],
+	"biomeBlackList": ["desert", "desert_hills", "mutated_desert", "biomesoplenty:xeric_shrubland", "biomesoplenty:oasis"],
 	"offset": {
 		"x": 0,
 		"y": -1,

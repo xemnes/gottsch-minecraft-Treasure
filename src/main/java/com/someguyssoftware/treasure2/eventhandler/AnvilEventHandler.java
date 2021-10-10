@@ -5,6 +5,7 @@ package com.someguyssoftware.treasure2.eventhandler;
 
 import java.util.Optional;
 
+import biomesoplenty.common.item.ItemGem;
 import com.someguyssoftware.gottschcore.mod.IMod;
 import com.someguyssoftware.treasure2.Treasure;
 import com.someguyssoftware.treasure2.capability.CharmCapabilityProvider;
@@ -20,6 +21,7 @@ import com.someguyssoftware.treasure2.item.charm.ICharmInstance;
 import com.someguyssoftware.treasure2.item.charm.ICharmable;
 import com.someguyssoftware.treasure2.item.charm.ICharmed;
 
+import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.event.AnvilUpdateEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
@@ -92,7 +94,8 @@ public class AnvilEventHandler {
                 event.setOutput(outputItemStack.get());
             }
         }
-        else if (leftItemStack.getItem() instanceof ICharmable && rightItemStack.getItem() instanceof GemItem) {
+        else if (leftItemStack.getItem() instanceof ICharmable &&
+				(rightItemStack.getItem() instanceof GemItem || rightItemStack.getItem() instanceof ItemGem || rightItemStack.getItem() == Items.DIAMOND || rightItemStack.getItem() == Items.EMERALD)) {
             Optional<ItemStack> outputItemStack = addSlotsToCharmable(leftItemStack, rightItemStack);
             if (outputItemStack.isPresent()) {
             	event.setCost(1);

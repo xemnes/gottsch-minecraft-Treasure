@@ -3,6 +3,7 @@ package com.someguyssoftware.treasure2.client.model;
 import com.someguyssoftware.treasure2.tileentity.ITreasureChestTileEntity;
 
 import net.minecraft.client.model.ModelBase;
+import net.minecraft.client.model.ModelBox;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.entity.Entity;
 
@@ -37,102 +38,70 @@ public class BandedChestModel extends ModelBase implements ITreasureChestModel {
 		textureWidth = 128;
 		textureHeight = 128;
 
-		base = new ModelRenderer(this, 0, 20);
-		base.addBox(-7F, 0F, -14F, 14, 9, 14);
-		base.setRotationPoint(0F, 14.5F, 7F);
-		base.setTextureSize(64, 32);
-		base.mirror = true;
-		setRotation(base, 0F, 0F, 0F);
-		RightBottomBand = new ModelRenderer(this, 0, 44);
-		RightBottomBand.addBox(-1F, 0F, -15F, 2, 9, 15);
-		RightBottomBand.setRotationPoint(-4F, 15F, 7.5F);
-		RightBottomBand.setTextureSize(64, 32);
-		RightBottomBand.mirror = true;
-		setRotation(RightBottomBand, 0F, 0F, 0F);
-		lid = new ModelRenderer(this, 0, 0);
-		lid.addBox(-7F, -5F, -14F, 14, 5, 14);
-		lid.setRotationPoint(0F, 15.5F, 7F);
-		lid.setTextureSize(64, 32);
-		lid.mirror = true;
-		setRotation(lid, 0F, 0F, 0F);
-		RightTopBand = new ModelRenderer(this, 0, 69);
-		RightTopBand.addBox(0F, -5F, -15F, 2, 1, 15);
-		RightTopBand.setRotationPoint(-5F, 15F, 7.5F);
-		RightTopBand.setTextureSize(64, 32);
-		RightTopBand.mirror = true;
-		setRotation(RightTopBand, 0F, 0F, 0F);
-		LeftTopBand = new ModelRenderer(this, 36, 69);
-		LeftTopBand.addBox(0F, -5F, -15F, 2, 1, 15);
-		LeftTopBand.setRotationPoint(3F, 15F, 7.5F);
-		LeftTopBand.setTextureSize(64, 32);
-		LeftTopBand.mirror = true;
-		setRotation(LeftTopBand, 0F, 0F, 0F);
-		FrontLeftTopBand = new ModelRenderer(this, 64, 0);
-		FrontLeftTopBand.addBox(-1F, -4F, -15F, 2, 5, 1);
-		FrontLeftTopBand.setRotationPoint(4F, 15F, 7.5F);
-		FrontLeftTopBand.setTextureSize(64, 32);
-		FrontLeftTopBand.mirror = true;
-		setRotation(FrontLeftTopBand, 0F, 0F, 0F);
-		BackRightTopBand = new ModelRenderer(this, 57, 7);
-		BackRightTopBand.addBox(-1F, -5F, -1F, 2, 5, 1);
-		BackRightTopBand.setRotationPoint(-4F, 15F, 7.5F);
-		BackRightTopBand.setTextureSize(64, 32);
-		BackRightTopBand.mirror = true;
-		setRotation(BackRightTopBand, 0F, 0F, 0F);
-		BackLeftTopBand = new ModelRenderer(this, 64, 7);
-		BackLeftTopBand.addBox(-1F, -5F, -1F, 2, 5, 1);
-		BackLeftTopBand.setRotationPoint(4F, 15F, 7.5F);
-		BackLeftTopBand.setTextureSize(64, 32);
-		BackLeftTopBand.mirror = true;
-		setRotation(BackLeftTopBand, 0F, 0F, 0F);
-		LeftBottomBand = new ModelRenderer(this, 35, 44);
-		LeftBottomBand.addBox(-1F, 0F, -15F, 2, 9, 15);
-		LeftBottomBand.setRotationPoint(4F, 15F, 7.5F);
-		LeftBottomBand.setTextureSize(64, 32);
-		LeftBottomBand.mirror = true;
-		setRotation(LeftBottomBand, 0F, 0F, 0F);
-		FrontRightTopBand = new ModelRenderer(this, 57, 0);
-		FrontRightTopBand.addBox(-1F, -4F, -15F, 2, 5, 1);
-		FrontRightTopBand.setRotationPoint(-4F, 15F, 7.5F);
-		FrontRightTopBand.setTextureSize(64, 32);
-		FrontRightTopBand.mirror = true;
-		setRotation(FrontRightTopBand, 0F, 0F, 0F);
-		Ledge = new ModelRenderer(this, 58, 16);
-		Ledge.addBox(-2F, -1F, -15F, 4, 1, 1);
-		Ledge.setRotationPoint(0F, 15F, 7F);
-		Ledge.setTextureSize(64, 32);
-		Ledge.mirror = true;
-		setRotation(Ledge, 0F, 0F, 0F);
-		Ledge2 = new ModelRenderer(this, 58, 16);
-		Ledge2.addBox(0F, -1F, -9F, 1, 1, 4);
-		Ledge2.setRotationPoint(7F, 15F, 7F);
-		Ledge2.setTextureSize(128, 128);
-		Ledge2.mirror = true;
-		setRotation(Ledge2, 0F, 0F, 0F);
-		Ledge3 = new ModelRenderer(this, 0, 0);
-		Ledge3.addBox(-1F, -1F, -9F, 1, 1, 4);
-		Ledge3.setRotationPoint(-7F, 15F, 7F);
-		Ledge3.setTextureSize(128, 128);
-		Ledge3.mirror = true;
-		setRotation(Ledge3, 0F, 0F, 0F);
-	      hinge1 = new ModelRenderer(this, 11, 86);
-	      hinge1.addBox(-1F, 0F, -0.8F, 2, 2, 1);
-	      hinge1.setRotationPoint(2F, 14.5F, 7F);
-	      hinge1.setTextureSize(128, 128);
-	      hinge1.mirror = true;
-	      setRotation(hinge1, 0F, 0F, 0F);
-	      hinge2 = new ModelRenderer(this, 11, 86);
-	      hinge2.addBox(-1F, 0F, -0.8F, 2, 2, 1);
-	      hinge2.setRotationPoint(-2F, 14.5F, 7F);
-	      hinge2.setTextureSize(128, 128);
-	      hinge2.mirror = true;
-	      setRotation(hinge2, 0F, 0F, 0F);
-	      pad = new ModelRenderer(this, 0, 86);
-	      pad.addBox(-2F, -1F, -14.2F, 4, 4, 1);
-	      pad.setRotationPoint(0F, 15.5F, 7F);
-	      pad.setTextureSize(128, 128);
-	      pad.mirror = true;
-	      setRotation(pad, 0F, 0F, 0F);
+		base = new ModelRenderer(this);
+		base.setRotationPoint(0.0F, 14.5F, 7.0F);
+		base.cubeList.add(new ModelBox(base, 0, 20, -7.0F, 0.0F, -14.0F, 14, 9, 14, 0.0F, true));
+
+		RightBottomBand = new ModelRenderer(this);
+		RightBottomBand.setRotationPoint(-4.0F, 15.0F, 7.0F);
+		RightBottomBand.cubeList.add(new ModelBox(RightBottomBand, 0, 44, -2.0F, 0.0F, -14.5F, 3, 9, 15, 0.0F, true));
+
+		lid = new ModelRenderer(this);
+		lid.setRotationPoint(0.0F, 15.5F, 7.0F);
+		lid.cubeList.add(new ModelBox(lid, 0, 0, -7.0F, -5.0F, -14.0F, 14, 5, 14, 0.0F, true));
+
+		RightTopBand = new ModelRenderer(this);
+		RightTopBand.setRotationPoint(-5.0F, 15.5F, 7.0F);
+		RightTopBand.cubeList.add(new ModelBox(RightTopBand, 0, 69, -1.0F, -5.5F, -14.5F, 3, 1, 15, 0.0F, true));
+
+		LeftTopBand = new ModelRenderer(this);
+		LeftTopBand.setRotationPoint(3.0F, 15.5F, 7.0F);
+		LeftTopBand.cubeList.add(new ModelBox(LeftTopBand, 36, 69, 0.0F, -5.5F, -14.5F, 3, 1, 15, 0.0F, true));
+
+		FrontLeftTopBand = new ModelRenderer(this);
+		FrontLeftTopBand.setRotationPoint(4.0F, 15.5F, 7.0F);
+		FrontLeftTopBand.cubeList.add(new ModelBox(FrontLeftTopBand, 66, 7, -1.0F, -4.5F, -14.5F, 3, 5, 1, 0.0F, true));
+
+		BackRightTopBand = new ModelRenderer(this);
+		BackRightTopBand.setRotationPoint(-4.0F, 15.5F, 7.0F);
+		BackRightTopBand.cubeList.add(new ModelBox(BackRightTopBand, 66, 0, -2.0F, -5.5F, -0.5F, 3, 5, 1, 0.0F, true));
+
+		BackLeftTopBand = new ModelRenderer(this);
+		BackLeftTopBand.setRotationPoint(4.0F, 15.5F, 7.0F);
+		BackLeftTopBand.cubeList.add(new ModelBox(BackLeftTopBand, 57, 0, -1.0F, -5.5F, -0.5F, 3, 5, 1, 0.0F, true));
+
+		LeftBottomBand = new ModelRenderer(this);
+		LeftBottomBand.setRotationPoint(4.0F, 15.0F, 7.5F);
+		LeftBottomBand.cubeList.add(new ModelBox(LeftBottomBand, 36, 44, -1.0F, 0.0F, -15.0F, 3, 9, 15, 0.0F, true));
+
+		FrontRightTopBand = new ModelRenderer(this);
+		FrontRightTopBand.setRotationPoint(-4.0F, 15.5F, 7.0F);
+		FrontRightTopBand.cubeList.add(new ModelBox(FrontRightTopBand, 57, 7, -2.0F, -4.5F, -14.5F, 3, 5, 1, 0.0F, true));
+
+		Ledge = new ModelRenderer(this);
+		Ledge.setRotationPoint(0.0F, 15.5F, 7.0F);
+		Ledge.cubeList.add(new ModelBox(Ledge, 58, 16, -2.0F, -2.0F, -15.0F, 4, 1, 1, 0.0F, true));
+
+		Ledge2 = new ModelRenderer(this);
+		Ledge2.setRotationPoint(7.0F, 15.0F, 7.0F);
+		Ledge2.cubeList.add(new ModelBox(Ledge2, 0, 0, 0.0F, -1.5F, -9.0F, 1, 1, 4, 0.0F, true));
+
+		Ledge3 = new ModelRenderer(this);
+		Ledge3.setRotationPoint(-7.0F, 15.0F, 7.0F);
+		Ledge3.cubeList.add(new ModelBox(Ledge3, 0, 0, -1.0F, -1.5F, -9.0F, 1, 1, 4, 0.0F, true));
+
+		hinge1 = new ModelRenderer(this);
+		hinge1.setRotationPoint(2.0F, 14.5F, 7.0F);
+		hinge1.cubeList.add(new ModelBox(hinge1, 11, 86, -1.0F, 0.0F, -0.5F, 1, 2, 1, 0.0F, true));
+
+		hinge2 = new ModelRenderer(this);
+		hinge2.setRotationPoint(-2.0F, 14.5F, 7.0F);
+		hinge2.cubeList.add(new ModelBox(hinge2, 11, 86, 0.0F, 0.0F, -0.5F, 1, 2, 1, 0.0F, true));
+
+		pad = new ModelRenderer(this);
+		pad.setRotationPoint(0.0F, 15.5F, 7.0F);
+		pad.cubeList.add(new ModelBox(pad, 0, 86, -2.0F, -1.0F, -14.2F, 4, 4, 1, 0.0F, true));
+
 	}
 
 	/**
@@ -203,8 +172,32 @@ public class BandedChestModel extends ModelBase implements ITreasureChestModel {
 	    pad.render(0.0625F);
 	}
 
+	/**
+	 * @return the base
+	 */
+	public ModelRenderer getBase() {
+		return base;
+	}
+
+	/**
+	 * @param base the base to set
+	 */
+	public void setBase(ModelRenderer base) {
+		this.base = base;
+	}
+
+	/**
+	 * @return the lid
+	 */
 	@Override
 	public ModelRenderer getLid() {
 		return lid;
+	}
+
+	/**
+	 * @param lid the lid to set
+	 */
+	public void setLid(ModelRenderer lid) {
+		this.lid = lid;
 	}
 }

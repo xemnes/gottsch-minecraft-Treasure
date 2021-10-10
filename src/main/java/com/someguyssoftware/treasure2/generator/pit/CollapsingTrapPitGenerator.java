@@ -121,12 +121,12 @@ public class CollapsingTrapPitGenerator extends AbstractPitGenerator {
 		GenUtil.replaceWithBlockState(world, coords.add(-1, 0, 1), blockState);
 		GenUtil.replaceWithBlockState(world, coords.add(1, 0, 1), blockState);
 		GenUtil.replaceWithBlockState(world, coords.add(-1, 0, -1), blockState);
-		GenUtil.replaceWithBlockState(world, coords.add(1, 0, -1), blockState);	
+		GenUtil.replaceWithBlockState(world, coords.add(1, 0, -1), blockState);
 
 		for (int x = coords.getX() - 2; x <= coords.getX() + 2; x++) {
 			for (int z = coords.getZ() -2; z <=coords.getZ() + 2; z++ ) {
 				// fill with AIR
-				GenUtil.replaceWithBlockState(world, coords.add(x, 0, z), blockState);	
+				GenUtil.replaceWithBlockState(world, coords.add(x, 0, z), blockState);
 			}
 		}
 		return coords.add(0, 1, 0);

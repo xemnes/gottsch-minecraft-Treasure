@@ -52,58 +52,52 @@ public class KeyRingContainer extends AbstractChestContainer {
 	 */
 	@Override
 	public void buildContainerInventory() {
-		Point[][] points = {
-				{
-					new Point(28, 38),
-					new Point(28 + getSlotXSpacing(),  38),
-					new Point(118,  38),
-					new Point(118 + getSlotXSpacing(),  38)
-				}, 
-				{
-					new Point(28, 56),
-					new Point(28 + getSlotXSpacing(),  56),
-					new Point(118,  56),
-					new Point(118 + getSlotXSpacing(),  56)					
-				}
-		};
-		
-		// add top row         
-		for (int x = 0; x < 3; x++) {
-			int slotNumber = x;
-			int xpos = getContainerInventoryXPos() + x * getSlotXSpacing();
-			int ypos = 18;
-			addSlotToContainer(new KeyRingSlot(inventory, slotNumber, xpos, ypos));
-		}
-		
-		// middle rows
-		for (int y = 0; y < 2; y++) {
-			for (int x = 0; x < 4; x++) {
-				int slotNumber = (y * 4 + x) + 3;
-				addSlotToContainer(new KeyRingSlot(inventory, slotNumber, points[y][x].x, points[y][x].y));
-			}
-		}		
-		
-		// add bottom row
-		for (int x = 0; x < 3; x++) {
-			int slotNumber = x + 11;
-			int xpos = getContainerInventoryXPos() + x * getSlotXSpacing();
-			int ypos = 76;
-			addSlotToContainer(new KeyRingSlot(inventory, slotNumber, xpos, ypos));
-		}
+
+		//row 1
+		addSlotToContainer(new KeyRingSlot(inventory, 0, 44, 18));
+		addSlotToContainer(new KeyRingSlot(inventory, 1, 62, 18));
+		addSlotToContainer(new KeyRingSlot(inventory, 2, 80, 18));
+		addSlotToContainer(new KeyRingSlot(inventory, 3, 98, 18));
+		addSlotToContainer(new KeyRingSlot(inventory, 4, 116, 18));
+		//row2
+		addSlotToContainer(new KeyRingSlot(inventory, 5, 26, 36));
+		addSlotToContainer(new KeyRingSlot(inventory, 6, 44, 36));
+		addSlotToContainer(new KeyRingSlot(inventory, 7, 62, 36));
+		addSlotToContainer(new KeyRingSlot(inventory, 8, 80, 36));
+		addSlotToContainer(new KeyRingSlot(inventory, 9, 98, 36));
+		addSlotToContainer(new KeyRingSlot(inventory, 10, 116, 36));
+		addSlotToContainer(new KeyRingSlot(inventory, 11, 134, 36));
+		//row3
+		addSlotToContainer(new KeyRingSlot(inventory, 12, 26, 54));
+		addSlotToContainer(new KeyRingSlot(inventory, 13, 44, 54));
+		addSlotToContainer(new KeyRingSlot(inventory, 14, 116, 54));
+		addSlotToContainer(new KeyRingSlot(inventory, 15, 134, 54));
+		//row4
+		addSlotToContainer(new KeyRingSlot(inventory, 16, 26, 72));
+		addSlotToContainer(new KeyRingSlot(inventory, 17, 44, 72));
+		addSlotToContainer(new KeyRingSlot(inventory, 18, 116, 72));
+		addSlotToContainer(new KeyRingSlot(inventory, 19, 134, 72));
+		//row5
+		addSlotToContainer(new KeyRingSlot(inventory, 20, 44, 90));
+		addSlotToContainer(new KeyRingSlot(inventory, 21, 62, 90));
+		addSlotToContainer(new KeyRingSlot(inventory, 22, 80, 90));
+		addSlotToContainer(new KeyRingSlot(inventory, 23, 98, 90));
+		addSlotToContainer(new KeyRingSlot(inventory, 24, 116, 90));
+
 	}
 	
 	@Override
 	public int getHotbarYPos() {
-		return 158;
+		return 175;
 	}
 	
 	@Override
 	public int getPlayerInventoryYPos() {
-		return 100;
+		return 117;
 	}
 	
 	@Override
 	public int getContainerInventorySlotCount() {
-		return 14;
+		return 25;
 	}
 }

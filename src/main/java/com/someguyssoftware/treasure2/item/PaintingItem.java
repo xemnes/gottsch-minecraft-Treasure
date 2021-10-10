@@ -68,7 +68,7 @@ public class PaintingItem extends ModItem {
 		super.addInformation(stack, worldIn, tooltip, flagIn);
 		
 		// add all the painting info here
-		tooltip.add(I18n.translateToLocalFormatted("tooltip.label.rarity", TextFormatting.DARK_BLUE + getRarity().toString()));
+		tooltip.add(I18n.translateToLocalFormatted("tooltip.label.rarity", TextFormatting.AQUA + getRarity().toString()));
 //		tooltip.add(I18n.translateToLocalFormatted("tooltip.painting.name", TextFormatting.WHITE + getPaintingName()));
 		tooltip.add(I18n.translateToLocalFormatted("tooltip.painting.collection", TextFormatting.GOLD +getCollectionName()));
 //		tooltip.add(I18n.translateToLocalFormatted("tooltip.painting.artist", TextFormatting.DARK_AQUA + getArtist()));

@@ -3,15 +3,35 @@
  */
 package com.someguyssoftware.treasure2.generator.oasis;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 import java.util.Random;
 
+import biomesoplenty.api.biome.BOPBiomes;
+import com.ferreusveritas.dynamictrees.api.TreeHelper;
+import com.ferreusveritas.dynamictrees.api.TreeRegistry;
+import com.ferreusveritas.dynamictrees.api.treedata.ITreePart;
+import com.ferreusveritas.dynamictrees.api.worldgen.IGroundFinder;
+import com.ferreusveritas.dynamictrees.blocks.BlockBranch;
+import com.ferreusveritas.dynamictrees.blocks.BlockRooty;
+import com.ferreusveritas.dynamictrees.blocks.BlockRootyDirt;
+import com.ferreusveritas.dynamictrees.blocks.BlockRootySand;
+import com.ferreusveritas.dynamictrees.trees.Species;
+import com.ferreusveritas.dynamictrees.trees.TreeDarkOak;
+import com.ferreusveritas.dynamictrees.trees.TreeOak;
+import com.ferreusveritas.dynamictrees.util.SafeChunkBounds;
+import com.ferreusveritas.dynamictrees.worldgen.BiomeDataBase;
+import com.ferreusveritas.dynamictrees.worldgen.JoCode;
+import com.ferreusveritas.dynamictrees.worldgen.TreeGenerator;
+import com.ferreusveritas.dynamictrees.worldgen.WorldGeneratorTrees;
 import com.someguyssoftware.gottschcore.cube.Cube;
 import com.someguyssoftware.gottschcore.positional.Coords;
 import com.someguyssoftware.gottschcore.positional.ICoords;
 import com.someguyssoftware.gottschcore.random.RandomHelper;
 import com.someguyssoftware.gottschcore.world.WorldInfo;
 import com.someguyssoftware.treasure2.Treasure;
+import com.someguyssoftware.treasure2.block.AbstractChestBlock;
 import com.someguyssoftware.treasure2.chest.ChestInfo;
 import com.someguyssoftware.treasure2.config.IOasisConfig;
 import com.someguyssoftware.treasure2.config.TreasureConfig;
@@ -30,16 +50,22 @@ import com.someguyssoftware.treasure2.registry.ChestRegistry;
 import com.someguyssoftware.treasure2.world.gen.structure.TemplateHolder;
 import com.someguyssoftware.treasure2.worldgen.SurfaceChestWorldGenerator;
 
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockChest;
-import net.minecraft.block.BlockFlower;
+import exterminatorjeff.undergroundbiomes.common.block.IgneousSand;
+import exterminatorjeff.undergroundbiomes.common.block.MetamorphicSand;
+import exterminatorjeff.undergroundbiomes.common.block.SedimentarySand;
+import net.minecraft.block.*;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.block.state.pattern.BlockStateMatcher;
 import net.minecraft.init.Biomes;
 import net.minecraft.init.Blocks;
+import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.AxisAlignedBB;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
+import net.minecraft.world.biome.Biome;
 import net.minecraft.world.gen.feature.WorldGenAbstractTree;
 import net.minecraft.world.gen.feature.WorldGenFlowers;
 import net.minecraft.world.gen.feature.WorldGenerator;
@@ -53,6 +79,10 @@ public class DesertOasisGenerator implements IOasisGenerator<GeneratorResult<Che
 	private static final int MIN_OASIS_RADIUS = 8;
 	private static final int MAX_OASIS_RADIUS = 20;
 
+	private int TREETYPE = 6;
+
+	List<BlockPos> possibleTreeCoords = new ArrayList<>();
+
 	/**
 	 * 
 	 */
@@ -64,6 +94,8 @@ public class DesertOasisGenerator implements IOasisGenerator<GeneratorResult<Che
 	public GeneratorResult<GeneratorData> generate(World world, Random random, ICoords coords) {
 
 		ICoords chestCoords = null;
+		setVariant(random);
+
 
 		// result to return to the caller
 		GeneratorResult<GeneratorData> result = new GeneratorResult<>(GeneratorData.class);
@@ -86,7 +118,6 @@ public class DesertOasisGenerator implements IOasisGenerator<GeneratorResult<Che
 		centerCoords = WorldInfo.getDryLandSurfaceCoords(world, centerCoords);
 		
 		generateBase(world, random, coords, radius);
-		generateTrees(world, random, centerCoords, radius);
 		generateGrass(world, random, centerCoords, radius);
 		generateFlowers(world, random, centerCoords, radius);
 		Optional<GeneratorResult<GeneratorData>> wellResult = Optional.ofNullable(generateWell(world, random, centerCoords));
@@ -105,6 +136,7 @@ public class DesertOasisGenerator implements IOasisGenerator<GeneratorResult<Che
 			chestCoords = centerCoords;
 		}		
 		generateChest(world, random, chestCoords);
+		generateTrees(world, random, centerCoords, radius);
 
 		Treasure.logger.info("CHEATER! Desert oasis at coords: {}", centerCoords.toShortString());
 		return wellResult.get();
@@ -148,7 +180,7 @@ public class DesertOasisGenerator implements IOasisGenerator<GeneratorResult<Che
 		}
 		return result.get();
 	}
-	
+
 	/**
 	 * 
 	 * @param world
@@ -184,26 +216,24 @@ public class DesertOasisGenerator implements IOasisGenerator<GeneratorResult<Che
 						spawnCoords = spawnCoords.down(1);			
 						Cube sandCube = new Cube(world, spawnCoords.down(1));
 						if (sandCube.equalsBlock(Blocks.SAND) || (i > 0 && grassCube.equalsBlock(Blocks.GRASS))) {
-							world.setBlockState(spawnCoords.toPos(), Blocks.GRASS.getDefaultState(), 3);
-						}
+							world.setBlockState(spawnCoords.toPos(), Blocks.GRASS.getDefaultState(), 3);}
 					}
 				}
 			}
 		}		
 	}
 
-	/**
-	 * 
-	 * @param world
-	 * @param random
-	 * @param centerCoords
-	 * @param radius
-	 */
+
+	private void setVariant(Random random)
+	{
+		this.TREETYPE = random.nextInt(6);
+	}
+
+
 	private void generateTrees(World world, Random random, ICoords centerCoords, int radius) {
-		WorldGenAbstractTree treeWorldGenerator = Biomes.FOREST.getRandomTreeFeature(random);
-		int diameter = radius * 2;		
+		int diameter = radius * 2;
 		int diameterSquared = diameter * diameter;
-		
+
 		// get the number of trees based on size of oasis
 		int numberOfTrees = (int) ((diameterSquared / 256 ) * (double)getConfig().getTreesPerChunk() * getConfig().getTreesPerChunkSizeFactor());
 		// for each tree
@@ -211,12 +241,60 @@ public class DesertOasisGenerator implements IOasisGenerator<GeneratorResult<Che
 			// find a random location within the oasis
 			int xOffset = (int) (random.nextFloat() * diameter - radius);
 			int zOffset = (int) (random.nextFloat() * diameter - radius);
-			Treasure.logger.debug("attempting oasis tree @ -> {}", centerCoords.add(xOffset, 0, zOffset).toShortString());
-			boolean treeResult = treeWorldGenerator.generate(world, random, centerCoords.add(xOffset, 0, zOffset).toPos());
-			Treasure.logger.debug("tree result -> {}", treeResult);
 
+			ICoords treeCoords = centerCoords.add(xOffset, 0, zOffset);
+			IGroundFinder groundFinder = new WorldGeneratorTrees.GroundFinder();
+
+			Biome biome = world.getBiome(treeCoords.toPos());
+			BiomeDataBase.BiomeEntry biomeEntry = TreeGenerator.getTreeGenerator().getBiomeDataBase(world).getEntry(biome);
+			BlockPos groundPos = groundFinder.findGround(biomeEntry, world, treeCoords.toPos());
+			Treasure.logger.debug("attempting oasis tree @ -> {}", treeCoords.toShortString());
+
+			for (BlockPos soilRange : BlockPos.getAllInBox(groundPos.add(-1, -1, -1), groundPos.add(1, 1, 1))) {
+				possibleTreeCoords.add(soilRange);
+			}
+
+			IBlockState soilBlock = world.getBlockState(groundPos);
+			Block block = soilBlock.getBlock();
+
+			if (possibleTreeCoords.stream().anyMatch(pos -> world.getBlockState(pos).getBlock() instanceof ITreePart)) {
+				possibleTreeCoords.clear();
+				return;
+			}
+
+			else if (
+					block instanceof BlockGrass
+					|| block instanceof BlockSand
+					|| block instanceof IgneousSand
+					|| block instanceof SedimentarySand
+					|| block instanceof MetamorphicSand
+			){
+				this.TREETYPE = random.nextInt(6);
+				Species species;
+
+				if (this.TREETYPE == 0) {
+					species = TreeRegistry.findSpeciesSloppy("dynamictreesbop:palm");
+				} else if (this.TREETYPE == 1) {
+					species = TreeRegistry.findSpeciesSloppy("dynamictreesphc:banana");
+				} else if (this.TREETYPE == 2) {
+					species = TreeRegistry.findSpeciesSloppy("dynamictreesphc:coconut");
+				} else if (this.TREETYPE == 3) {
+					species = TreeRegistry.findSpeciesSloppy("dynamictreesphc:papaya");
+				} else if (this.TREETYPE == 4) {
+					species = TreeRegistry.findSpeciesSloppy("dynamictreesforestry:papaya");
+				} else {
+					species = TreeRegistry.findSpeciesSloppy("dynamictreesforestry:palm");
+				}
+				species.generate(world, groundPos, world.getBiome(treeCoords.toPos()), random, 8, SafeChunkBounds.ANY);
+				TreeHelper.ageVolume(world, groundPos, 3, 14, 1, SafeChunkBounds.ANY);
+				possibleTreeCoords.clear();
+			}
 		}
+
 	}
+
+
+
 	
 	/**
 	 * 
@@ -227,7 +305,7 @@ public class DesertOasisGenerator implements IOasisGenerator<GeneratorResult<Che
 	 */
 	private void generateGrass(World world, Random random, ICoords centerCoords, int radius) {
 		WorldGenerator grassWorldGenerator = Biomes.FOREST.getRandomWorldGenForGrass(random);
-		int diameter = radius * 2;		
+		int diameter = radius * 2;
 		
 		for (int grassIndex = 0; grassIndex < 5; grassIndex++) {
 			// find a random location within the oasis

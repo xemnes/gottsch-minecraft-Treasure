@@ -4,7 +4,18 @@
 package com.someguyssoftware.treasure2.item;
 
 import java.util.List;
+import java.util.Optional;
 
+import artifacts.client.model.ModelAmulet;
+import artifacts.client.model.layer.LayerGloves;
+import artifacts.common.item.BaubleAmulet;
+import artifacts.common.item.BaubleBase;
+import baubles.api.BaubleType;
+import baubles.api.BaublesApi;
+import baubles.api.IBauble;
+import baubles.api.cap.BaublesCapabilities;
+import baubles.api.cap.IBaublesItemHandler;
+import baubles.api.render.IRenderBauble;
 import com.someguyssoftware.gottschcore.item.ModItem;
 import com.someguyssoftware.treasure2.Treasure;
 import com.someguyssoftware.treasure2.capability.CharmableCapabilityProvider;
@@ -12,22 +23,38 @@ import com.someguyssoftware.treasure2.capability.CharmCapabilityProvider;
 import com.someguyssoftware.treasure2.capability.ICharmCapability;
 import com.someguyssoftware.treasure2.capability.ICharmableCapability;
 import com.someguyssoftware.treasure2.enums.AdornmentType;
+import com.someguyssoftware.treasure2.eventhandler.PlayerEventHandler;
 import com.someguyssoftware.treasure2.item.charm.ICharmable;
 
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.model.ModelBase;
+import net.minecraft.client.model.ModelBiped;
+import net.minecraft.client.model.ModelPlayer;
+import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.util.ITooltipFlag;
+import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.SoundEvents;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.potion.PotionEffect;
+import net.minecraft.util.*;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.util.text.translation.I18n;
 import net.minecraft.world.World;
+import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.ICapabilityProvider;
+
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 
 /**
  * @author Mark Gottschling on Dec 20, 2020
  *
  */
-public class Adornment extends ModItem implements IAdornment, ICharmable, IPouchable {
+public class Adornment extends ModItem implements IAdornment, ICharmable, IPouchable, IBauble, IRenderBauble {
 	private AdornmentType type;
+	public final BaubleType baubleType;
 	// TODO add customName to capability
 
 	// TODO this is max slots which exists in Item class
@@ -45,18 +72,36 @@ public class Adornment extends ModItem implements IAdornment, ICharmable, IPouch
 
     private int level = 1;
 
+	protected ModelBase modelAmulet = new ModelAmulet();
+	protected ResourceLocation textures;
+
+	protected SoundEvent equipSound = SoundEvents.ITEM_ARMOR_EQUIP_DIAMOND;
+	protected float equipPitch = 1;
+
 	/**
 	 * 
 	 * @param modID
 	 * @param name
 	 * @param type
 	 */
-	public Adornment(String modID, String name, AdornmentType type) {
+	public Adornment(String modID, String name, AdornmentType type, BaubleType baubleType, ResourceLocation textures) {
 		super();
 		setItemName(modID, name);
 		setMaxStackSize(1);
 		setCreativeTab(Treasure.TREASURE_TAB);
 		setType(type);
+		this.baubleType = baubleType;
+		this.textures = textures;
+	}
+
+	public Adornment setEquipSound(SoundEvent equipSound, float equipPitch) {
+		this.equipSound = equipSound;
+		this.equipPitch = equipPitch;
+		return this;
+	}
+
+	public Adornment setEquipSound(SoundEvent equipSound) {
+		return setEquipSound(equipSound, 1);
 	}
 
 	@Override
@@ -107,6 +152,7 @@ public class Adornment extends ModItem implements IAdornment, ICharmable, IPouch
 		}
 		else {
 			tooltip.add(TextFormatting.GOLD.toString() + "" + TextFormatting.ITALIC.toString() + I18n.translateToLocal("tooltip.label.charmable"));
+			tooltip.add(TextFormatting.GOLD.toString() + "" + TextFormatting.ITALIC.toString() + "Compatible gems unlock slots");
 		}
 		addSlotsInfo(stack, world, tooltip, flag);
 	}
@@ -117,6 +163,32 @@ public class Adornment extends ModItem implements IAdornment, ICharmable, IPouch
 
 	public void setType(AdornmentType type) {
 		this.type = type;
+	}
+
+	@Override
+	public BaubleType getBaubleType(ItemStack itemStack) {
+		return baubleType;
+	}
+
+	@Override
+	public ActionResult<ItemStack> onItemRightClick(World world, EntityPlayer player, @Nonnull EnumHand hand) {
+		IBaublesItemHandler baubles = BaublesApi.getBaublesHandler(player);
+		for (int i = 0; i < baubles.getSlots(); i++) {
+			if (baubles.getStackInSlot(i).isEmpty() && baubles.isItemValidForSlot(i, player.getHeldItem(hand), player)) {
+				baubles.setStackInSlot(i, player.getHeldItem(hand).copy());
+				if (!player.capabilities.isCreativeMode) {
+					player.getHeldItem(hand).setCount(0);
+				}
+				onEquipped(player.getHeldItem(hand), player);
+				return new ActionResult<>(EnumActionResult.SUCCESS, player.getHeldItem(hand));
+			}
+		}
+		return new ActionResult<>(EnumActionResult.FAIL, player.getHeldItem(hand));
+	}
+
+	@Override
+	public void onEquipped(ItemStack itemstack, EntityLivingBase player) {
+		player.playSound(equipSound, .75F, 0.95F * equipPitch);
 	}
 
 	@Override
@@ -139,4 +211,16 @@ public class Adornment extends ModItem implements IAdornment, ICharmable, IPouch
         this.level = level;
         return this;
     }
+
+	@Override
+	public void onPlayerBaubleRender(ItemStack stack, EntityPlayer player, IRenderBauble.RenderType renderType, float partialTicks) {
+
+		if (renderType == RenderType.BODY && baubleType == BaubleType.AMULET) {
+			GlStateManager.enableLighting();
+			GlStateManager.enableRescaleNormal();
+			Helper.rotateIfSneaking(player);
+			Minecraft.getMinecraft().renderEngine.bindTexture(textures);
+			modelAmulet.render(player, 0, 0, player.ticksExisted + partialTicks, 0, 0, 1 / 16F);
+		}
+	}
 }

@@ -17,8 +17,9 @@
 		"item": "minecraft:glowstone_dust"
 	},
 	"G": {
-		"item": "treasure2:amethyst"
-	}
+      "type": "forge:ore_dict",
+      "ore": "gemAmethyst"
+    }
   },
   "result": {
     "item": "treasure2:amethyst_silver_ring",

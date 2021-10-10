@@ -37,11 +37,11 @@ public class CardboardBoxModel extends ModelBase implements ITreasureChestModel 
 
 		southFlap = new ModelRenderer(this);
 		southFlap.setRotationPoint(0.0F, 10.0F, 7.0F);
-		southFlap.cubeList.add(new ModelBox(southFlap, 42, 7, -7.0F, -0.999F, -6.001F, 14, 1, 6, 0.0F, false));
+		southFlap.cubeList.add(new ModelBox(southFlap, 42, 7, -7.0F, -0.999F, -6.001F, 14, 1, 6, -0.03F, false));
 
 		northFlap = new ModelRenderer(this);
 		northFlap.setRotationPoint(0.0F, 10.0F, -7.0F);
-		northFlap.cubeList.add(new ModelBox(northFlap, 42, 0, -7.0F, -0.999F, 0.001F, 14, 1, 6, 0.0F, false));
+		northFlap.cubeList.add(new ModelBox(northFlap, 42, 0, -7.0F, -0.999F, 0.001F, 14, 1, 6, -0.03F, false));
 	}
 
 	@Override

@@ -6,9 +6,12 @@ package com.someguyssoftware.treasure2.item.charm;
 import java.util.List;
 import java.util.Random;
 
+import artifacts.common.init.ModSoundEvents;
+import baubles.api.BaubleType;
 import com.someguyssoftware.gottschcore.positional.ICoords;
 
 import net.minecraft.client.util.ITooltipFlag;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.MathHelper;
@@ -64,4 +67,9 @@ public class DecayCharm extends Charm {
         tooltip.add("  " + color + getLabel(data));
         tooltip.add(" " + TextFormatting.GRAY +  "" + TextFormatting.ITALIC + I18n.translateToLocalFormatted("tooltip.charm.decay_rate"));
     }
+
+	@Override
+	public BaubleType getBaubleType(ItemStack itemStack) {
+		return null;
+	}
 }

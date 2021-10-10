@@ -65,7 +65,7 @@ public class StrongboxModel extends ModelBase implements ITreasureChestModel {
     	      pad.mirror = true;
     	      setRotation(pad, 0F, 0F, 0F);
     	      latch = new ModelRenderer(this, 37, 11);
-    	      latch.addBox(-1F, -1.5F, -9F, 2, 2, 1);
+    	      latch.addBox(-1F, -1.0F, -9F, 2, 2, 1);
     	      latch.setRotationPoint(0F, 19.5F, 4F);
     	      latch.setTextureSize(64, 32);
     	      latch.mirror = true;

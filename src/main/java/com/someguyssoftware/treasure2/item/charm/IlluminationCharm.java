@@ -6,6 +6,7 @@ package com.someguyssoftware.treasure2.item.charm;
 import java.util.List;
 import java.util.Random;
 
+import baubles.api.BaubleType;
 import com.someguyssoftware.gottschcore.cube.Cube;
 import com.someguyssoftware.gottschcore.positional.Coords;
 import com.someguyssoftware.gottschcore.positional.ICoords;
@@ -147,6 +148,11 @@ public class IlluminationCharm extends Charm {
 		TextFormatting color = TextFormatting.WHITE;
 		tooltip.add("  " + color + getLabel(data));
 		tooltip.add(" " + TextFormatting.GRAY +  "" + TextFormatting.ITALIC + I18n.translateToLocalFormatted("tooltip.charm.illumination_rate"));
+	}
+
+	@Override
+	public BaubleType getBaubleType(ItemStack itemStack) {
+		return null;
 	}
 
 }

@@ -17,7 +17,8 @@
       "conditions": {
         "items": [
           {
-            "item": "treasure2:sapphire"
+            "item": "biomesoplenty:gem",
+			"data": 6
           }
         ]
       }

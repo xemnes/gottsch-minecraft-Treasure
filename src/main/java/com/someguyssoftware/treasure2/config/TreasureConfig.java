@@ -91,7 +91,14 @@ public class TreasureConfig implements IConfig, ILoggerConfig {
 	@Ignore public static final String DIAMOND_LOCK_ID = "diamond_lock";
 	@Ignore public static final String EMERALD_LOCK_ID = "emerald_lock";
 	@Ignore public static final String RUBY_LOCK_ID = "ruby_lock";
+	@Ignore public static final String AMBER_LOCK_ID = "amber_lock";
+	@Ignore public static final String MALACHITE_LOCK_ID = "malachite_lock";
 	@Ignore public static final String SAPPHIRE_LOCK_ID = "sapphire_lock";
+	@Ignore public static final String PERIDOT_LOCK_ID = "peridot_lock";
+	@Ignore public static final String AMETHYST_LOCK_ID = "amethyst_lock";
+	@Ignore public static final String TOPAZ_LOCK_ID = "topaz_lock";
+	@Ignore public static final String TANZANITE_LOCK_ID = "tanzanite_lock";
+	@Ignore public static final String ONYX_LOCK_ID = "onyx_lock";
 	@Ignore public static final String SPIDER_LOCK_ID = "spider_lock";
 	@Ignore public static final String WITHER_LOCK_ID = "wither_lock";
 
@@ -106,8 +113,15 @@ public class TreasureConfig implements IConfig, ILoggerConfig {
 	@Ignore public static final String IRON_KEY_ID = "iron_key";
 	@Ignore public static final String DIAMOND_KEY_ID = "diamond_key";	
 	@Ignore public static final String EMERALD_KEY_ID = "emerald_key";
+	@Ignore public static final String AMBER_KEY_ID = "amber_key";
+	@Ignore public static final String MALACHITE_KEY_ID = "malachite_key";
 	@Ignore public static final String RUBY_KEY_ID = "ruby_key";
 	@Ignore public static final String SAPPHIRE_KEY_ID = "sapphire_key";
+	@Ignore public static final String PERIDOT_KEY_ID = "peridot_key";
+	@Ignore public static final String AMETHYST_KEY_ID = "amethyst_key";
+	@Ignore public static final String TOPAZ_KEY_ID = "topaz_key";
+	@Ignore public static final String TANZANITE_KEY_ID = "tanzanite_key";
+	@Ignore public static final String ONYX_KEY_ID = "onyx_key";
 	@Ignore public static final String JEWELLED_KEY_ID = "jewelled_key";
 	@Ignore public static final String METALLURGISTS_KEY_ID = "metallurgists_key";
 	@Ignore public static final String SKELETON_KEY_ID = "skeleton_key";
@@ -214,15 +228,8 @@ public class TreasureConfig implements IConfig, ILoggerConfig {
 
 	@Ignore public static final String WITHER_PLANKS_ID = "wither_planks";
 
-	@Ignore public static final String AMETHYST_ORE_ID = "amethyst_ore";
-    @Ignore public static final String AMETHYST_ID = "amethyst";
     @Ignore public static final String ONYX_ORE_ID = "onyx_ore";
     @Ignore public static final String ONYX_ID = "onyx";
-       
-	@Ignore public static final String SAPPHIRE_ORE_ID = "sapphire_ore";
-	@Ignore public static final String SAPPHIRE_ID = "sapphire";
-	@Ignore public static final String RUBY_ORE_ID = "ruby_ore";
-	@Ignore public static final String RUBY_ID = "ruby";
 
 	@Ignore public static final String PROXIMITY_SPAWNER_ID = "proximity_spawner";
 
@@ -472,10 +479,10 @@ public class TreasureConfig implements IConfig, ILoggerConfig {
 					new String[] {}, new String[] {}));
 			configs.put(Rarity.SCARCE, new ChestConfig(true, 300, 50, 30, new String[] {}, new String[] {},
 					new String[] {}, new String[] {}));
-			configs.put(Rarity.RARE, new ChestConfig(true, 500, 25, 20, new String[] {},
-					new String[] { "plains", "sunflower_plains" }, new String[] {}, new String[] { "plains" }));
-			configs.put(Rarity.EPIC, new ChestConfig(true, 800, 15, 10, new String[] {},
-					new String[] { "plains", "sunflower_plains" }, new String[] {}, new String[] { "plains" }));
+			configs.put(Rarity.RARE, new ChestConfig(true, 500, 25, 20, new String[] {}, new String[] {},
+					new String[] {}, new String[] {}));
+			configs.put(Rarity.EPIC, new ChestConfig(true, 800, 15, 10, new String[] {}, new String[] {},
+					new String[] {}, new String[] {}));
 
 			surfaceChests = new ChestCollection(configs);
 
@@ -578,11 +585,11 @@ public class TreasureConfig implements IConfig, ILoggerConfig {
 
 			@Name("04 Rare chest")
 			public ChestConfig rareChestProperties = new ChestConfig(true, 500, 25, 20, new String[] {},
-					new String[] { "plains", "sunflower_plains" }, new String[] {}, new String[] { "plains" });
+					new String[] {}, new String[] {}, new String[] {});
 
 			@Name("05 Epic chest")
 			public ChestConfig epicChestProperties = new ChestConfig(true, 800, 15, 10, new String[] {},
-					new String[] { "plains", "sunflower_plains" }, new String[] {}, new String[] { "plains" });
+					new String[] {}, new String[] {}, new String[] {});
 
 			/**
 			 * 
@@ -895,84 +902,6 @@ public class TreasureConfig implements IConfig, ILoggerConfig {
 		@Name("01. Chunks per gem ore spawn:")
 		@RangeInt(min = 1, max = 32000)
 		public int chunksPerGemOre = 1;
-
-		@Comment({ "The probability that a ruby ore will spawn." })
-		@Name("02. Probability of ruby ore spawn.")
-		@RangeDouble(min = 0.0, max = 100.0)
-		public double rubyGenProbability = 65.0;
-
-		@Comment({ "The max. y-value where a ruby ore can spawn." })
-		@Name("03. Max. y-value for ruby ore spawn location:")
-		@RangeInt(min = 1, max = 255)
-		public int rubyOreMaxY = 14;
-
-		@Comment({ "The min. y-value where a ruby ore can spawn." })
-		@Name("04. Min. y-value for ruby ore spawn location:")
-		@RangeInt(min = 1, max = 255)
-		public int rubyOreMinY = 6;
-
-		@Comment({ "The number of ruby ore blocks in a vein." })
-		@Name("05. Ruby ore vein size:")
-		@RangeInt(min = 1, max = 20)
-		@RequiresMcRestart
-		public int rubyOreVeinSize = 3;
-
-		@Comment({ "The number of ruby ore veins in a chunk." })
-		@Name("06. Ruby ore veins per chunk.")
-		@RangeInt(min = 1, max = 20)
-		public int rubyOreVeinsPerChunk = 1;
-
-		@Comment({ "The probability that a sapphire ore will spawn." })
-		@Name("07. Probability of sapphire ore spawn.")
-		@RangeDouble(min = 0.0, max = 100.0)
-		public double sapphireGenProbability = 65.0;
-
-		@Comment({ "The max. y-value where a sapphire ore can spawn." })
-		@Name("08. Max. y-value for sapphire ore spawn location:")
-		@RangeInt(min = 1, max = 255)
-		public int sapphireOreMaxY = 14;
-
-		@Comment({ "The min. y-value where a sapphire ore can spawn." })
-		@Name("09. Min. y-value for sapphire ore spawn location:")
-		@RangeInt(min = 1, max = 255)
-		public int sapphireOreMinY = 6;
-
-		@Comment({ "The number of sapphire ore blocks in a vein." })
-		@Name("10. Sapphire ore vein size:")
-		@RangeInt(min = 1, max = 20)
-		@RequiresMcRestart
-		public int sapphireOreVeinSize = 3;
-
-		@Comment({ "The number of sapphire ore veins in a chunk." })
-		@Name("11. Sapphire ore veins per chunk.")
-		@RangeInt(min = 1, max = 20)
-        public int sapphireOreVeinsPerChunk = 1;
-        
- 	    @Comment({ "The probability that a amethyst ore will spawn." })
-		@Name("12. Probability of amethyst ore spawn.")
-		@RangeDouble(min = 0.0, max = 100.0)
-		public double amethystGenProbability = 75.0;
-
-		@Comment({ "The max. y-value where a amethyst ore can spawn." })
-		@Name("13. Max. y-value for amethyst ore spawn location:")
-		@RangeInt(min = 1, max = 255)
-		public int amethystOreMaxY = 24;
-
-		@Comment({ "The min. y-value where a amethyst ore can spawn." })
-		@Name("14. Min. y-value for amethyst ore spawn location:")
-		@RangeInt(min = 1, max = 255)
-		public int amethystOreMinY = 8;
-
-		@Comment({ "The number of amethyst ore blocks in a vein." })
-		@Name("15. Amethyst ore vein size:")
-		@RangeInt(min = 1, max = 20)
-		@RequiresMcRestart
-		public int amethystOreVeinSize = 4;
-
-		@Comment({ "The number of amethyst ore veins in a chunk." })
-		@Name("16. Amethyst ore veins per chunk.")
-		@RangeInt(min = 1, max = 20)
-        public int amethystOreVeinsPerChunk = 1;
         
 	    @Comment({ "The probability that a onyx ore will spawn." })
 		@Name("17. Probability of onyx ore spawn.")
@@ -1011,7 +940,7 @@ public class TreasureConfig implements IConfig, ILoggerConfig {
 
 		@Comment({ "Enable/Disable whether a Lock item is dropped when unlocked by Key item." })
 		@Name("02. Enable lock drops:")
-		public boolean enableLockDrops = true;
+		public boolean enableLockDrops = false;
 
 		@Comment({ "The maximum uses for a given pilferers lock pick." })
 		@Name("03. Pilferer's lockpick max. uses:")
@@ -1061,6 +990,18 @@ public class TreasureConfig implements IConfig, ILoggerConfig {
 		@RequiresMcRestart
 		public int emeraldKeyMaxUses = 10;
 
+		@Comment({ "The maximum uses for a given amber key." })
+		@Name("11. Amber key max. uses:")
+		@RangeInt(min = 1, max = 32000)
+		@RequiresMcRestart
+		public int amberKeyMaxUses = 5;
+
+		@Comment({ "The maximum uses for a given malachite key." })
+		@Name("11. Malachite key max. uses:")
+		@RangeInt(min = 1, max = 32000)
+		@RequiresMcRestart
+		public int malachiteKeyMaxUses = 5;
+
 		@Comment({ "The maximum uses for a given ruby key." })
 		@Name("11. Ruby key max. uses:")
 		@RangeInt(min = 1, max = 32000)
@@ -1072,6 +1013,36 @@ public class TreasureConfig implements IConfig, ILoggerConfig {
 		@RangeInt(min = 1, max = 32000)
 		@RequiresMcRestart
 		public int sapphireKeyMaxUses = 5;
+
+		@Comment({ "The maximum uses for a given peridot key." })
+		@Name("12. Peridot key max. uses:")
+		@RangeInt(min = 1, max = 32000)
+		@RequiresMcRestart
+		public int peridotKeyMaxUses = 5;
+
+		@Comment({ "The maximum uses for a given amethyst key." })
+		@Name("12. Amethyst key max. uses:")
+		@RangeInt(min = 1, max = 32000)
+		@RequiresMcRestart
+		public int amethystKeyMaxUses = 5;
+
+		@Comment({ "The maximum uses for a given topaz key." })
+		@Name("12. Topaz key max. uses:")
+		@RangeInt(min = 1, max = 32000)
+		@RequiresMcRestart
+		public int topazKeyMaxUses = 5;
+
+		@Comment({ "The maximum uses for a given tanzanite key." })
+		@Name("12. Tanzanite key max. uses:")
+		@RangeInt(min = 1, max = 32000)
+		@RequiresMcRestart
+		public int tanzaniteKeyMaxUses = 5;
+
+		@Comment({ "The maximum uses for a given onyx key." })
+		@Name("12. Onyx key max. uses:")
+		@RangeInt(min = 1, max = 32000)
+		@RequiresMcRestart
+		public int onyxKeyMaxUses = 3;
 
 		@Comment({ "The maximum uses for a given metallurgists key." })
 		@Name("13. Metallurgists key max. uses:")

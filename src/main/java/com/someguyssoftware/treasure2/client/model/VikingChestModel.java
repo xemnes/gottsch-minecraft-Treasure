@@ -30,49 +30,50 @@ public class VikingChestModel  extends ModelBase implements ITreasureChestModel 
 		mainBox.setRotationPoint(0.0F, 24.0F, 0.0F);
 		mainBox.cubeList.add(new ModelBox(mainBox, 0, 0, -7.0F, -13.0F, -5.0F, 14, 10, 10, 0.0F, false));
 		mainBox.cubeList.add(new ModelBox(mainBox, 0, 20, -2.0F, -12.0F, -5.5F, 4, 4, 1, 0.0F, false));
-		mainBox.cubeList.add(new ModelBox(mainBox, 0, 33, -8.0F, -5.5F, -2.0F, 16, 2, 4, 0.0F, false));
-		mainBox.cubeList.add(new ModelBox(mainBox, 38, 10, -7.0F, -3.0F, -5.0F, 2, 3, 10, 0.0F, false));
-		mainBox.cubeList.add(new ModelBox(mainBox, 30, 33, 5.0F, -3.0F, -5.0F, 2, 3, 10, 0.0F, false));
-		mainBox.cubeList.add(new ModelBox(mainBox, 0, 5, 7.0F, -11.0F, -2.0F, 1, 1, 4, 0.0F, false));
-		mainBox.cubeList.add(new ModelBox(mainBox, 0, 0, -8.0F, -11.0F, -2.0F, 1, 1, 4, 0.0F, false));
+		mainBox.cubeList.add(new ModelBox(mainBox, 2, 20, -1.0F, -11.0F, -6.0F, 2, 2, 1, 0.0F, false));
+		mainBox.cubeList.add(new ModelBox(mainBox, 0, 35, -8.0F, -6.0F, -2.0F, 16, 2, 4, 0.0F, false));
+		mainBox.cubeList.add(new ModelBox(mainBox, 53, 1, -7.0F, -3.0F, 3.0F, 2, 3, 2, 0.0F, false));
+		mainBox.cubeList.add(new ModelBox(mainBox, 53, 1, 5.0F, -3.0F, 3.0F, 2, 3, 2, 0.0F, false));
+		mainBox.cubeList.add(new ModelBox(mainBox, 53, 1, -7.0F, -3.0F, -5.0F, 2, 3, 2, 0.0F, false));
+		mainBox.cubeList.add(new ModelBox(mainBox, 53, 1, 5.0F, -3.0F, -5.0F, 2, 3, 2, 0.0F, false));
+		mainBox.cubeList.add(new ModelBox(mainBox, 0, 41, -8.0F, -11.0F, -2.0F, 16, 1, 4, 0.0F, false));
 
 		lid = new ModelRenderer(this);
 		lid.setRotationPoint(0.0F, 12.0F, 5.0F);
-		lid.cubeList.add(new ModelBox(lid, 38, 0, -1.0F, -3.5F, -10.75F, 2, 1, 8, 0.0F, false)); // topLatchTop
-		lid.cubeList.add(new ModelBox(lid, 0, 25, -1.0F, -2.5F, -10.75F, 2, 4, 1, 0.0F, false)); // topLatchFront
+		lid.cubeList.add(new ModelBox(lid, 38, 0, -1.0F, -3.5F, -10.75F, 2, 1, 8, 0.0F, false));
+		lid.cubeList.add(new ModelBox(lid, 0, 25, -1.0F, -2.5F, -10.75F, 2, 4, 1, 0.0F, false));
 		lid.cubeList.add(new ModelBox(lid, 0, 20, -7.0F, -3.0F, -10.0F, 14, 3, 10, 0.0F, false));
-		lid.cubeList.add(new ModelBox(lid, 38, 8, 5.5F, -2.0F, -10.5F, 1, 1, 1, 0.0F, false));
-		lid.cubeList.add(new ModelBox(lid, 38, 6, -6.5F, -2.0F, -10.5F, 1, 1, 1, 0.0F, false));
-		lid.cubeList.add(new ModelBox(lid, 38, 4, 5.5F, -2.0F, -0.5F, 1, 1, 1, 0.0F, false));
-		lid.cubeList.add(new ModelBox(lid, 38, 2, -6.5F, -2.0F, -0.5F, 1, 1, 1, 0.0F, false));
+		lid.cubeList.add(new ModelBox(lid, 38, 10, 5.5F, -2.0F, -10.5F, 1, 1, 11, 0.0F, false));
+		lid.cubeList.add(new ModelBox(lid, 38, 10, -6.5F, -2.0F, -10.5F, 1, 1, 11, 0.0F, false));
+		lid.cubeList.add(new ModelBox(lid, 48, 22, -6.5F, -3.5F, -1.5F, 1, 1, 1, 0.0F, false));
+		lid.cubeList.add(new ModelBox(lid, 48, 22, -6.5F, -3.5F, -9.5F, 1, 1, 1, 0.0F, false));
+		lid.cubeList.add(new ModelBox(lid, 48, 22, -6.5F, -3.5F, -5.5F, 1, 1, 1, 0.0F, false));
+		lid.cubeList.add(new ModelBox(lid, 48, 22, -0.5F, -4.0F, -5.5F, 1, 1, 1, 0.0F, false));
+		lid.cubeList.add(new ModelBox(lid, 48, 22, -0.5F, -4.0F, -9.5F, 1, 1, 1, 0.0F, false));
+		lid.cubeList.add(new ModelBox(lid, 48, 22, 5.5F, -3.5F, -9.5F, 1, 1, 1, 0.0F, false));
+		lid.cubeList.add(new ModelBox(lid, 48, 22, 5.5F, -3.5F, -1.5F, 1, 1, 1, 0.0F, false));
+		lid.cubeList.add(new ModelBox(lid, 48, 22, 5.5F, -3.5F, -5.5F, 1, 1, 1, 0.0F, false));
 
 		front = new ModelRenderer(this);
 		front.setRotationPoint(0.0F, 24.0F, 0.0F);
-		front.cubeList.add(new ModelBox(front, 38, 0, 5.5F, -2.0F, -5.5F, 1, 1, 1, 0.0F, false));
-		front.cubeList.add(new ModelBox(front, 36, 35, 5.5F, -8.0F, -5.5F, 1, 1, 1, 0.0F, false));
-		front.cubeList.add(new ModelBox(front, 36, 33, -6.5F, -8.0F, -5.5F, 1, 1, 1, 0.0F, false));
-		front.cubeList.add(new ModelBox(front, 0, 35, -6.5F, -2.0F, -5.5F, 1, 1, 1, 0.0F, false));
+
 
 		side1 = new ModelRenderer(this);
 		side1.setRotationPoint(0.0F, 24.0F, 0.0F);
-		side1.cubeList.add(new ModelBox(side1, 0, 33, 6.5F, -5.0F, -4.5F, 1, 1, 1, 0.0F, false));
-		side1.cubeList.add(new ModelBox(side1, 4, 27, -7.5F, -11.0F, -4.5F, 1, 1, 1, 0.0F, false));
-		side1.cubeList.add(new ModelBox(side1, 0, 27, 6.5F, -5.0F, 3.5F, 1, 1, 1, 0.0F, false));
-		side1.cubeList.add(new ModelBox(side1, 4, 25, 6.5F, -11.0F, 3.5F, 1, 1, 1, 0.0F, false));
+		side1.cubeList.add(new ModelBox(side1, 32, 33, -7.5F, -5.0F, -4.5F, 15, 1, 1, 0.0F, false));
+		side1.cubeList.add(new ModelBox(side1, 32, 33, -7.5F, -5.0F, 3.5F, 15, 1, 1, 0.0F, false));
+		side1.cubeList.add(new ModelBox(side1, 32, 33, -7.5F, -11.0F, 3.5F, 15, 1, 1, 0.0F, false));
 
 		side2 = new ModelRenderer(this);
 		side2.setRotationPoint(0.0F, 24.0F, 0.0F);
-		side2.cubeList.add(new ModelBox(side2, 0, 25, -7.5F, -5.0F, -4.5F, 1, 1, 1, 0.0F, false));
-		side2.cubeList.add(new ModelBox(side2, 0, 7, 6.5F, -11.0F, -4.5F, 1, 1, 1, 0.0F, false));
-		side2.cubeList.add(new ModelBox(side2, 6, 2, -7.5F, -5.0F, 3.5F, 1, 1, 1, 0.0F, false));
-		side2.cubeList.add(new ModelBox(side2, 6, 0, -7.5F, -11.0F, 3.5F, 1, 1, 1, 0.0F, false));
+		side2.cubeList.add(new ModelBox(side2, 32, 33, -7.5F, -11.0F, -4.5F, 15, 1, 1, 0.0F, false));
 
 		back = new ModelRenderer(this);
 		back.setRotationPoint(0.0F, 24.0F, 0.0F);
-		back.cubeList.add(new ModelBox(back, 6, 6, 5.5F, -2.0F, 4.5F, 1, 1, 1, 0.0F, false));
-		back.cubeList.add(new ModelBox(back, 0, 5, 5.5F, -8.0F, 4.5F, 1, 1, 1, 0.0F, false));
-		back.cubeList.add(new ModelBox(back, 0, 2, -6.5F, -8.0F, 4.5F, 1, 1, 1, 0.0F, false));
-		back.cubeList.add(new ModelBox(back, 0, 0, -6.5F, -2.0F, 4.5F, 1, 1, 1, 0.0F, false));
+		back.cubeList.add(new ModelBox(back, 38, 10, 5.5F, -2.0F, -5.5F, 1, 1, 11, 0.0F, false));
+		back.cubeList.add(new ModelBox(back, 38, 10, 5.5F, -8.0F, -5.5F, 1, 1, 11, 0.0F, false));
+		back.cubeList.add(new ModelBox(back, 38, 10, -6.5F, -8.0F, -5.5F, 1, 1, 11, 0.0F, false));
+		back.cubeList.add(new ModelBox(back, 38, 10, -6.5F, -2.0F, -5.5F, 1, 1, 11, 0.0F, false));
 	}
 
 	@Override

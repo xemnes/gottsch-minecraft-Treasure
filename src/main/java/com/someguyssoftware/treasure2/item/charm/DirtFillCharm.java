@@ -7,6 +7,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Random;
 
+import baubles.api.BaubleType;
 import com.google.common.collect.Lists;
 import com.someguyssoftware.gottschcore.positional.ICoords;
 
@@ -93,4 +94,9 @@ public class DirtFillCharm extends Charm {
         Collections.shuffle(list, rand);
         return list;
     }
+
+	@Override
+	public BaubleType getBaubleType(ItemStack itemStack) {
+		return null;
+	}
 }

@@ -17,8 +17,9 @@
 		"item": "minecraft:glowstone_dust"
 	},
 	"S": {
-		"item": "treasure2:sapphire"
-	}
+      "type": "forge:ore_dict",
+      "ore": "gemSapphire"
+    }
   },
   "result": {
     "item": "treasure2:sapphire_silver_amulet",

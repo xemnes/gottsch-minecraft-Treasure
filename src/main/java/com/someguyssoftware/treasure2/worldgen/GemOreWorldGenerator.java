@@ -32,10 +32,7 @@ import net.minecraft.world.gen.feature.WorldGenerator;
  */
 public class GemOreWorldGenerator implements ITreasureWorldGenerator {
 
-    private WorldGenMinable amethystGenerator;
     private WorldGenMinable onyxGenerator;
-	private WorldGenMinable sapphireGenerator;
-	private WorldGenMinable rubyGenerator;
 	private int chunksSinceLastOre = 1;
 
     Map<Item, GemGenerationContext> gemContexts;
@@ -59,38 +56,18 @@ public class GemOreWorldGenerator implements ITreasureWorldGenerator {
         chunksSinceLastOre = 0;
 
         // create generators
-        amethystGenerator = new WorldGenMinable(TreasureBlocks.AMETHYST_ORE.getDefaultState(), TreasureConfig.GEMS_ORES.amethystOreVeinSize);
         onyxGenerator = new WorldGenMinable(TreasureBlocks.ONYX_ORE.getDefaultState(), TreasureConfig.GEMS_ORES.onyxOreVeinSize);
-		sapphireGenerator = new WorldGenMinable(TreasureBlocks.SAPPHIRE_ORE.getDefaultState(), TreasureConfig.GEMS_ORES.sapphireOreVeinSize);
-		rubyGenerator = new WorldGenMinable(TreasureBlocks.RUBY_ORE.getDefaultState(), TreasureConfig.GEMS_ORES.rubyOreVeinSize);
         
         // map gem contexts
 		gemContexts = new HashMap<>();
-		
-        gemContexts.put(TreasureItems.AMETHYST, new GemGenerationContext(
-            amethystGenerator, 
-            TreasureConfig.GEMS_ORES.amethystGenProbability,
-			TreasureConfig.GEMS_ORES.amethystOreVeinsPerChunk,
-			TreasureConfig.GEMS_ORES.amethystOreMaxY,
-			TreasureConfig.GEMS_ORES.amethystOreMinY));
+
         gemContexts.put(TreasureItems.ONYX, new GemGenerationContext(
             onyxGenerator,
             TreasureConfig.GEMS_ORES.onyxGenProbability,
 			TreasureConfig.GEMS_ORES.onyxOreVeinsPerChunk,
 			TreasureConfig.GEMS_ORES.onyxOreMaxY,
 			TreasureConfig.GEMS_ORES.onyxOreMinY));
-        gemContexts.put(TreasureItems.RUBY, new GemGenerationContext(
-            rubyGenerator, 
-            TreasureConfig.GEMS_ORES.rubyGenProbability,
-			TreasureConfig.GEMS_ORES.rubyOreVeinsPerChunk,
-			TreasureConfig.GEMS_ORES.rubyOreMaxY,
-			TreasureConfig.GEMS_ORES.rubyOreMinY));
-        gemContexts.put(TreasureItems.SAPPHIRE, new GemGenerationContext(
-            sapphireGenerator,
-            TreasureConfig.GEMS_ORES.sapphireGenProbability,
-			TreasureConfig.GEMS_ORES.sapphireOreVeinsPerChunk,
-			TreasureConfig.GEMS_ORES.sapphireOreMaxY,
-			TreasureConfig.GEMS_ORES.sapphireOreMinY));
+
 	}
 
 	/**
@@ -103,8 +80,7 @@ public class GemOreWorldGenerator implements ITreasureWorldGenerator {
 		}
 		if (TreasureConfig.WORLD_GEN.getGeneralProperties().getDimensionsWhiteList().contains(Integer.valueOf(world.provider.getDimension()))) {
             // generate(world, random, chunkX, chunkZ);
-            generate(world, random, chunkX, chunkZ, gemContexts.get(TreasureItems.RUBY), gemContexts.get(TreasureItems.SAPPHIRE));
-            generate(world, random, chunkX, chunkZ, gemContexts.get(TreasureItems.AMETHYST), gemContexts.get(TreasureItems.ONYX));
+            generate(world, random, chunkX, chunkZ, gemContexts.get(TreasureItems.ONYX));
 		}
 	}
 

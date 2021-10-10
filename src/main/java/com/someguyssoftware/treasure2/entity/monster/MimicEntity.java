@@ -6,6 +6,7 @@ package com.someguyssoftware.treasure2.entity.monster;
 import java.util.List;
 import java.util.Random;
 
+import artifacts.common.init.ModSoundEvents;
 import com.someguyssoftware.gottschcore.loot.LootTableShell;
 import com.someguyssoftware.gottschcore.random.RandomHelper;
 import com.someguyssoftware.treasure2.Treasure;
@@ -114,25 +115,21 @@ public abstract class MimicEntity extends EntityMob {
 		return false;
 	}
 
-	/**
-	 * Returns the sound this mob makes when it is hurt.
-	 */
-	protected SoundEvent getHurtSound(DamageSource damageSourceIn) {
-		return SoundEvents.BLOCK_WOODEN_DOOR_OPEN;
+	@Override
+	protected SoundEvent getHurtSound(DamageSource damageSource) {
+		return ModSoundEvents.MIMIC_HURT;
 	}
 
-	/**
-	 * Returns the sound this mob makes on death.
-	 */
+	@Override
 	protected SoundEvent getDeathSound() {
-		return SoundEvents.BLOCK_CHEST_CLOSE;
+		return ModSoundEvents.MIMIC_DEATH;
 	}
 
 	/**
 	 * 
 	 */
 	protected void playStepSound(BlockPos pos, Block block) {
-		this.playSound(SoundEvents.BLOCK_CHEST_LOCKED, 0.15F, 1.0F);
+		this.playSound(ModSoundEvents.MIMIC_OPEN, 0.15F, 1.0F);
 	}
 	
 	/**

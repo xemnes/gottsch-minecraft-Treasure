@@ -1,7 +1,7 @@
 {
     "parent": "item/handheld",
     "textures": {
-        "layer0": "treasure2:items/charmed_sapphire"
+        "layer0": "treasure2:items/miners_friend"
     },
     "display": {
        "thirdperson_righthand": {

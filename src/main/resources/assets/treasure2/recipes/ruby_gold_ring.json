@@ -17,8 +17,9 @@
 		"item": "minecraft:glowstone_dust"
 	},
 	"G": {
-		"item": "treasure2:ruby"
-	}
+      "type": "forge:ore_dict",
+      "ore": "gemRuby"
+    }
   },
   "result": {
     "item": "treasure2:ruby_gold_ring",

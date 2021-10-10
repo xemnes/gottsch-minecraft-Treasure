@@ -11,8 +11,9 @@
 		"item": "treasure2:treasure_tool"
 	},
 	"S": {
-		"item": "minecraft:mossy_cobblestone"
-	}
+      "type": "forge:ore_dict",
+      "ore": "blockMossy"
+    }
   },
   "result": {
     "item": "treasure2:gravestone2_mossy_cobblestone",

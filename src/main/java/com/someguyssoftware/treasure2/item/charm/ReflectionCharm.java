@@ -6,6 +6,7 @@ package com.someguyssoftware.treasure2.item.charm;
 import java.util.List;
 import java.util.Random;
 
+import baubles.api.BaubleType;
 import com.someguyssoftware.gottschcore.positional.ICoords;
 import com.someguyssoftware.treasure2.Treasure;
 
@@ -76,5 +77,10 @@ public class ReflectionCharm extends Charm {
 		tooltip.add("  " + color + getLabel(data));
 		tooltip.add(" " + TextFormatting.GRAY +  "" + TextFormatting.ITALIC + I18n.translateToLocalFormatted("tooltip.charm.reflection_rate", 
 				Math.toIntExact((long) (data.getPercent()*100)), data.getDuration()));
+	}
+
+	@Override
+	public BaubleType getBaubleType(ItemStack itemStack) {
+		return null;
 	}
 }

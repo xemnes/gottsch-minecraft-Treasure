@@ -1,9 +1,11 @@
 {
 	"version": "2.1",
-	"pools": [{
+	"pools": [
+		{
 			"name": "epic_keys",
 			"rolls": 1,
-			"entries": [{
+			"entries": [
+				{
 					"entryName": "jewelled_key",
 					"type": "item",
 					"name": "treasure2:jewelled_key",
@@ -14,52 +16,135 @@
 					"type": "item",
 					"name": "treasure2:ruby_key",
 					"weight": 25,
-					"functions": [{
-						"function": "set_count",
-						"count": {
-							"min": 0,
-							"max": 2
+					"functions": [
+						{
+							"function": "set_count",
+							"count": {
+								"min": 0,
+								"max": 2
+							}
 						}
-					}]
+					]
 				},
 				{
 					"entryName": "sapphire_key",
 					"type": "item",
 					"name": "treasure2:sapphire_key",
 					"weight": 25,
-					"functions": [{
-						"function": "set_count",
-						"count": {
-							"min": 0,
-							"max": 2
+					"functions": [
+						{
+							"function": "set_count",
+							"count": {
+								"min": 0,
+								"max": 2
+							}
 						}
-					}]
+					]
+				},
+				{
+					"entryName": "peridot_key",
+					"type": "item",
+					"name": "treasure2:peridot_key",
+					"weight": 25,
+					"functions": [
+						{
+							"function": "set_count",
+							"count": {
+								"min": 0,
+								"max": 2
+							}
+						}
+					]
+				},
+				{
+					"entryName": "amethyst_key",
+					"type": "item",
+					"name": "treasure2:amethyst_key",
+					"weight": 25,
+					"functions": [
+						{
+							"function": "set_count",
+							"count": {
+								"min": 0,
+								"max": 2
+							}
+						}
+					]
+				},
+				{
+					"entryName": "topaz_key",
+					"type": "item",
+					"name": "treasure2:topaz_key",
+					"weight": 25,
+					"functions": [
+						{
+							"function": "set_count",
+							"count": {
+								"min": 0,
+								"max": 2
+							}
+						}
+					]
+				},
+				{
+					"entryName": "tanzanite_key",
+					"type": "item",
+					"name": "treasure2:tanzanite_key",
+					"weight": 25,
+					"functions": [
+						{
+							"function": "set_count",
+							"count": {
+								"min": 0,
+								"max": 2
+							}
+						}
+					]
+				},
+				{
+					"entryName": "onyx_key",
+					"type": "item",
+					"name": "treasure2:onyx_key",
+					"weight": 20,
+					"functions": [
+						{
+							"function": "set_count",
+							"count": {
+								"min": 0,
+								"max": 2
+							}
+						}
+					]
 				},
 				{
 					"entryName": "diamond_key",
 					"type": "item",
 					"name": "treasure2:diamond_key",
 					"weight": 15,
-					"functions": [{
-						"function": "set_count",
-						"count": {
-							"min": 1,
-							"max": 2
+					"functions": [
+						{
+							"function": "set_count",
+							"count": {
+								"min": 1,
+								"max": 2
+							}
 						}
-					}]
+					]
 				},
 				{
 					"entryName": "emerald_key",
 					"type": "item",
 					"name": "treasure2:emerald_key",
 					"weight": 15,
-					"functions": [{
-						"function": "set_count",
-						"count": {
-							"min": 1,
-							"max": 2
+					"functions": [
+						{
+							"function": "set_count",
+							"count": {
+								"min": 1,
+								"max": 2
+							}
 						}
-					}]
+					]
 				},
 				{
 					"entryName": "metallurgists_key",
@@ -78,47 +163,60 @@
 		{
 			"name": "epic_treasure",
 			"rolls": 1,
-			"entries": [{
+			"entries": [
+				{
 					"entryName": "silver_coin",
 					"type": "item",
 					"name": "treasure2:silver_coin",
 					"weight": 25,
-					"functions": [{
-						"function": "set_count",
-						"count": {
-							"min": 3,
-							"max": 10
+					"functions": [
+						{
+							"function": "set_count",
+							"count": {
+								"min": 3,
+								"max": 10
+							}
 						}
-					}]
+					]
 				},
 				{
 					"entryName": "gold_coin",
 					"type": "item",
 					"name": "treasure2:gold_coin",
 					"weight": 20,
-					"functions": [{
-						"function": "set_count",
-						"count": {
-							"min": 2,
-							"max": 5
+					"functions": [
+						{
+							"function": "set_count",
+							"count": {
+								"min": 2,
+								"max": 5
+							}
 						}
-					}]
+					]
 				},
 				{
 					"entryName": "skull_sword",
 					"type": "item",
 					"name": "treasure2:skull_sword",
 					"weight": 10,
-					"conditions": [{
-						"condition": "random_chance",
-						"chance": 0.5
-					}]
+					"conditions": [
+						{
+							"condition": "random_chance",
+							"chance": 0.5
+						}
+					]
 				},
 				{
 					"entryName": "amethyst",
 					"type": "item",
-					"name": "treasure2:amethyst",
-					"weight": 15
+					"name": "biomesoplenty:gem",
+					"weight": 15,
+					"functions": [
+						{
+							"function": "set_data",
+							"data": 0
+						}
+					]
 				},
 				{
 					"entryName": "onyx",
@@ -129,14 +227,86 @@
 				{
 					"entryName": "sapphire",
 					"type": "item",
-					"name": "treasure2:sapphire",
-					"weight": 10
+					"name": "biomesoplenty:gem",
+					"weight": 10,
+					"functions": [
+						{
+							"function": "set_data",
+							"data": 6
+						}
+					]
 				},
 				{
 					"entryName": "ruby",
 					"type": "item",
-					"name": "treasure2:ruby",
-					"weight": 10
+					"name": "biomesoplenty:gem",
+					"weight": 10,
+					"functions": [
+						{
+							"function": "set_data",
+							"data": 1
+						}
+					]
+				},
+				{
+					"entryName": "amber",
+					"type": "item",
+					"name": "biomesoplenty:gem",
+					"weight": 5,
+					"functions": [
+						{
+							"function": "set_data",
+							"data": 7
+						}
+					]
+				},
+				{
+					"entryName": "malachite",
+					"type": "item",
+					"name": "biomesoplenty:gem",
+					"weight": 5,
+					"functions": [
+						{
+							"function": "set_data",
+							"data": 5
+						}
+					]
+				},
+				{
+					"entryName": "tanzanite",
+					"type": "item",
+					"name": "biomesoplenty:gem",
+					"weight": 5,
+					"functions": [
+						{
+							"function": "set_data",
+							"data": 4
+						}
+					]
+				},
+				{
+					"entryName": "topaz",
+					"type": "item",
+					"name": "biomesoplenty:gem",
+					"weight": 5,
+					"functions": [
+						{
+							"function": "set_data",
+							"data": 3
+						}
+					]
+				},
+				{
+					"entryName": "peridot",
+					"type": "item",
+					"name": "biomesoplenty:gem",
+					"weight": 5,
+					"functions": [
+						{
+							"function": "set_data",
+							"data": 2
+						}
+					]
 				},
 				{
 					"entryName": "white_pearl",
@@ -155,30 +325,180 @@
 					"type": "item",
 					"name": "treasure2:eye_patch",
 					"weight": 10,
-					"conditions": [{
-						"condition": "random_chance",
-						"chance": 0.50
-					}]
+					"conditions": [
+						{
+							"condition": "random_chance",
+							"chance": 0.5
+						}
+					]
 				},
 				{
 					"entryName": "painting_blocks_bricks",
 					"type": "item",
 					"name": "treasure2:painting_blocks_bricks",
 					"weight": 10,
-					"conditions": [{
-						"condition": "random_chance",
-						"chance": 0.25
-					}]
+					"conditions": [
+						{
+							"condition": "random_chance",
+							"chance": 0.25
+						}
+					]
 				},
 				{
 					"entryName": "painting_blocks_lava",
 					"type": "item",
 					"name": "treasure2:painting_blocks_lava",
 					"weight": 10,
-					"conditions": [{
-						"condition": "random_chance",
-						"chance": 0.25
-					}]
+					"conditions": [
+						{
+							"condition": "random_chance",
+							"chance": 0.25
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "epic_artifacts",
+			"rolls": 1,
+			"entries": [
+				{
+					"entryName": "shiny_red_balloon",
+					"type": "item",
+					"name": "artifacts:shiny_red_balloon",
+					"weight": 10
+				},
+				{
+					"entryName": "obsidian_skull",
+					"type": "item",
+					"name": "artifacts:obsidian_skull",
+					"weight": 10
+				},
+				{
+					"entryName": "snorkel",
+					"type": "item",
+					"name": "artifacts:snorkel",
+					"weight": 10
+				},
+				{
+					"entryName": "shock_pendant",
+					"type": "item",
+					"name": "artifacts:shock_pendant",
+					"weight": 10
+				},
+				{
+					"entryName": "flame_pendant",
+					"type": "item",
+					"name": "artifacts:flame_pendant",
+					"weight": 10
+				},
+				{
+					"entryName": "thorn_pendant",
+					"type": "item",
+					"name": "artifacts:thorn_pendant",
+					"weight": 10
+				},
+				{
+					"entryName": "ultimate_pendant",
+					"type": "item",
+					"name": "artifacts:ultimate_pendant",
+					"weight": 10
+				},
+				{
+					"entryName": "panic_necklace",
+					"type": "item",
+					"name": "artifacts:panic_necklace",
+					"weight": 10
+				},
+				{
+					"entryName": "lucky_horseshoe",
+					"type": "item",
+					"name": "artifacts:lucky_horseshoe",
+					"weight": 10
+				},
+				{
+					"entryName": "cobalt_shield",
+					"type": "item",
+					"name": "artifacts:cobalt_shield",
+					"weight": 10
+				},
+				{
+					"entryName": "whoopie_cushion",
+					"type": "item",
+					"name": "artifacts:whoopie_cushion",
+					"weight": 15
+				},
+				{
+					"entryName": "bottled_cloud",
+					"type": "item",
+					"name": "artifacts:bottled_cloud",
+					"weight": 10
+				},
+				{
+					"entryName": "bottled_fart",
+					"type": "item",
+					"name": "artifacts:bottled_fart",
+					"weight": 10
+				},
+				{
+					"entryName": "magma_stone",
+					"type": "item",
+					"name": "artifacts:magma_stone",
+					"weight": 10
+				},
+				{
+					"entryName": "feral_claws",
+					"type": "item",
+					"name": "artifacts:feral_claws",
+					"weight": 10
+				},
+				{
+					"entryName": "power_glove",
+					"type": "item",
+					"name": "artifacts:power_glove",
+					"weight": 10
+				},
+				{
+					"entryName": "fire_gauntlet",
+					"type": "item",
+					"name": "artifacts:fire_gauntlet",
+					"weight": 10
+				},
+				{
+					"entryName": "mechanical_glove",
+					"type": "item",
+					"name": "artifacts:mechanical_glove",
+					"weight": 10
+				},
+				{
+					"entryName": "drinking_hat",
+					"type": "item",
+					"name": "artifacts:drinking_hat",
+					"weight": 10
+				},
+				{
+					"entryName": "star_cloak",
+					"type": "item",
+					"name": "artifacts:star_cloak",
+					"weight": 10
+				},
+				{
+					"entryName": "pocket_piston",
+					"type": "item",
+					"name": "artifacts:pocket_piston",
+					"weight": 10
+				},
+				{
+					"entryName": "night_vision_goggles",
+					"type": "item",
+					"name": "artifacts:night_vision_goggles",
+					"weight": 10
+				},
+				{
+					"entryName": "tiny_shirt",
+					"type": "item",
+					"name": "artifacts:tiny_shirt",
+					"weight": 10
 				}
 			]
 		}

@@ -23,17 +23,7 @@ import com.someguyssoftware.treasure2.client.model.VikingChestModel;
 import com.someguyssoftware.treasure2.client.model.WitherChestModel;
 import com.someguyssoftware.treasure2.client.render.entity.BoundSoulRenderer;
 import com.someguyssoftware.treasure2.client.render.entity.MimicEntityRenderer;
-import com.someguyssoftware.treasure2.client.render.tileentity.CardboardBoxTileEntityRenderer;
-import com.someguyssoftware.treasure2.client.render.tileentity.CauldronChestTileEntityRenderer;
-import com.someguyssoftware.treasure2.client.render.tileentity.CompressorChestTileEntityRenderer;
-import com.someguyssoftware.treasure2.client.render.tileentity.CrateChestTileEntityRenderer;
-import com.someguyssoftware.treasure2.client.render.tileentity.MilkCrateTileEntityRenderer;
-import com.someguyssoftware.treasure2.client.render.tileentity.MolluscChestTileEntityRenderer;
-import com.someguyssoftware.treasure2.client.render.tileentity.SafeTileEntityRenderer;
-import com.someguyssoftware.treasure2.client.render.tileentity.SkullChestTileEntityRenderer;
-import com.someguyssoftware.treasure2.client.render.tileentity.StrongboxTileEntityRenderer;
-import com.someguyssoftware.treasure2.client.render.tileentity.TreasureChestTileEntityRenderer;
-import com.someguyssoftware.treasure2.client.render.tileentity.WitherChestTileEntityRenderer;
+import com.someguyssoftware.treasure2.client.render.tileentity.*;
 import com.someguyssoftware.treasure2.entity.monster.BoundSoulEntity;
 import com.someguyssoftware.treasure2.entity.monster.PirateMimicEntity;
 import com.someguyssoftware.treasure2.entity.monster.WoodMimicEntity;
@@ -181,7 +171,7 @@ public class ClientProxy {
 		// viking chest
 		ClientRegistry.bindTileEntitySpecialRenderer(
 				VikingChestTileEntity.class,
-				new TreasureChestTileEntityRenderer("viking-chest", new VikingChestModel()));
+				new VikingChestTileEntityRenderer("viking-chest", new VikingChestModel()));
 
 		// cardboard box
 		ClientRegistry.bindTileEntitySpecialRenderer(

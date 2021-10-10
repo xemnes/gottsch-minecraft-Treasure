@@ -3,6 +3,7 @@
  */
 package com.someguyssoftware.treasure2.block;
 
+import java.util.List;
 import java.util.Random;
 
 import com.someguyssoftware.gottschcore.block.CardinalDirectionFacadeBlock;
@@ -22,6 +23,7 @@ import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.Minecraft;
+import net.minecraft.entity.Entity;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
 import net.minecraft.tileentity.TileEntity;
@@ -32,6 +34,8 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+
+import javax.annotation.Nullable;
 
 /**
  * 
@@ -47,7 +51,7 @@ public class GravestoneBlock extends CardinalDirectionFacadeBlock
 	AxisAlignedBB[] bounds = new AxisAlignedBB[4];
 
 	/**
-	 * 
+	 *
 	 * @param modID
 	 * @param name
 	 * @param material
@@ -63,6 +67,18 @@ public class GravestoneBlock extends CardinalDirectionFacadeBlock
 				new AxisAlignedBB(0F, 0F, 0F, 1F, 1F, 1F), // S
 				new AxisAlignedBB(0F, 0F, 0F, 1F, 1F, 1F) // W
 		);
+
+	}
+
+
+	@Override
+	public int getLightOpacity(IBlockState state, IBlockAccess world, BlockPos pos) {
+		return super.getLightOpacity(state, world, pos);
+	}
+
+	@Override
+	public boolean isSideSolid(IBlockState base_state, IBlockAccess world, BlockPos pos, EnumFacing side) {
+		return false;
 	}
 
 	/**
@@ -186,4 +202,16 @@ public class GravestoneBlock extends CardinalDirectionFacadeBlock
 		this.bounds = bounds;
 		return this;
 	}
+
+	@Override
+	public void addCollisionBoxToList(IBlockState state, World worldIn,
+											 BlockPos pos, AxisAlignedBB entityBox, List<AxisAlignedBB> collidingBoxes,
+											 @Nullable Entity entityIn, boolean p_185477_7_) {
+		addCollisionBoxToList(pos, entityBox, collidingBoxes, new AxisAlignedBB(0F, 0F, 0F, 1F, 1F, 1F));
+		addCollisionBoxToList(pos, entityBox, collidingBoxes, new AxisAlignedBB(0F, 0F, 0F, 1F, 1F, 1F));
+		addCollisionBoxToList(pos, entityBox, collidingBoxes, new AxisAlignedBB(0F, 0F, 0F, 1F, 1F, 1F));
+		addCollisionBoxToList(pos, entityBox, collidingBoxes, new AxisAlignedBB(0F, 0F, 0F, 1F, 1F, 1F));
+	}
+
+
 }

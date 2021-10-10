@@ -7,6 +7,6 @@
 	"themes": ["dungeon"],
 	"rarities": ["common"],
 	"biomeWhiteList": [],
-	"biomeBlackList": [],
+	"biomeBlackList": ["desert", "desert_hills", "mutated_desert", "biomesoplenty:xeric_shrubland", "biomesoplenty:oasis"],
 	"decayRuleSetName": ["default_ruleset", "aged_ruleset", "ruinous_ruleset"]
 }

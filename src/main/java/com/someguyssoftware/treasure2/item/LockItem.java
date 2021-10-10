@@ -89,7 +89,7 @@ public class LockItem extends ModItem {
 		super.addInformation(stack, worldIn, tooltip, flagIn);
 
 		tooltip.add(I18n.translateToLocalFormatted("tooltip.label.rarity",
-				TextFormatting.DARK_BLUE + getRarity().toString()));
+				TextFormatting.AQUA + getRarity().toString()));
 		tooltip.add(I18n.translateToLocalFormatted("tooltip.label.category", getCategory()));
 
 		String craftable = "";

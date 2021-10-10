@@ -4,6 +4,7 @@ import com.someguyssoftware.treasure2.lock.LockState;
 import com.someguyssoftware.treasure2.tileentity.ITreasureChestTileEntity;
 
 import net.minecraft.client.model.ModelBase;
+import net.minecraft.client.model.ModelBox;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.entity.Entity;
 
@@ -30,87 +31,61 @@ public class CompressorChestModel extends ModelBase implements ITreasureChestMod
     ModelRenderer latch4;
     
 	public CompressorChestModel() {
-	    textureWidth = 64;
-	    textureHeight = 128;
-	    
-	      base = new ModelRenderer(this, 0, 0);
-	      base.addBox(-7F, 0F, -14F, 14, 10, 14);
-	      base.setRotationPoint(0F, 14F, 7F);
-	      base.setTextureSize(64, 128);
-	      base.mirror = true;
-	      setRotation(base, 0F, 0F, 0F);
-	      lid1 = new ModelRenderer(this, 0, 25);
-	      lid1.addBox(-4F, -5F, 0F, 7, 5, 7);
-	      lid1.setRotationPoint(4F, 15F, -7F);
-	      lid1.setTextureSize(64, 32);
-	      lid1.mirror = true;
-	      setRotation(lid1, 0F, 0F, 0F);
-	      lid2 = new ModelRenderer(this, 0, 38);
-	      lid2.addBox(0F, -5F, -4F, 7, 5, 7);
-	      lid2.setRotationPoint(-7F, 15F, -3F);
-	      lid2.setTextureSize(64, 32);
-	      lid2.mirror = true;
-	      setRotation(lid2, 0F, 0F, 0F);
-	      lid3 = new ModelRenderer(this, 0, 51);
-	      lid3.addBox(-4F, -5F, -7F, 7, 5, 7);
-	      lid3.setRotationPoint(-3F, 15F, 7F);
-	      lid3.setTextureSize(64, 32);
-	      lid3.mirror = true;
-	      setRotation(lid3, 0F, 0F, 0F);
-	      lid4 = new ModelRenderer(this, 0, 64);
-	      lid4.addBox(-7F, -5F, -3F, 7, 5, 7);
-	      lid4.setRotationPoint(7F, 15F, 3F);
-	      lid4.setTextureSize(64, 32);
-	      lid4.mirror = true;
-	      setRotation(lid4, 0F, 0F, 0F);
-	      hinge1 = new ModelRenderer(this, 0, 77);
-	      hinge1.addBox(-2F, 0F, 0F, 5, 1, 1);
-	      hinge1.setRotationPoint(3F, 14.5F, -7.5F);
-	      hinge1.setTextureSize(64, 128);
-	      hinge1.mirror = true;
-	      setRotation(hinge1, 0F, 0F, 0F);
-	      hinge2 = new ModelRenderer(this, 0, 80);
-	      hinge2.addBox(0F, 0F, -3F, 1, 1, 5);
-	      hinge2.setRotationPoint(-7.5F, 14.5F, -3F);
-	      hinge2.setTextureSize(64, 128);
-	      hinge2.mirror = true;
-	      setRotation(hinge2, 0F, 0F, 0F);
-	      hinge3 = new ModelRenderer(this, 0, 77);
-	      hinge3.addBox(-2F, 0F, 0F, 5, 1, 1);
-	      hinge3.setRotationPoint(-4F, 14.5F, 6.5F);
-	      hinge3.setTextureSize(64, 128);
-	      hinge3.mirror = true;
-	      setRotation(hinge3, 0F, 0F, 0F);
-	      hinge4 = new ModelRenderer(this, 0, 80);
-	      hinge4.addBox(0F, 0F, -3F, 1, 1, 5);
-	      hinge4.setRotationPoint(6.5F, 14.5F, 4F);
-	      hinge4.setTextureSize(64, 128);
-	      hinge4.mirror = true;
-	      setRotation(hinge4, 0F, 0F, 0F);
-	      latch2 = new ModelRenderer(this, 0, 87);
-	      latch2.addBox(2F, -2F, -5F, 3, 4, 1);
-	      latch2.setRotationPoint(-7F, 15F, -3F);
-	      latch2.setTextureSize(64, 128);
-	      latch2.mirror = true;
-	      setRotation(latch2, 0F, 0F, 0F);
-	      latch4 = new ModelRenderer(this, 0, 87);
-	      latch4.addBox(-5F, -2F, 5F, 3, 4, 1);
-	      latch4.setRotationPoint(7F, 15F, 2F);
-	      latch4.setTextureSize(64, 128);
-	      latch4.mirror = true;
-	      setRotation(latch4, 0F, 0F, 0F);
-	      latch3 = new ModelRenderer(this, 0, 93);
-	      latch3.addBox(-5F, -2F, -5F, 1, 4, 3);
-	      latch3.setRotationPoint(-3F, 15F, 7F);
-	      latch3.setTextureSize(64, 32);
-	      latch3.mirror = true;
-	      setRotation(latch3, 0F, 0F, 0F);
-	      latch1 = new ModelRenderer(this, 0, 93);
-	      latch1.addBox(5F, -2F, 2F, 1, 4, 3);
-	      latch1.setRotationPoint(2F, 15F, -7F);
-	      latch1.setTextureSize(64, 128);
-	      latch1.mirror = true;
-	      setRotation(latch1, 0F, 0F, 0F);
+		textureWidth = 64;
+		textureHeight = 32;
+
+		base = new ModelRenderer(this);
+		base.setRotationPoint(0.0F, 14.0F, 7.0F);
+		base.cubeList.add(new ModelBox(base, 0, 0, -5.0F, 0.0F, -12.0F, 10, 10, 10, 0.0F, false));
+
+		lid1 = new ModelRenderer(this);
+		lid1.setRotationPoint(4.0F, 14.0F, -5.0F);
+		lid1.cubeList.add(new ModelBox(lid1, 44, 14, -4.0F, -2.0F, 0.0F, 5, 2, 5, 0.0F, false));
+
+		lid2 = new ModelRenderer(this);
+		lid2.setRotationPoint(-5.0F, 14.0F, -3.0F);
+		lid2.cubeList.add(new ModelBox(lid2, 44, 21, 0.0F, -2.0F, -2.0F, 5, 2, 5, 0.0F, false));
+
+		lid3 = new ModelRenderer(this);
+		lid3.setRotationPoint(-3.0F, 14.0F, 5.0F);
+		lid3.cubeList.add(new ModelBox(lid3, 44, 0, -2.0F, -2.0F, -5.0F, 5, 2, 5, 0.0F, false));
+
+		lid4 = new ModelRenderer(this);
+		lid4.setRotationPoint(5.0F, 14.0F, 3.0F);
+		lid4.cubeList.add(new ModelBox(lid4, 44, 7, -5.0F, -2.0F, -3.0F, 5, 2, 5, 0.0F, false));
+
+		hinge1 = new ModelRenderer(this);
+		hinge1.setRotationPoint(3.0F, 14.0F, -5.0F);
+		hinge1.cubeList.add(new ModelBox(hinge1, 0, 24, -2.0F, -1.0F, -0.5F, 3, 1, 1, 0.0F, false));
+
+		hinge2 = new ModelRenderer(this);
+		hinge2.setRotationPoint(-5.0F, 14.0F, -3.0F);
+		hinge2.cubeList.add(new ModelBox(hinge2, 0, 20, -0.5F, -1.0F, -1.0F, 1, 1, 3, 0.0F, false));
+
+		hinge3 = new ModelRenderer(this);
+		hinge3.setRotationPoint(-3.0F, 14.0F, 5.0F);
+		hinge3.cubeList.add(new ModelBox(hinge3, 0, 24, -1.0F, -1.0F, -0.5F, 3, 1, 1, 0.0F, false));
+
+		hinge4 = new ModelRenderer(this);
+		hinge4.setRotationPoint(5.0F, 14.0F, 3.0F);
+		hinge4.cubeList.add(new ModelBox(hinge4, 0, 20, -0.5F, -1.0F, -2.0F, 1, 1, 3, 0.0F, false));
+
+		latch1 = new ModelRenderer(this);
+		latch1.setRotationPoint(2.0F, 14.0F, -5.0F);
+		latch1.cubeList.add(new ModelBox(latch1, 31, 1, 3.0F, -1.0F, 1.0F, 1, 3, 2, 0.0F, false));
+
+		latch2 = new ModelRenderer(this);
+		latch2.setRotationPoint(-5.0F, 14.0F, -3.0F);
+		latch2.cubeList.add(new ModelBox(latch2, 31, 6, 1.0F, -1.0F, -3.0F, 2, 3, 1, 0.0F, false));
+
+		latch3 = new ModelRenderer(this);
+		latch3.setRotationPoint(-3.0F, 14.0F, 5.0F);
+		latch3.cubeList.add(new ModelBox(latch3, 31, 1, -3.0F, -1.0F, -3.0F, 1, 3, 2, 0.0F, false));
+
+		latch4 = new ModelRenderer(this);
+		latch4.setRotationPoint(5.0F, 14.0F, 2.0F);
+		latch4.cubeList.add(new ModelBox(latch4, 31, 6, -3.0F, -1.0F, 3.0F, 2, 3, 1, 0.0F, false));
+
 	}
 
 	/**
@@ -166,13 +141,17 @@ public class CompressorChestModel extends ModelBase implements ITreasureChestMod
 		// reverse the angle direction
 		lid1.rotateAngleX = -(lid1.rotateAngleX);
 		latch1.rotateAngleX = lid1.rotateAngleX;
+		hinge1.rotateAngleX = lid1.rotateAngleX;
 		lid2.rotateAngleZ = originalAngle;
 		latch2.rotateAngleZ = lid2.rotateAngleZ;
+		hinge2.rotateAngleZ = lid2.rotateAngleZ;
 		lid3.rotateAngleX = originalAngle;
 		latch3.rotateAngleX = lid3.rotateAngleX;
+		hinge3.rotateAngleX = lid3.rotateAngleX;
 		lid4.rotateAngleZ = lid1.rotateAngleX;
 		latch4.rotateAngleZ = lid4.rotateAngleZ;
-		
+		hinge4.rotateAngleZ = lid4.rotateAngleZ;
+
 //		for (LockState state : te.getLockStates()) {
 //			if (state.getLock() != null) {
 //				switch(state.getSlot().getIndex()) {
@@ -197,10 +176,10 @@ public class CompressorChestModel extends ModelBase implements ITreasureChestMod
 	    lid2.render(f5);
 	    lid3.render(f5);
 	    lid4.render(f5);
-//	    hinge1.render(f5);
-//	    hinge2.render(f5);
-//	    hinge3.render(f5);
-//	    hinge4.render(f5);
+	    hinge1.render(f5);
+	    hinge2.render(f5);
+	    hinge3.render(f5);
+	    hinge4.render(f5);
 	    latch1.render(f5);
 	    latch2.render(f5);
 	    latch3.render(f5);

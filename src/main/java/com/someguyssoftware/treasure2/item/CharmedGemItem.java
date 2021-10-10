@@ -8,6 +8,7 @@ import java.util.List;
 import com.someguyssoftware.gottschcore.item.ModItem;
 import com.someguyssoftware.treasure2.Treasure;
 import com.someguyssoftware.treasure2.capability.CharmCapabilityProvider;
+import com.someguyssoftware.treasure2.enums.Gems;
 import com.someguyssoftware.treasure2.item.charm.ICharmed;
 
 import net.minecraft.client.util.ITooltipFlag;
@@ -22,12 +23,12 @@ import net.minecraftforge.common.capabilities.ICapabilityProvider;
  *
  */
 public class CharmedGemItem extends GemItem implements ICharmed {
-	
+
 	/**
-	 * 
+	 *
 	 */
-	public CharmedGemItem (String modID, String name)	 {
-		super(modID, name);
+	public CharmedGemItem (String modID, String name, Gems gem)	 {
+		super(modID, name, gem);
 		this.setMaxStackSize(1);
 		// prevent from showing in any creative tab
 		this.setCreativeTab(null);

@@ -1,8 +1,10 @@
 package com.someguyssoftware.treasure2.client.model;
 
+import com.someguyssoftware.treasure2.lock.LockState;
 import com.someguyssoftware.treasure2.tileentity.ITreasureChestTileEntity;
 
 import net.minecraft.client.model.ModelBase;
+import net.minecraft.client.model.ModelBox;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.entity.Entity;
 
@@ -23,101 +25,89 @@ public class CauldronChestModel extends ModelBase implements ITreasureChestModel
 	ModelRenderer br2;
 	ModelRenderer lidLeft;
 	ModelRenderer lidRight;
+	ModelRenderer pad1;
+	ModelRenderer pad2;
+	ModelRenderer water;
 
 	public CauldronChestModel() {
 		textureWidth = 128;
 		textureHeight = 128;
 
-		front = new ModelRenderer(this, 0, 0);
-		front.addBox(0F, 0F, 0F, 12, 13, 2);
-		front.setRotationPoint(-6F, 8F, -8F);
-		front.setTextureSize(64, 32);
-		front.mirror = true;
-		setRotation(front, 0F, 0F, 0F);
-		back = new ModelRenderer(this, 32, 0);
-		back.addBox(0F, 0F, 0F, 12, 13, 2);
-		back.setRotationPoint(-6F, 8F, 6F);
-		back.setTextureSize(64, 32);
-		back.mirror = true;
-		setRotation(back, 0F, 0F, 0F);
-		left = new ModelRenderer(this, 0, 18);
-		left.addBox(0F, 0F, 0F, 2, 13, 16);
-		left.setRotationPoint(6F, 8F, -8F);
-		left.setTextureSize(64, 32);
-		left.mirror = true;
-		setRotation(left, 0F, 0F, 0F);
-		right = new ModelRenderer(this, 38, 18);
-		right.addBox(0F, 0F, 0F, 2, 13, 16);
-		right.setRotationPoint(-8F, 8F, -8F);
-		right.setTextureSize(64, 32);
-		right.mirror = true;
-		setRotation(right, 0F, 0F, 0F);
-		bottom = new ModelRenderer(this, 0, 50);
-		bottom.addBox(0F, 0F, 0F, 12, 1, 12);
-		bottom.setRotationPoint(-6F, 20F, -6F);
-		bottom.setTextureSize(64, 32);
-		bottom.mirror = true;
-		setRotation(bottom, 0F, 0F, 0F);
-		flFoot = new ModelRenderer(this, 0, 80);
-		flFoot.addBox(0F, 0F, 0F, 4, 3, 2);
-		flFoot.setRotationPoint(4F, 21F, -8F);
-		flFoot.setTextureSize(64, 32);
-		flFoot.mirror = true;
-		setRotation(flFoot, 0F, 0F, 0F);
-		frFoot = new ModelRenderer(this, 14, 80);
-		frFoot.addBox(0F, 0F, 0F, 4, 3, 2);
-		frFoot.setRotationPoint(-8F, 21F, -8F);
-		frFoot.setTextureSize(64, 32);
-		frFoot.mirror = true;
-		setRotation(frFoot, 0F, 0F, 0F);
-		blFoot = new ModelRenderer(this, 28, 80);
-		blFoot.addBox(0F, 0F, 0F, 4, 3, 2);
-		blFoot.setRotationPoint(4F, 21F, 6F);
-		blFoot.setTextureSize(64, 32);
-		blFoot.mirror = true;
-		setRotation(blFoot, 0F, 0F, 0F);
-		brFoot = new ModelRenderer(this, 42, 80);
-		brFoot.addBox(0F, 0F, 0F, 4, 3, 2);
-		brFoot.setRotationPoint(-8F, 21F, 6F);
-		brFoot.setTextureSize(64, 32);
-		brFoot.mirror = true;
-		setRotation(brFoot, 0F, 0F, 0F);
-		fl2 = new ModelRenderer(this, 0, 88);
-		fl2.addBox(0F, 0F, 0F, 2, 3, 2);
-		fl2.setRotationPoint(6F, 21F, -6F);
-		fl2.setTextureSize(64, 32);
-		fl2.mirror = true;
-		setRotation(fl2, 0F, 0F, 0F);
-		fr2 = new ModelRenderer(this, 10, 88);
-		fr2.addBox(0F, 0F, 0F, 2, 3, 2);
-		fr2.setRotationPoint(-8F, 21F, -6F);
-		fr2.setTextureSize(64, 32);
-		fr2.mirror = true;
-		setRotation(fr2, 0F, 0F, 0F);
-		bl2 = new ModelRenderer(this, 20, 88);
-		bl2.addBox(0F, 0F, 0F, 2, 3, 2);
-		bl2.setRotationPoint(6F, 21F, 4F);
-		bl2.setTextureSize(64, 32);
-		bl2.mirror = true;
-		setRotation(bl2, 0F, 0F, 0F);
-		br2 = new ModelRenderer(this, 30, 88);
-		br2.addBox(0F, 0F, 0F, 2, 3, 2);
-		br2.setRotationPoint(-8F, 21F, 4F);
-		br2.setTextureSize(64, 32);
-		br2.mirror = true;
-		setRotation(br2, 0F, 0F, 0F);
-		lidLeft = new ModelRenderer(this, 0, 65);
-		lidLeft.addBox(-6F, 0F, 0F, 6, 1, 12);
-		lidLeft.setRotationPoint(6F, 9F, -6F);
-		lidLeft.setTextureSize(64, 32);
-		lidLeft.mirror = true;
-		setRotation(lidLeft, 0F, 0F, 0F);
-		lidRight = new ModelRenderer(this, 38, 65);
-		lidRight.addBox(0F, 0F, 0F, 6, 1, 12);
-		lidRight.setRotationPoint(-6F, 9F, -6F);
-		lidRight.setTextureSize(64, 32);
-		lidRight.mirror = true;
-		setRotation(lidRight, 0F, 0F, 0F);
+		front = new ModelRenderer(this);
+		front.setRotationPoint(-6.0F, 8.0F, -8.0F);
+		front.cubeList.add(new ModelBox(front, 0, 0, 0.0F, 0.0F, 0.0F, 12, 14, 2, 0.0F, false));
+
+		back = new ModelRenderer(this);
+		back.setRotationPoint(-6.0F, 8.0F, 6.0F);
+		back.cubeList.add(new ModelBox(back, 32, 0, 0.0F, 0.0F, 0.0F, 12, 14, 2, 0.0F, false));
+
+		left = new ModelRenderer(this);
+		left.setRotationPoint(6.0F, 8.0F, -8.0F);
+		left.cubeList.add(new ModelBox(left, 0, 18, 0.0F, 0.0F, 0.0F, 2, 14, 16, 0.0F, false));
+
+		right = new ModelRenderer(this);
+		right.setRotationPoint(-8.0F, 8.0F, -8.0F);
+		right.cubeList.add(new ModelBox(right, 38, 18, 0.0F, 0.0F, 0.0F, 2, 14, 16, 0.0F, false));
+
+		bottom = new ModelRenderer(this);
+		bottom.setRotationPoint(-6.0F, 20.0F, -6.0F);
+		bottom.cubeList.add(new ModelBox(bottom, 0, 50, 0.0F, 1.0F, 0.0F, 12, 1, 12, 0.0F, false));
+
+		flFoot = new ModelRenderer(this);
+		flFoot.setRotationPoint(4.0F, 21.0F, -8.0F);
+		flFoot.cubeList.add(new ModelBox(flFoot, 0, 80, -1.0F, 1.0F, 0.0F, 5, 2, 2, 0.0F, false));
+
+		frFoot = new ModelRenderer(this);
+		frFoot.setRotationPoint(-8.0F, 21.0F, -8.0F);
+		frFoot.cubeList.add(new ModelBox(frFoot, 14, 80, 0.0F, 1.0F, 0.0F, 5, 2, 2, 0.0F, false));
+
+		blFoot = new ModelRenderer(this);
+		blFoot.setRotationPoint(4.0F, 21.0F, 6.0F);
+		blFoot.cubeList.add(new ModelBox(blFoot, 14, 80, -1.0F, 1.0F, 0.0F, 5, 2, 2, 0.0F, false));
+
+		brFoot = new ModelRenderer(this);
+		brFoot.setRotationPoint(-8.0F, 21.0F, 6.0F);
+		brFoot.cubeList.add(new ModelBox(brFoot, 0, 80, 0.0F, 1.0F, 0.0F, 5, 2, 2, 0.0F, false));
+
+		fl2 = new ModelRenderer(this);
+		fl2.setRotationPoint(6.0F, 21.0F, -6.0F);
+		fl2.cubeList.add(new ModelBox(fl2, 0, 87, 0.0F, 1.0F, 0.0F, 2, 2, 3, 0.0F, false));
+
+		fr2 = new ModelRenderer(this);
+		fr2.setRotationPoint(-8.0F, 21.0F, -6.0F);
+		fr2.cubeList.add(new ModelBox(fr2, 10, 87, 0.0F, 1.0F, 0.0F, 2, 2, 3, 0.0F, false));
+
+		bl2 = new ModelRenderer(this);
+		bl2.setRotationPoint(6.0F, 21.0F, 4.0F);
+		bl2.cubeList.add(new ModelBox(bl2, 9, 87, 0.0F, 1.0F, -1.0F, 2, 2, 3, 0.0F, false));
+
+		br2 = new ModelRenderer(this);
+		br2.setRotationPoint(-8.0F, 21.0F, 4.0F);
+		br2.cubeList.add(new ModelBox(br2, 0, 87, 0.0F, 1.0F, -1.0F, 2, 2, 3, 0.0F, false));
+
+		lidLeft = new ModelRenderer(this);
+		lidLeft.setRotationPoint(6.0F, 10.0F, -6.0F);
+		lidLeft.cubeList.add(new ModelBox(lidLeft, 0, 65, -6.0F, 0.0F, 0.0F, 6, 1, 12, 0.0F, false));
+
+		lidRight = new ModelRenderer(this);
+		lidRight.setRotationPoint(-6.0F, 10.0F, -6.0F);
+		lidRight.cubeList.add(new ModelBox(lidRight, 38, 65, 0.0F, 0.0F, 0.0F, 6, 1, 12, 0.0F, false));
+
+		pad1 = new ModelRenderer(this);
+		pad1.setRotationPoint(0.0F, 24.0F, 0.0F);
+		pad1.cubeList.add(new ModelBox(pad1, 44, 0, 2.0F, -16.0F, 2.0F, 2, 2, 1, 0.0F, false));
+		pad1.cubeList.add(new ModelBox(pad1, 31, 0, -6.0F, -15.1F, 1.0F, 12, 2, 3, 0.0F, false));
+
+
+		pad2 = new ModelRenderer(this);
+		pad2.setRotationPoint(-6.0F, 24.0F, 0.0F);
+		pad2.cubeList.add(new ModelBox(pad2, 34, 0, 2.0F, -16.0F, 2.0F, 2, 2, 1, 0.0F, false));
+		pad2.cubeList.add(new ModelBox(pad2, 31, 0, 0.0F, -15.1F, 1.0F, 12, 2, 3, 0.0F, false));
+
+		water = new ModelRenderer(this);
+		water.setRotationPoint(7.0F, 9.0F, -8.0F);
+		water.cubeList.add(new ModelBox(water, 36, 51, -13.0F, 0.0F, 2.0F, 12, 1, 12, 0.0F, false));
+
 	}
 
 	/**
@@ -141,6 +131,9 @@ public class CauldronChestModel extends ModelBase implements ITreasureChestModel
 		br2.render(f5);
 		lidLeft.render(f5);
 		lidRight.render(f5);
+		pad1.render(f5);
+		pad2.render(f5);
+		water.render(f5);
 	}
 
 	private void setRotation(ModelRenderer model, float x, float y, float z) {
@@ -160,7 +153,8 @@ public class CauldronChestModel extends ModelBase implements ITreasureChestModel
 	public void renderAll(ITreasureChestTileEntity te) {
 		// set the angles of the latch to same as the lib
 		lidRight.rotateAngleZ = -lidLeft.rotateAngleZ;
-		
+		water.rotateAngleZ = -lidLeft.rotateAngleZ;
+
 		float angle = 0.0625F;
 		front.render(angle);
 		back.render(angle);
@@ -176,7 +170,21 @@ public class CauldronChestModel extends ModelBase implements ITreasureChestModel
 		blFoot.render(angle);
 		bl2.render(angle);
 		brFoot.render(angle);
-		br2.render(angle);		
+		br2.render(angle);
+
+		for (LockState state : te.getLockStates()) {
+			if (state.getLock() != null) {
+				switch(state.getSlot().getIndex()) {
+					case 0:
+						pad1.render(angle);
+						break;
+					case 1:
+						pad2.render(angle);
+						break;
+				}
+			}
+		}
+		water.render(angle);
 	}
 
 	@Override

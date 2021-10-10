@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Random;
 
 import static com.someguyssoftware.treasure2.Treasure.logger;
+
 import com.someguyssoftware.gottschcore.item.ModItem;
 import com.someguyssoftware.gottschcore.random.RandomHelper;
 import com.someguyssoftware.gottschcore.world.WorldInfo;
@@ -16,6 +17,7 @@ import com.someguyssoftware.treasure2.block.ITreasureChestProxy;
 import com.someguyssoftware.treasure2.capability.EffectiveMaxDamageCapability;
 import com.someguyssoftware.treasure2.capability.EffectiveMaxDamageCapabilityProvider;
 import com.someguyssoftware.treasure2.capability.IEffectiveMaxDamageCapability;
+import com.someguyssoftware.treasure2.chest.LockSlot;
 import com.someguyssoftware.treasure2.config.TreasureConfig;
 import com.someguyssoftware.treasure2.enums.Category;
 import com.someguyssoftware.treasure2.enums.Rarity;
@@ -23,22 +25,28 @@ import com.someguyssoftware.treasure2.lock.LockState;
 import com.someguyssoftware.treasure2.tileentity.AbstractTreasureChestTileEntity;
 
 import net.minecraft.block.Block;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.renderer.GlStateManager;
+import net.minecraft.client.renderer.block.model.ItemCameraTransforms;
 import net.minecraft.client.util.ITooltipFlag;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.inventory.InventoryHelper;
+import net.minecraft.item.EnumAction;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.network.play.server.SPacketSoundEffect;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.EnumActionResult;
-import net.minecraft.util.EnumFacing;
-import net.minecraft.util.EnumHand;
-import net.minecraft.util.SoundCategory;
+import net.minecraft.util.*;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.Vec3d;
 import net.minecraft.util.text.TextComponentString;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.util.text.translation.I18n;
 import net.minecraft.world.World;
+import net.minecraft.world.WorldServer;
 import net.minecraftforge.common.capabilities.ICapabilityProvider;
 
 /**
@@ -120,7 +128,7 @@ public class KeyItem extends ModItem {
 	public void addInformation(ItemStack stack, World worldIn, List<String> tooltip, ITooltipFlag flagIn) {
 		super.addInformation(stack, worldIn, tooltip, flagIn);
 		
-		tooltip.add(I18n.translateToLocalFormatted("tooltip.label.rarity", TextFormatting.DARK_BLUE + getRarity().toString()));
+		tooltip.add(I18n.translateToLocalFormatted("tooltip.label.rarity", TextFormatting.AQUA + getRarity().toString()));
         tooltip.add(I18n.translateToLocalFormatted("tooltip.label.category", getCategory()));
 		
         if (stack.hasCapability(EffectiveMaxDamageCapabilityProvider.EFFECTIVE_MAX_DAMAGE_CAPABILITY, null)) {
@@ -199,6 +207,7 @@ public class KeyItem extends ModItem {
 			EnumFacing facing, float hitX, float hitY, float hitZ) {
 		
 		BlockPos chestPos = pos;
+
 		// determine if block at pos is a treasure chest
 		Block block = worldIn.getBlockState(chestPos).getBlock();
 		if (block instanceof ITreasureChestProxy) {
@@ -222,6 +231,7 @@ public class KeyItem extends ModItem {
 
 			// determine if chest is locked
 			if (!chestTileEntity.hasLocks()) {
+				player.sendMessage(new TextComponentString("This chest is unlocked."));
 				return EnumActionResult.SUCCESS;
 			}
 			
@@ -239,11 +249,15 @@ public class KeyItem extends ModItem {
 				
 				if (fitsLock) {
 					if (unlock(lockState.getLock())) {
+
 						LockItem lock = lockState.getLock();
+						if (lockState.getLock() != null) {
+							((WorldServer) worldIn).spawnParticle(EnumParticleTypes.SMOKE_LARGE, chestPos.getX() + lockState.getSlot().getXOffset(), chestPos.getY() + lockState.getSlot().getYOffset(), chestPos.getZ() + lockState.getSlot().getZOffset(), 12, 0.0D, 0.0D, 0.0D, 0.0D, 255, 250, 0);
+						}
+
 						// remove the lock
 						lockState.setLock(null);
-						// play noise
-						worldIn.playSound(player, chestPos, SoundEvents.BLOCK_LEVER_CLICK, SoundCategory.BLOCKS, 0.3F, 0.6F);
+						worldIn.playSound(null, chestPos, SoundEvents.ENTITY_SHEEP_SHEAR, SoundCategory.BLOCKS, 0.3F, 0.6F);
 						// update the client
                         chestTileEntity.sendUpdates();
                         if(!breaksLock(lock)) {
@@ -256,6 +270,7 @@ public class KeyItem extends ModItem {
                         breakKey = false;
 					}
 				}
+
                 
                 // get capability
                 IEffectiveMaxDamageCapability cap = heldItemStack.getCapability(EffectiveMaxDamageCapabilityProvider.EFFECTIVE_MAX_DAMAGE_CAPABILITY, null);
@@ -269,14 +284,35 @@ public class KeyItem extends ModItem {
                             // break key;
                             heldItemStack.shrink(1);
                         }
-                        player.sendMessage(new TextComponentString("Key broke."));
-                        worldIn.playSound(player, chestPos, SoundEvents.BLOCK_METAL_BREAK, SoundCategory.BLOCKS, 0.3F, 0.6F);
-                        // flag the key as broken
-                        isKeyBroken = true;
+                        player.sendMessage(new TextComponentString("Your key broke whilst attempting to unlock the lock!"));
+						for (LockState lockPos : chestTileEntity.getLockStates()) {
+							if (lockPos.getLock() != null) {((WorldServer) worldIn).spawnParticle(EnumParticleTypes.CRIT, chestPos.getX() + lockPos.getSlot().getXOffset(), chestPos.getY() + lockPos.getSlot().getYOffset(), chestPos.getZ() + lockPos.getSlot().getZOffset(), 6, 0.0D, 0.0D, 0.0D, 0.1D);
+							}
+						}
+						Vec3d vec = player.getLookVec();
+						double lookX = player.posX + (vec.x * 2);
+						double lookY = player.posY + player.getEyeHeight() - 0.5;
+						double lookZ = player.posZ + (vec.z * 2);
+						((WorldServer) worldIn).spawnParticle(EnumParticleTypes.SMOKE_LARGE, lookX, lookY, lookZ, 20, 0.0D, 0.0D, 0.0D, 0.5D);
+						worldIn.playSound(null, chestPos, SoundEvents.ENTITY_ITEM_BREAK, SoundCategory.BLOCKS, 0.3F, 0.8F);
+						isKeyBroken = true;
+					}
+					else if (!fitsLock){
+						player.sendMessage(new TextComponentString("Your key doesn't fit the lock!"));
+						for (LockState lockPos : chestTileEntity.getLockStates()) {
+							if (lockPos.getLock() != null) {((WorldServer) worldIn).spawnParticle(EnumParticleTypes.CRIT, chestPos.getX() + lockPos.getSlot().getXOffset(), chestPos.getY() + lockPos.getSlot().getYOffset(), chestPos.getZ() + lockPos.getSlot().getZOffset(), 6, 0.0D, 0.0D, 0.0D, 0.1D);
+							}
+						}
+						worldIn.playSound(null, chestPos, SoundEvents.ITEM_SHIELD_BREAK, SoundCategory.BLOCKS, 0.3F, 2.0F);
 					}
 					else {
-						player.sendMessage(new TextComponentString("Failed to unlock."));
-					}						
+						player.sendMessage(new TextComponentString("You slipped and damaged your key."));
+						for (LockState lockPos : chestTileEntity.getLockStates()) {
+							if (lockPos.getLock() != null) {((WorldServer) worldIn).spawnParticle(EnumParticleTypes.CRIT, chestPos.getX() + lockPos.getSlot().getXOffset(), chestPos.getY() + lockPos.getSlot().getYOffset(), chestPos.getZ() + lockPos.getSlot().getZOffset(), 6, 0.0D, 0.0D, 0.0D, 0.1D);}
+						}
+						worldIn.playSound(null, chestPos, SoundEvents.ITEM_SHIELD_BREAK, SoundCategory.BLOCKS, 0.3F, 2.0F);
+					}
+
 				}
 				
 				// user attempted to use key - increment the damage
@@ -295,6 +331,11 @@ public class KeyItem extends ModItem {
 		}		
 		
 		return super.onItemUse(player, worldIn, chestPos, hand, facing, hitX, hitY, hitZ);
+	}
+
+	public EnumAction getItemUseAction(ItemStack stack)
+	{
+		return EnumAction.BOW;
 	}
 
 	/**

@@ -3,6 +3,7 @@ package com.someguyssoftware.treasure2.client.model;
 import com.someguyssoftware.treasure2.tileentity.ITreasureChestTileEntity;
 
 import net.minecraft.client.model.ModelBase;
+import net.minecraft.client.model.ModelBox;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.entity.Entity;
 
@@ -13,21 +14,19 @@ import net.minecraft.entity.Entity;
  */
 public class DreadPirateChestModel extends ModelBase implements ITreasureChestModel {
 	// fields
-	ModelRenderer lid;
-	ModelRenderer baseMiddle;
-	ModelRenderer baseSide1;
-	ModelRenderer baseSide2;
-	ModelRenderer bottom;
-	ModelRenderer skullTop;
-	ModelRenderer skullBottom;
-	ModelRenderer topHinge1;
-	ModelRenderer topHinge2;
-	ModelRenderer bottomHinge1;
-	ModelRenderer bottomHinge2;
-	ModelRenderer corner1;
-	ModelRenderer corner2;
-	ModelRenderer handle1;
-	ModelRenderer handle2;
+	private final ModelRenderer lid;
+	private final ModelRenderer baseMiddle;
+	private final ModelRenderer baseSide1;
+	private final ModelRenderer baseSide2;
+	private final ModelRenderer bottom;
+	private final ModelRenderer skullTop;
+	private final ModelRenderer skullBottom;
+	private final ModelRenderer topHinge1;
+	private final ModelRenderer topHinge2;
+	private final ModelRenderer bottomHinge1;
+	private final ModelRenderer bottomHinge2;
+	private final ModelRenderer handle1;
+	private final ModelRenderer handle2;
 
 	/**
 	 * 
@@ -36,96 +35,58 @@ public class DreadPirateChestModel extends ModelBase implements ITreasureChestMo
 		textureWidth = 128;
 		textureHeight = 128;
 
-		lid = new ModelRenderer(this, 0, 0);
-		lid.addBox(-7F, -4F, -14F, 14, 5, 14);
-		lid.setRotationPoint(0F, 14F, 7F);
-		lid.setTextureSize(128, 128);
-		lid.mirror = true;
-		setRotation(lid, 0F, 0F, 0F);
-		baseMiddle = new ModelRenderer(this, 0, 21);
-		baseMiddle.addBox(-3F, 0F, -11F, 6, 9, 12);
-		baseMiddle.setRotationPoint(0F, 14F, 5F);
-		baseMiddle.setTextureSize(128, 128);
-		baseMiddle.mirror = true;
-		setRotation(baseMiddle, 0F, 0F, 0F);
-		baseSide1 = new ModelRenderer(this, 0, 44);
-		baseSide1.addBox(-2F, 0F, -12F, 4, 9, 14);
-		baseSide1.setRotationPoint(5F, 14F, 5F);
-		baseSide1.setTextureSize(128, 128);
-		baseSide1.mirror = true;
-		setRotation(baseSide1, 0F, 0F, 0F);
-		baseSide2 = new ModelRenderer(this, 0, 70);
-		baseSide2.addBox(-2F, 0F, -12F, 4, 9, 14);
-		baseSide2.setRotationPoint(-5F, 14F, 5F);
-		baseSide2.setTextureSize(128, 128);
-		baseSide2.mirror = true;
-		setRotation(baseSide2, 0F, 0F, 0F);
-		bottom = new ModelRenderer(this, 0, 96);
-		bottom.addBox(-7F, 0F, -14F, 14, 2, 14);
-		bottom.setRotationPoint(0F, 22F, 7F);
-		bottom.setTextureSize(128, 128);
-		bottom.mirror = true;
-		setRotation(bottom, 0F, 0F, 0F);
-		skullTop = new ModelRenderer(this, 57, 0);
-		skullTop.addBox(-3F, -3F, -15F, 6, 5, 2);
-		skullTop.setRotationPoint(0F, 15F, 7F);
-		skullTop.setTextureSize(128, 128);
-		skullTop.mirror = true;
-		setRotation(skullTop, 0F, 0F, 0F);
-		skullBottom = new ModelRenderer(this, 57, 8);
-		skullBottom.addBox(-2F, 0F, -1F, 4, 3, 1);
-		skullBottom.setRotationPoint(0F, 17F, -6F);
-		skullBottom.setTextureSize(128, 128);
-		skullBottom.mirror = true;
-		setRotation(skullBottom, 0F, 0F, 0F);
-		topHinge1 = new ModelRenderer(this, 57, 14);
-		topHinge1.addBox(-1F, -4.5F, -4.5F, 2, 4, 5);
-		topHinge1.setRotationPoint(4F, 14F, 7F);
-		topHinge1.setTextureSize(128, 128);
-		topHinge1.mirror = true;
-		setRotation(topHinge1, 0F, 0F, 0F);
-		topHinge2 = new ModelRenderer(this, 57, 14);
-		topHinge2.addBox(-1F, -4.5F, -4.5F, 2, 4, 5);
-		topHinge2.setRotationPoint(-4F, 14F, 7F);
-		topHinge2.setTextureSize(128, 128);
-		topHinge2.mirror = true;
-		setRotation(topHinge2, 0F, 0F, 0F);
-		bottomHinge1 = new ModelRenderer(this, 57, 24);
-		bottomHinge1.addBox(-1F, -0.5F, -0.5F, 2, 2, 1);
-		bottomHinge1.setRotationPoint(4F, 14F, 7F);
-		bottomHinge1.setTextureSize(128, 128);
-		bottomHinge1.mirror = true;
-		setRotation(bottomHinge1, 0F, 0F, 0F);
-		bottomHinge2 = new ModelRenderer(this, 57, 24);
-		bottomHinge2.addBox(-1F, -0.5F, -0.5F, 2, 2, 1);
-		bottomHinge2.setRotationPoint(-4F, 14F, 7F);
-		bottomHinge2.setTextureSize(128, 128);
-		bottomHinge2.mirror = true;
-		setRotation(bottomHinge2, 0F, 0F, 0F);
-		corner1 = new ModelRenderer(this, 57, 28);
-		corner1.addBox(-1F, -4.25F, -14.25F, 2, 2, 2);
-		corner1.setRotationPoint(6.25F, 14F, 7F);
-		corner1.setTextureSize(64, 32);
-		corner1.mirror = true;
-		setRotation(corner1, 0F, 0F, 0F);
-		corner2 = new ModelRenderer(this, 66, 28);
-		corner2.addBox(-1F, -4.25F, -14.25F, 2, 2, 2);
-		corner2.setRotationPoint(-6.3F, 14F, 7F);
-		corner2.setTextureSize(64, 32);
-		corner2.mirror = true;
-		setRotation(corner2, 0F, 0F, 0F);
-		handle1 = new ModelRenderer(this, 57, 34);
-		handle1.addBox(0F, 0F, 0F, 1, 2, 4);
-		handle1.setRotationPoint(7F, 15F, -2F);
-		handle1.setTextureSize(128, 128);
-		handle1.mirror = true;
-		setRotation(handle1, 0F, 0F, 0F);
-		handle2 = new ModelRenderer(this, 57, 34);
-		handle2.addBox(0F, 0F, 0F, 1, 2, 4);
-		handle2.setRotationPoint(-8F, 15F, -2F);
-		handle2.setTextureSize(128, 128);
-		handle2.mirror = true;
-		setRotation(handle2, 0F, 0F, 0F);
+		lid = new ModelRenderer(this);
+		lid.setRotationPoint(0.0F, 15.0F, 6.0F);
+		lid.cubeList.add(new ModelBox(lid, 0, 0, -7.0F, -5.0F, -13.0F, 14, 5, 14, 0.0F, true));
+
+		baseMiddle = new ModelRenderer(this);
+		baseMiddle.setRotationPoint(0.0F, 14.0F, 5.0F);
+		baseMiddle.cubeList.add(new ModelBox(baseMiddle, 0, 21, -3.0F, 0.0F, -11.0F, 6, 9, 12, 0.0F, true));
+
+		baseSide1 = new ModelRenderer(this);
+		baseSide1.setRotationPoint(5.0F, 14.0F, 5.0F);
+		baseSide1.cubeList.add(new ModelBox(baseSide1, 0, 44, -2.0F, 0.0F, -12.0F, 4, 9, 14, 0.0F, false));
+
+		baseSide2 = new ModelRenderer(this);
+		baseSide2.setRotationPoint(-5.0F, 14.0F, 5.0F);
+		baseSide2.cubeList.add(new ModelBox(baseSide2, 0, 70, -2.0F, 0.0F, -12.0F, 4, 9, 14, 0.0F, false));
+
+		bottom = new ModelRenderer(this);
+		bottom.setRotationPoint(0.0F, 22.0F, 7.0F);
+		bottom.cubeList.add(new ModelBox(bottom, 0, 96, -7.0F, 0.0F, -14.0F, 14, 2, 14, 0.0F, true));
+
+		skullTop = new ModelRenderer(this);
+		skullTop.setRotationPoint(0.0F, 15.0F, 6.0F);
+		skullTop.cubeList.add(new ModelBox(skullTop, 57, 0, -3.0F, -3.0F, -14.0F, 6, 5, 2, 0.0F, true));
+
+		skullBottom = new ModelRenderer(this);
+		skullBottom.setRotationPoint(0.0F, 17.0F, -6.0F);
+		skullBottom.cubeList.add(new ModelBox(skullBottom, 57, 8, -2.0F, 0.0F, -1.0F, 4, 3, 1, 0.0F, true));
+
+		topHinge1 = new ModelRenderer(this);
+		topHinge1.setRotationPoint(4.0F, 15.0F, 6.0F);
+		topHinge1.cubeList.add(new ModelBox(topHinge1, 57, 14, -1.0F, -5.5F, -3.5F, 2, 4, 5, 0.0F, true));
+
+		topHinge2 = new ModelRenderer(this);
+		topHinge2.setRotationPoint(-4.0F, 15.0F, 6.0F);
+		topHinge2.cubeList.add(new ModelBox(topHinge2, 57, 14, -1.0F, -5.5F, -3.5F, 2, 4, 5, 0.0F, true));
+
+		bottomHinge1 = new ModelRenderer(this);
+		bottomHinge1.setRotationPoint(4.0F, 14.0F, 7.0F);
+		bottomHinge1.cubeList.add(new ModelBox(bottomHinge1, 56, 23, -1.0F, -0.5F, -1.5F, 2, 2, 2, 0.01F, true));
+
+		bottomHinge2 = new ModelRenderer(this);
+		bottomHinge2.setRotationPoint(-4.0F, 14.0F, 7.0F);
+		bottomHinge2.cubeList.add(new ModelBox(bottomHinge2, 57, 23, -1.0F, -0.5F, -1.5F, 2, 2, 2, 0.01F, true));
+
+		handle1 = new ModelRenderer(this);
+		handle1.setRotationPoint(7.0F, 15.0F, -2.0F);
+		handle1.cubeList.add(new ModelBox(handle1, 57, 34, 0.0F, 0.0F, 0.0F, 1, 2, 4, 0.0F, true));
+
+		handle2 = new ModelRenderer(this);
+		handle2.setRotationPoint(-8.0F, 15.0F, -2.0F);
+		handle2.cubeList.add(new ModelBox(handle2, 57, 34, 0.0F, 0.0F, 0.0F, 1, 2, 4, 0.0F, true));
+
 	}
 
 	public void render(Entity entity, float f, float f1, float f2, float f3, float f4, float f5) {
@@ -142,8 +103,6 @@ public class DreadPirateChestModel extends ModelBase implements ITreasureChestMo
 		topHinge2.render(f5);
 		bottomHinge1.render(f5);
 		bottomHinge2.render(f5);
-		corner1.render(f5);
-		corner2.render(f5);
 		handle1.render(f5);
 		handle2.render(f5);
 	}
@@ -169,8 +128,6 @@ public class DreadPirateChestModel extends ModelBase implements ITreasureChestMo
 		skullTop.rotateAngleX = lid.rotateAngleX;
 		topHinge1.rotateAngleX = lid.rotateAngleX;
 		topHinge2.rotateAngleX = lid.rotateAngleX;
-		corner1.rotateAngleX = lid.rotateAngleX;
-		corner2.rotateAngleX = lid.rotateAngleX;
 
 		lid.render(f5);
 		baseMiddle.render(f5);
@@ -183,8 +140,6 @@ public class DreadPirateChestModel extends ModelBase implements ITreasureChestMo
 		topHinge2.render(f5);
 		bottomHinge1.render(f5);
 		bottomHinge2.render(f5);
-		corner1.render(f5);
-		corner2.render(f5);
 		handle1.render(f5);
 		handle2.render(f5);
 	}

@@ -6,7 +6,7 @@
 	"type": "well",
 	"rarities": ["common"],
 	"biomeWhiteList": [],
-	"biomeBlackList": ["ocean", "deep_ocean","desert"],
+	"biomeBlackList": ["ocean", "deep_ocean", "desert", "desert_hills", "mutated_desert", "biomesoplenty:xeric_shrubland", "biomesoplenty:oasis"],
 	"includeFog": false,
 	"verticalOffset": -6,
 	"offset": {

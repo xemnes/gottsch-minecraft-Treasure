@@ -78,6 +78,8 @@ tile.treasure2:falling_grass.name=Grass Block
 tile.treasure2:falling_sand.name=Sand Block
 tile.treasure2:falling_red_sand.name=Red Sand Block
 tile.treasure2:blackstone.name=Blackstone
+tile.treasure2:proximity_spawner.name=Proximity Spawner
+
 
 #items
 item.treasure2:gold_coin.name=Gold Coin
@@ -133,8 +135,15 @@ item.treasure2:iron_key.name=Iron Key
 item.treasure2:gold_key.name=Gold Key
 item.treasure2:diamond_key.name=Diamond Key
 item.treasure2:emerald_key.name=Emerald Key
+item.treasure2:amber_key.name=Amber Key
+item.treasure2:malachite_key.name=Malachite Key
 item.treasure2:ruby_key.name=Ruby Key
 item.treasure2:sapphire_key.name=Sapphire Key
+item.treasure2:peridot_key.name=Peridot Key
+item.treasure2:amethyst_key.name=Amethyst Key
+item.treasure2:topaz_key.name=Topaz Key
+item.treasure2:tanzanite_key.name=Tanzanite Key
+item.treasure2:onyx_key.name=Onyx Key
 item.treasure2:jewelled_key.name=Jewelled Key
 item.treasure2:metallurgists_key.name=Metallurgist's Key
 item.treasure2:skeleton_key.name=Skeleton Key
@@ -151,8 +160,15 @@ item.treasure2:iron_lock.name=Iron Lock
 item.treasure2:gold_lock.name=Gold Lock
 item.treasure2:diamond_lock.name=Diamond Lock
 item.treasure2:emerald_lock.name=Emerald Lock
+item.treasure2:amber_lock.name=Amber Lock
+item.treasure2:malachite_lock.name=Malachite Lock
 item.treasure2:ruby_lock.name=Ruby Lock
 item.treasure2:sapphire_lock.name=Sapphire Lock
+item.treasure2:peridot_lock.name=Peridot Lock
+item.treasure2:amethyst_lock.name=Amethyst Lock
+item.treasure2:topaz_lock.name=Topaz Lock
+item.treasure2:tanzanite_lock.name=Tanzanite Lock
+item.treasure2:onyx_lock.name=Onyx Lock
 item.treasure2:spider_lock.name=Spider Lock
 item.treasure2:wither_lock.name=Wither Lock
 
@@ -185,6 +201,8 @@ item.treasure2:clam_meat.name=Clam Meat
 item.treasure2:clam_stew.name=Clam Stew
 item.treasure2:treasure_tool.name=Treasure Tool
 
+item.treasure2:treasure_tab.name=Treasure
+
 #entities
 entity.wood_mimic.name=Wood Mimic
 entity.pirate_mimic.name=Pirate Mimic
@@ -214,8 +232,8 @@ tooltip.label.treasure_tool=Required for Key/Pick recipes
 tooltip.label.charmed=Hold in hand or in coin pouch for buffs
 tooltip.label.charmed.adornment=Hold in hand, coin pouch, or hotbar for buffs
 tooltip.label.charms=Charms:
-tooltip.label.charmable=To charm, add charmed items on an anvil
-tooltip.label.charmable.slots=Charms Capacity: %s[available/activated/max.]
+tooltip.label.charmable=Use on an anvil to add charmed items to slots.
+tooltip.label.charmable.slots=Charm Capacity: %s[available/activated/max.]
 tooltip.label.charmable.slots.stats=[%s/%s/%s]
 
 tooltip.label.max_locks=Max Locks: %s
@@ -369,4 +387,4 @@ display.spider_chest.name=Spider Chest
 display.viking_chest.name=Viking Chest
 display.cardboard_box.name=Cardboard Box
 display.milk_crate.name=Milk Crate
-display.crystal_skull_chest.name=Crystal Skull
+display.crystal_skull_chest.name=Crystal Skull Chest

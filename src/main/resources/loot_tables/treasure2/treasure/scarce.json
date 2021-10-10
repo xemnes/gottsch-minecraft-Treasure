@@ -87,6 +87,18 @@
 					]
 				},
 				{
+					"entryName": "amber_key",
+					"type": "item",
+					"name": "treasure2:amber_key",
+					"weight": 25
+				},
+				{
+					"entryName": "malachite_key",
+					"type": "item",
+					"name": "treasure2:malachite_key",
+					"weight": 25
+				},
+				{
 					"entryName": "spider_key",
 					"type": "item",
 					"name": "treasure2:spider_key",

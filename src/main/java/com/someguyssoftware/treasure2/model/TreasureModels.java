@@ -96,10 +96,7 @@ public class TreasureModels {
 		registerItemModel(Item.getItemFromBlock(TreasureBlocks.WITHER_PLANKS));
 
         // ORES/GEMS
-        registerItemModel(Item.getItemFromBlock(TreasureBlocks.AMETHYST_ORE));
         registerItemModel(Item.getItemFromBlock(TreasureBlocks.ONYX_ORE));
-		registerItemModel(Item.getItemFromBlock(TreasureBlocks.SAPPHIRE_ORE));
-		registerItemModel(Item.getItemFromBlock(TreasureBlocks.RUBY_ORE));
 
 		// OTHER
 		registerItemModel(Item.getItemFromBlock(TreasureBlocks.FALLING_GRASS));
@@ -166,8 +163,15 @@ public class TreasureModels {
 		registerItemModel(TreasureItems.GOLD_LOCK);
 		registerItemModel(TreasureItems.DIAMOND_LOCK);
 		registerItemModel(TreasureItems.EMERALD_LOCK);
+		registerItemModel(TreasureItems.AMBER_LOCK);
+		registerItemModel(TreasureItems.MALACHITE_LOCK);
 		registerItemModel(TreasureItems.RUBY_LOCK);
 		registerItemModel(TreasureItems.SAPPHIRE_LOCK);
+		registerItemModel(TreasureItems.PERIDOT_LOCK);
+		registerItemModel(TreasureItems.AMETHYST_LOCK);
+		registerItemModel(TreasureItems.TOPAZ_LOCK);
+		registerItemModel(TreasureItems.TANZANITE_LOCK);
+		registerItemModel(TreasureItems.ONYX_LOCK);
 		registerItemModel(TreasureItems.SPIDER_LOCK);
 		registerItemModel(TreasureItems.WITHER_LOCK);
 
@@ -181,8 +185,15 @@ public class TreasureModels {
 		registerItemModel(TreasureItems.GOLD_KEY);
 		registerItemModel(TreasureItems.DIAMOND_KEY);
 		registerItemModel(TreasureItems.EMERALD_KEY);
+		registerItemModel(TreasureItems.AMBER_KEY);
+		registerItemModel(TreasureItems.MALACHITE_KEY);
 		registerItemModel(TreasureItems.RUBY_KEY);
 		registerItemModel(TreasureItems.SAPPHIRE_KEY);
+		registerItemModel(TreasureItems.PERIDOT_KEY);
+		registerItemModel(TreasureItems.AMETHYST_KEY);
+		registerItemModel(TreasureItems.TOPAZ_KEY);
+		registerItemModel(TreasureItems.TANZANITE_KEY);
+		registerItemModel(TreasureItems.ONYX_KEY);
 		registerItemModel(TreasureItems.JEWELLED_KEY);
 		registerItemModel(TreasureItems.METALLURGISTS_KEY);
 		registerItemModel(TreasureItems.SKELETON_KEY);
@@ -212,10 +223,7 @@ public class TreasureModels {
 
 		// OTHER
         registerItemModel(TreasureItems.SPANISH_MOSS);
-        registerItemModel(TreasureItems.AMETHYST);
         registerItemModel(TreasureItems.ONYX);
-		registerItemModel(TreasureItems.SAPPHIRE);
-		registerItemModel(TreasureItems.RUBY);
 		registerItemModel(TreasureItems.TREASURE_TOOL);
 	}
 

@@ -31,12 +31,16 @@ import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
+import net.minecraft.init.SoundEvents;
 import net.minecraft.inventory.InventoryHelper;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.util.EnumParticleTypes;
+import net.minecraft.util.SoundCategory;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.util.text.translation.I18n;
 import net.minecraft.world.World;
+import net.minecraft.world.WorldServer;
 import net.minecraft.world.storage.loot.LootContext;
 import net.minecraft.world.storage.loot.LootPool;
 
@@ -78,6 +82,7 @@ public class PearlItem extends ModItem implements IWishable, IPouchable {
 	public void addInformation(ItemStack stack, World worldIn, List<String> tooltip, ITooltipFlag flagIn) {
 		super.addInformation(stack, worldIn, tooltip, flagIn);		
 		tooltip.add(TextFormatting.GOLD + I18n.translateToLocal("tooltip.label.coin"));
+		tooltip.add(I18n.translateToLocalFormatted("tooltip.label.rarity", TextFormatting.AQUA + "SPECIAL"));
 	}
 	
 	/**
@@ -223,6 +228,8 @@ public class PearlItem extends ModItem implements IWishable, IPouchable {
 		
 		// spawn the item 
 		if (stack != null) {
+			world.playSound(null, coords.toPos(), SoundEvents.BLOCK_ENCHANTMENT_TABLE_USE, SoundCategory.BLOCKS, 0.5F, 2.0F);
+			((WorldServer) world).spawnParticle(EnumParticleTypes.END_ROD, (double)coords.getX()+0.5D, (double)coords.getY()+1, (double)coords.getZ()+0.5D, 100, 0.0D, 0.1D, 0.0D, 0.5D);
 			InventoryHelper.spawnItemStack(world, (double)coords.getX(), (double)coords.getY()+1, (double)coords.getZ(), stack);
 		}
 

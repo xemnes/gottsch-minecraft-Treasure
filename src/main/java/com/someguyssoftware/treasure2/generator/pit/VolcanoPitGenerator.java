@@ -12,7 +12,6 @@ import com.someguyssoftware.treasure2.block.TreasureBlocks;
 import com.someguyssoftware.treasure2.generator.ChestGeneratorData;
 import com.someguyssoftware.treasure2.generator.GenUtil;
 import com.someguyssoftware.treasure2.generator.GeneratorResult;
-import com.sun.media.jfxmedia.logging.Logger;
 
 import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
@@ -28,7 +27,7 @@ import net.minecraft.world.World;
 public class VolcanoPitGenerator extends AbstractPitGenerator {
 	private static final int MIN_VOLCANO_RADIUS = 4;
     private static final int MAX_VOLCANO_RADIUS = 8;
-    private static final int MIN_VERTICAL_DISTANCE = 15;
+    private static final int MIN_VERTICAL_DISTANCE = 25;
     
 	/**
 	 * 

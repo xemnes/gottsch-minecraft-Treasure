@@ -8,6 +8,7 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Random;
 
+import baubles.api.BaubleType;
 import com.google.common.collect.FluentIterable;
 import com.google.common.collect.Iterables;
 import com.someguyssoftware.gottschcore.positional.ICoords;
@@ -68,5 +69,10 @@ public class DecrepitCharm extends Charm {
 		TextFormatting color = TextFormatting.DARK_RED;
 		tooltip.add("  " + color + getLabel(data));
 		tooltip.add(" " + TextFormatting.GRAY +  "" + TextFormatting.ITALIC + I18n.translateToLocalFormatted("tooltip.charm.decrepit_rate", Math.round((data.getPercent()-1)*100)));
+	}
+
+	@Override
+	public BaubleType getBaubleType(ItemStack itemStack) {
+		return null;
 	}
 }

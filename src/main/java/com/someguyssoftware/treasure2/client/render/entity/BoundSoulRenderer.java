@@ -6,22 +6,27 @@ package com.someguyssoftware.treasure2.client.render.entity;
 import com.someguyssoftware.treasure2.Treasure;
 import com.someguyssoftware.treasure2.entity.monster.BoundSoulEntity;
 
+import com.someguyssoftware.treasure2.entity.monster.MimicEntity;
 import net.minecraft.client.model.ModelBiped;
 import net.minecraft.client.model.ModelZombie;
+import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.entity.RenderBiped;
 import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.client.renderer.entity.layers.LayerBipedArmor;
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.monster.EntityZombie;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import org.lwjgl.opengl.GL11;
 
 /**
  * @author Mark Gottschling on Feb 23, 2020
  *
  */
 @SideOnly(Side.CLIENT)
-public class BoundSoulRenderer extends RenderBiped<BoundSoulEntity> {
+public class BoundSoulRenderer <T extends EntityLiving> extends RenderBiped<BoundSoulEntity> {
 	private static final ResourceLocation BOUND_SOUL_TEXTURES = new ResourceLocation(Treasure.MODID + ":textures/entity/mob/bound-soul.png");
 
 	/**
@@ -37,6 +42,25 @@ public class BoundSoulRenderer extends RenderBiped<BoundSoulEntity> {
             }
         };
         this.addLayer(layerBipedArmor);
+    }
+
+    @Override
+    public void doRender(BoundSoulEntity entity, double x, double y, double z, float entityYaw, float partialTicks)
+    {
+        GlStateManager.pushMatrix();
+
+        GlStateManager.enableNormalize();
+        GlStateManager.enableBlend();
+
+        GlStateManager.color(1.0F, 1.0F, 1.0F, 0.8F);
+
+        super.doRender(entity, x, y, z, entityYaw, partialTicks);
+
+        GlStateManager.color(1.0F, 1.0F, 1.0F, 1F);
+
+        GlStateManager.disableBlend();
+        GlStateManager.disableNormalize();
+        GlStateManager.popMatrix();
     }
 
     /**

@@ -11,9 +11,9 @@
 		"item": "treasure2:treasure_tool"
 	},
 	"S": {
-		"item": "minecraft:stone",
-		"data":0
-	}
+      "type": "forge:ore_dict",
+      "ore": "stone"
+    }
   },
   "result": {
     "item": "treasure2:gravestone2_stone",

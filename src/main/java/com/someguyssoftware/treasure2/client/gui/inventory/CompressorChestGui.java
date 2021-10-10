@@ -66,9 +66,9 @@ public class CompressorChestGui extends GuiContainer {
 	@Override
 	protected void drawGuiContainerForegroundLayer(int mouseX, int mouseY) {
 		final int LABEL_XPOS = 5;
-		final int LABEL_YPOS = 5;
+		final int LABEL_YPOS = 4;
 		fontRenderer.drawString(tileEntity.getDisplayName().getUnformattedText(), LABEL_XPOS, LABEL_YPOS,
-				Color.darkGray.getRGB());
+				Color.white.getRGB());
 	}
 
 	/**

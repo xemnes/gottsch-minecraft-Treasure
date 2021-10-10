@@ -8,6 +8,7 @@ import java.util.Random;
 
 import javax.xml.ws.Holder;
 
+import baubles.api.BaubleType;
 import com.someguyssoftware.gottschcore.positional.ICoords;
 import com.someguyssoftware.treasure2.Treasure;
 
@@ -87,4 +88,9 @@ public class DrainCharm extends Charm {
 		tooltip.add("  " + color + getLabel(data));
 		tooltip.add(" " + TextFormatting.GRAY +  "" + TextFormatting.ITALIC + I18n.translateToLocalFormatted("tooltip.charm.drain_rate", data.getDuration()));
 	}
+
+    @Override
+    public BaubleType getBaubleType(ItemStack itemStack) {
+        return null;
+    }
 }

@@ -11,8 +11,9 @@
 		"item": "treasure2:treasure_tool"
 	},
 	"S": {
-		"item": "minecraft:cobblestone"
-	}
+      "type": "forge:ore_dict",
+      "ore": "cobblestone"
+    }
   },
   "result": {
     "item": "treasure2:gravestone1_cobblestone",

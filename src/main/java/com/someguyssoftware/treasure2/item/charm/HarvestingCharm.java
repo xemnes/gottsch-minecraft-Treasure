@@ -6,6 +6,7 @@ package com.someguyssoftware.treasure2.item.charm;
 import java.util.List;
 import java.util.Random;
 
+import baubles.api.BaubleType;
 import com.someguyssoftware.gottschcore.positional.ICoords;
 import com.someguyssoftware.treasure2.Treasure;
 import com.someguyssoftware.treasure2.item.IPouch;
@@ -83,4 +84,8 @@ public class HarvestingCharm extends Charm {
 		tooltip.add(" " + TextFormatting.GRAY + "" + TextFormatting.ITALIC + I18n.translateToLocalFormatted("tooltip.charm.harvest_rate", Math.toIntExact((long) getMaxPercent())));
 	}
 
+	@Override
+	public BaubleType getBaubleType(ItemStack itemStack) {
+		return null;
+	}
 }

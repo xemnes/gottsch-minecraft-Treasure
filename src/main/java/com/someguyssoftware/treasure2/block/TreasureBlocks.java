@@ -144,10 +144,7 @@ public class TreasureBlocks {
 	public static Map<FogHeight, FogBlock> poisonFogMap = new HashMap<>();
 
     // ores
-    public static final OreBlock AMETHYST_ORE;
     public static final OreBlock ONYX_ORE;
-	public static final OreBlock RUBY_ORE;
-	public static final OreBlock SAPPHIRE_ORE;
 
 	// wither
 	public static final Block WITHER_LOG;
@@ -189,7 +186,7 @@ public class TreasureBlocks {
 				TreasureChestTypes.STANDARD, Rarity.COMMON).setBounds(stdChestBounds).setHardness(2.5F);
 
 		IRONBOUND_CHEST = new TreasureChestBlock(Treasure.MODID, TreasureConfig.IRONBOUND_CHEST_ID,
-				IronboundChestTileEntity.class, TreasureChestTypes.STANDARD, Rarity.UNCOMMON).setBounds(stdChestBounds)
+				IronboundChestTileEntity.class, TreasureChestTypes.STANDARD2, Rarity.UNCOMMON).setBounds(stdChestBounds)
 				.setHardness(3.0F);
 
 		PIRATE_CHEST = new TreasureChestBlock(Treasure.MODID, TreasureConfig.PIRATE_CHEST_ID,
@@ -279,7 +276,7 @@ public class TreasureBlocks {
 				.setChestGuiID(GuiHandler.SKULL_CHEST_GUIID).setBounds(skullChestBounds).setHardness(3.0F);
 
 		CAULDRON_CHEST = new TreasureChestBlock(Treasure.MODID, TreasureConfig.CAULDRON_CHEST_ID, Material.IRON,
-				CauldronChestTileEntity.class, TreasureChestTypes.TOP_SPLIT, Rarity.EPIC)
+				CauldronChestTileEntity.class, TreasureChestTypes.CAULDRON, Rarity.EPIC)
 				.setChestGuiID(GuiHandler.STANDARD_CHEST_GUIID).setHardness(3.0F);
 
 
@@ -438,10 +435,7 @@ public class TreasureBlocks {
 		gravestoneSpawners.add(GRAVESTONE3_SPAWNER_OBSIDIAN);
 
         // ORES/GEMS
-        AMETHYST_ORE = new OreBlock(Treasure.MODID, TreasureConfig.AMETHYST_ORE_ID, Material.ROCK);
         ONYX_ORE = new OreBlock(Treasure.MODID, TreasureConfig.ONYX_ORE_ID, Material.ROCK);
-		SAPPHIRE_ORE = new OreBlock(Treasure.MODID, TreasureConfig.SAPPHIRE_ORE_ID, Material.ROCK);
-		RUBY_ORE = new OreBlock(Treasure.MODID, TreasureConfig.RUBY_ORE_ID, Material.ROCK);
 
 		// other
 		WISHING_WELL_BLOCK = new WishingWellBlock(Treasure.MODID, TreasureConfig.WISHING_WELL_BLOCK_ID, Material.ROCK);
@@ -545,10 +539,7 @@ public class TreasureBlocks {
 					WITHER_PLANKS, SPANISH_MOSS, PAINTING_BLOCKS_BRICKS, PAINTING_BLOCKS_COBBLESTONE,
 					PAINTING_BLOCKS_DIRT, PAINTING_BLOCKS_LAVA, PAINTING_BLOCKS_SAND, PAINTING_BLOCKS_WATER,
                     PAINTING_BLOCKS_WOOD,
-                    AMETHYST_ORE,
                     ONYX_ORE,
-                    SAPPHIRE_ORE,
-                    RUBY_ORE, 
 					FALLING_GRASS,
 					FALLING_SAND,
 					FALLING_RED_SAND,
@@ -629,15 +620,12 @@ public class TreasureBlocks {
 					new ItemBlock(WISHING_WELL_BLOCK), new ItemBlock(DESERT_WISHING_WELL_BLOCK),
 					new ItemBlock(WITHER_LOG), new ItemBlock(WITHER_BROKEN_LOG), new ItemBlock(WITHER_LOG_SOUL),
                     new ItemBlock(WITHER_PLANKS),
-                    new ItemBlock(AMETHYST_ORE),
                     new ItemBlock(ONYX_ORE),
-                    new ItemBlock(SAPPHIRE_ORE),
-                    new ItemBlock(RUBY_ORE),
-					new ItemBlock(PROXIMITY_SPAWNER),
 					new ItemBlock(FALLING_GRASS),
 					new ItemBlock(FALLING_SAND),
 					new ItemBlock(FALLING_RED_SAND),
-					new ItemBlock(BLACKSTONE)
+					new ItemBlock(BLACKSTONE),
+					new ItemBlock(PROXIMITY_SPAWNER)
 			};
 
 			for (final ItemBlock item : items) {
@@ -689,12 +677,13 @@ public class TreasureBlocks {
 			GameRegistry.registerTileEntity(MilkCrateTileEntity.class,
 					new ResourceLocation(Treasure.MODID + ":" + TreasureConfig.MILK_CRATE_TE_ID));
 
-			GameRegistry.registerTileEntity(ProximitySpawnerTileEntity.class,
-					new ResourceLocation(Treasure.MODID + ":" + TreasureConfig.PROXIMITY_SPAWNER_TE_ID));
 			GameRegistry.registerTileEntity(GravestoneProximitySpawnerTileEntity.class,
 					new ResourceLocation(Treasure.MODID + ":" + TreasureConfig.GRAVESTONE_PROXIMITY_SPAWNER_TE_ID));
 			GameRegistry.registerTileEntity(MistEmitterTileEntity.class,
 					new ResourceLocation(Treasure.MODID + ":" + TreasureConfig.GRAVESTONE_TE_ID));
+
+			GameRegistry.registerTileEntity(ProximitySpawnerTileEntity.class,
+					new ResourceLocation(Treasure.MODID + ":" + TreasureConfig.PROXIMITY_SPAWNER_TE_ID));
 		}
 	}
 }

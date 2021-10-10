@@ -5,6 +5,7 @@ package com.someguyssoftware.treasure2.client.render.tileentity;
 
 import com.someguyssoftware.treasure2.client.model.ITreasureChestModel;
 
+import com.someguyssoftware.treasure2.tileentity.AbstractTreasureChestTileEntity;
 import net.minecraft.client.renderer.GlStateManager;
 
 /**
@@ -21,21 +22,67 @@ public class CompressorChestTileEntityRenderer extends TreasureChestTileEntityRe
 	 public CompressorChestTileEntityRenderer(String texture, ITreasureChestModel model) {
 		 super(texture, model);
 	 }
-    
-    @Override
-	public void updateTranslation(double x, double y, double z) {
-        // initial position (centered moved up only half as normal as the size if half as normal)
-		GlStateManager.translate((float)x + 0.5F, (float)y + 0.75F, (float)z + 0.5F);
-	}
-	
-    @Override
-    public void updateScale() {
-    	// shrink the size of the chest by half
-		GlStateManager.scale(0.5F, 0.5F, 0.5F);
+
+	 @Override
+	public void render(AbstractTreasureChestTileEntity te, double x, double y, double z, float partialTicks, int destroyStage, float alpha) {
+
+		if (!(te instanceof AbstractTreasureChestTileEntity))
+			return; // should never happen
+
+		// apply the destory gl state (if any)
+		applyDestroyGlState(destroyStage);
+
+		GlStateManager.enableBlend();
+		// get the model
+		ITreasureChestModel model = getModel();
+		// bind the texture
+		this.bindTexture(getTexture());
+		// get the chest rotation
+		int meta = 0;
+		if (te.hasWorld()) {
+			meta = te.getBlockMetadata();
+		}
+		int rotation = getRotation(meta);
+
+		// start render matrix
+		GlStateManager.pushMatrix();
+
+		// initial position (centered moved up)
+		updateTranslation(x, y, z);
+
+		// This rotation part is very important! Without it, your model will render upside-down.
+		// (rotate 180 degrees around the z-axis)
+		GlStateManager.rotate(180F, 0F, 0F, 1.0F);
+		// rotate block to the correct direction that it is facing.
+		GlStateManager.rotate((float) rotation, 0.0F, 1.0F, 0.0F);
+
+		// add scale method
+		updateScale();
+
+		// update the lid rotation
+		updateModelLidRotation(te, partialTicks);
+
+		// render the model
+		model.renderAll(te);
+		GlStateManager.disableBlend();
+		GlStateManager.popMatrix();
+
+		// end of rendering chest entity ////
+
+		// pop the destroy stage matrix
+		popDestroyGlState(destroyStage);
+
+		////////////// render the locks //////////////////////////////////////
+		if (te.getLockStates() != null && !te.getLockStates().isEmpty()) {
+			renderLocks(te, x, y, z);
+		}
+
+		////////////// end of render the locks //////////////////////////////////////
+		GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
 	}
     
 	 @Override
 	 public void updateLockScale() {
-		 GlStateManager.scale(0.20F, 0.20F, 0.20F);
+		 GlStateManager.scale(0.40F, 0.40F, 0.40F);
 	} 
 }

@@ -42,8 +42,8 @@ public class MimicChestItemBlock extends ItemBlock {
 		ITreasureChestTileEntity te = tb.getTileEntity();
 	
 		// chest info		
-		tooltip.add(I18n.translateToLocalFormatted("tooltip.label.rarity", TextFormatting.DARK_BLUE + tb.getRarity().toString()));
-		tooltip.add(I18n.translateToLocalFormatted("tooltip.label.max_locks", TextFormatting.DARK_BLUE + String.valueOf(tb.getChestType().getMaxLocks())));
+		tooltip.add(I18n.translateToLocalFormatted("tooltip.label.rarity", TextFormatting.AQUA + tb.getRarity().toString()));
+		tooltip.add(I18n.translateToLocalFormatted("tooltip.label.max_locks", TextFormatting.BLUE + String.valueOf(tb.getChestType().getMaxLocks())));
 		tooltip.add(I18n.translateToLocalFormatted("tooltip.label.container_size", TextFormatting.DARK_GREEN + String.valueOf(te.getNumberOfSlots())));
 	}	
 }

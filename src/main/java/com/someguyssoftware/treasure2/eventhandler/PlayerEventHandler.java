@@ -8,6 +8,12 @@ import java.util.List;
 import java.util.Optional;
 import java.util.Random;
 
+import artifacts.common.init.ModItems;
+import baubles.api.BaubleType;
+import baubles.api.BaublesApi;
+import baubles.api.IBauble;
+import baubles.api.cap.BaublesCapabilities;
+import baubles.api.cap.IBaublesItemHandler;
 import com.someguyssoftware.gottschcore.mod.IMod;
 import com.someguyssoftware.gottschcore.positional.Coords;
 import com.someguyssoftware.gottschcore.world.WorldInfo;
@@ -19,6 +25,7 @@ import com.someguyssoftware.treasure2.capability.ICharmCapability;
 import com.someguyssoftware.treasure2.capability.PouchCapabilityProvider;
 import com.someguyssoftware.treasure2.config.TreasureConfig;
 import com.someguyssoftware.treasure2.enums.FogType;
+import com.someguyssoftware.treasure2.item.Adornment;
 import com.someguyssoftware.treasure2.item.IPouch;
 import com.someguyssoftware.treasure2.item.PouchType;
 import com.someguyssoftware.treasure2.item.TreasureItems;
@@ -42,6 +49,7 @@ import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
+import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.event.entity.item.ItemTossEvent;
 import net.minecraftforge.event.entity.living.LivingAttackEvent;
 import net.minecraftforge.event.entity.living.LivingDamageEvent;
@@ -253,6 +261,17 @@ public class PlayerEventHandler {
 			}
 		}
 
+		IBaublesItemHandler baubles = BaublesApi.getBaublesHandler(player);
+		for(int baubleSlot = 0; baubleSlot < baubles.getSlots(); baubleSlot++){
+			System.out.println(getCharmBaubleContext(player, baubleSlot));
+			context = getCharmBaubleContext(player, baubleSlot);
+			if (context.isPresent()) {
+				if (context.get().type == CharmedType.ADORNMENT) {
+					doCharms(context.get(), player, event, nonMultipleUpdateCharms);
+				}
+			}
+		}
+
 		// check hotbar - get the context at each slot
 		for (int hotbarSlot = 0; hotbarSlot < 9; hotbarSlot++) {
 			if (player.inventory.getStackInSlot(hotbarSlot) != player.getHeldItemMainhand()) {
@@ -390,7 +409,7 @@ public class PlayerEventHandler {
 	}
 
 	@SuppressWarnings("incomplete-switch")
-	private Optional<CharmContext> getCharmContext(EntityPlayerMP player, int hotbarSlot) {
+	public Optional<CharmContext> getCharmContext(EntityPlayerMP player, int hotbarSlot) {
 		CharmContext context = new CharmContext();
 
 		ItemStack stack = player.inventory.getStackInSlot(hotbarSlot);
@@ -414,6 +433,35 @@ public class PlayerEventHandler {
 			context.capability = stack.getCapability(CharmCapabilityProvider.CHARM_CAPABILITY, null);
 			break;		
 		}		
+		return Optional.of(context);
+	}
+
+	@SuppressWarnings("incomplete-switch")
+	public Optional<CharmContext> getCharmBaubleContext(EntityPlayerMP player, int baubleSlot) {
+		CharmContext context = new CharmContext();
+
+		IBaublesItemHandler baubles = BaublesApi.getBaublesHandler(player);
+		ItemStack stack = baubles.getStackInSlot(baubleSlot);
+		if (stack.isEmpty()) {
+			return Optional.empty();
+		}
+		Optional<CharmedType> type = getType(stack);
+		if (!type.isPresent()) {
+			return Optional.empty();
+		}
+
+		context.hotbarSlot = baubleSlot;
+		context.slot = baubleSlot;
+		context.itemStack = stack;
+		context.type = type.get();
+		switch(context.type) {
+			case ADORNMENT:
+				context.capability = stack.getCapability(CharmableCapabilityProvider.CHARM_CAPABILITY, null);
+				break;
+			case CHARM:
+				context.capability = stack.getCapability(CharmCapabilityProvider.CHARM_CAPABILITY, null);
+				break;
+		}
 		return Optional.of(context);
 	}
 
@@ -481,7 +529,7 @@ public class PlayerEventHandler {
 	 * @author Mark Gottschling on Apr 30, 2020
 	 *
 	 */
-	private class CharmContext {
+	public class CharmContext {
 		EnumHand hand;
 		Integer slot;
 		Integer hotbarSlot;
