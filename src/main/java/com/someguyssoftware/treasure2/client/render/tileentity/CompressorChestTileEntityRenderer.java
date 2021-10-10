@@ -7,6 +7,7 @@ import com.someguyssoftware.treasure2.client.model.ITreasureChestModel;
 
 import com.someguyssoftware.treasure2.tileentity.AbstractTreasureChestTileEntity;
 import net.minecraft.client.renderer.GlStateManager;
+import org.lwjgl.opengl.GL11;
 
 /**
  * 
@@ -32,7 +33,9 @@ public class CompressorChestTileEntityRenderer extends TreasureChestTileEntityRe
 		// apply the destory gl state (if any)
 		applyDestroyGlState(destroyStage);
 
-		GlStateManager.enableBlend();
+		 GlStateManager.enableBlend();
+		 GlStateManager.blendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
+		 GlStateManager.disableAlpha();
 		// get the model
 		ITreasureChestModel model = getModel();
 		// bind the texture
@@ -64,6 +67,7 @@ public class CompressorChestTileEntityRenderer extends TreasureChestTileEntityRe
 
 		// render the model
 		model.renderAll(te);
+		GlStateManager.enableAlpha();
 		GlStateManager.disableBlend();
 		GlStateManager.popMatrix();
 
