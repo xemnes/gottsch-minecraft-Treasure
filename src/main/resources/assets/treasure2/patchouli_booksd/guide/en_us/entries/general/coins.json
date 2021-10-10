@@ -1,0 +1,18 @@
+{
+    "name": "Coins, Gems and Pearls",
+    "icon": "biomesoplenty:gem:1",
+    "category": "general",
+    "sortnum": 4,
+    "pages": [
+    	{
+    		"type": "text",
+    		"title": "Coins, Gems and Pearls",
+             "text": "Some loot you may find or harvest are coins, gems, or pearls.$(br)$(bold)Coins$()$(br)- Gold Coin (rare)$()$(br)- Silver Coin (common) $(br)$(bold)Gems$()$(br)There are two kinds of gems - Ruby and Sapphire, which are both equal in value.$(br)$(bold)Pearls$()$(br)There are two kinds of pearls, white & black."		
+    	},
+    	{
+    		"type": "image",
+    		"text": "These items can be thrown into Wishing Wells to obtain treasure.",
+    		"images": ["treasure2:textures/gui/patchouli/guide/well1.png"]
+    	}
+    ]
+}

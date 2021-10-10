@@ -1,0 +1,17 @@
+{
+	"name": "canopy-wishing-well2",
+	"description": "",
+	"author": "gottsch",
+	"archetypes": ["surface"],
+	"type": "well",
+	"rarities": ["common"],
+	"biomeWhiteList": [],
+	"biomeBlackList": ["ocean", "deep_ocean", "desert", "desert_hills", "mutated_desert", "biomesoplenty:xeric_shrubland", "biomesoplenty:oasis"],
+	"includeFog": false,
+	"verticalOffset": -6,
+	"offset": {
+		"x": 0,
+		"y": -6,
+		"z": 0
+		}
+}

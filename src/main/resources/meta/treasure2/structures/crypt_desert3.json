@@ -1,0 +1,12 @@
+{
+	"name": "crypt_desert3",
+	"description": "",
+	"author": "gottsch",
+	"archetypes": ["surface"],
+	"type": "marker",
+	"themes": ["dungeon"],
+	"rarities": ["common"],
+	"biomeWhiteList": ["desert", "desert_hills", "mutated_desert", "biomesoplenty:xeric_shrubland", "biomesoplenty:oasis"],
+	"biomeBlackList": [],
+	"includeFog": true
+}

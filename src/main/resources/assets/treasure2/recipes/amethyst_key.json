@@ -1,0 +1,28 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "group": "Treasure2",
+  "pattern": [
+	" KT",
+	" D ",
+	" S "
+  ],
+  "key": {
+    "T": {
+		"item": "treasure2:treasure_tool"
+	},
+	"K": {
+		"item": "treasure2:gold_key"
+	},
+	"D": {
+		"item": "minecraft:glowstone_dust"
+	},
+	"S": {
+      "type": "forge:ore_dict",
+      "ore": "gemAmethyst"
+    }
+  },
+  "result": {
+    "item": "treasure2:amethyst_key",
+    "count": 1
+  }
+}
