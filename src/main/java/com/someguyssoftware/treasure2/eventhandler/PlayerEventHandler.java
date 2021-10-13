@@ -263,7 +263,6 @@ public class PlayerEventHandler {
 
 		IBaublesItemHandler baubles = BaublesApi.getBaublesHandler(player);
 		for(int baubleSlot = 0; baubleSlot < baubles.getSlots(); baubleSlot++){
-			System.out.println(getCharmBaubleContext(player, baubleSlot));
 			context = getCharmBaubleContext(player, baubleSlot);
 			if (context.isPresent()) {
 				if (context.get().type == CharmedType.ADORNMENT) {

@@ -56,20 +56,13 @@ public class LockItem extends ModItem {
 	 */
 	private List<KeyItem> keys = new ArrayList<>(3);
 
-	/**
-	 * 
-	 * @param item
-	 * @param keys
-	 */
+
 	public LockItem(String modID, String name, KeyItem[] keys) {
 		this(modID, name);
 		getKeys().addAll(Arrays.asList(keys));
 	}
 
-	/**
-	 * 
-	 * @param item
-	 */
+
 	public LockItem(String modID, String name) {
 		setItemName(modID, name);
 		setCategory(Category.ELEMENTAL);
@@ -100,10 +93,18 @@ public class LockItem extends ModItem {
 		}
 		tooltip.add(I18n.translateToLocalFormatted("tooltip.label.craftable", craftable));
 
-		String keyList = getKeys().stream().map(e -> I18n.translateToLocal(getUnlocalizedName() + ".name"))
-				.collect(Collectors.joining(","));
+		tooltip.add(I18n.translateToLocal("tooltip.label.accepts_keys"));
+		for (int i = 0; i < getKeys().size(); i++) {
+			KeyItem key = getKeys().get(i);
+			String formattedKey = I18n.translateToLocalFormatted(key.getUnlocalizedName() + ".name");
 
-		tooltip.add(I18n.translateToLocalFormatted("tooltip.label.accepts_keys", keyList));
+			tooltip.add(I18n.translateToLocalFormatted("- " + TextFormatting.DARK_GREEN + formattedKey));
+		}
+//			String keyList = getKeys().stream().map(e -> I18n.translateToLocal(e.getUnlocalizedName() + ".name"))
+//					.collect(Collectors.joining(", "));
+//
+//			tooltip.add(I18n.translateToLocalFormatted("tooltip.label.accepts_keys", TextFormatting.BLUE + keyList));
+
 	}
 
 	/**
@@ -140,13 +141,14 @@ public class LockItem extends ModItem {
 			} catch (Exception e) {
 				Treasure.logger.error("error: ", e);
 			}
+			System.out.println(keys);
 		}
 		return super.onItemUse(player, worldIn, chestPos, hand, facing, hitX, hitY, hitZ);
 	}
 
 	/**
-	 * 
-	 * @param te
+	 *
+	 * @param tileEntity
 	 * @param player
 	 * @param heldItem
 	 * @return flag indicating if a lock was added

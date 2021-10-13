@@ -53,6 +53,7 @@ public class ThiefsLockPick extends KeyItem {
 		String s2 = I18n.translateToLocalFormatted("tooltip.label.specials", 
 				TextFormatting.GOLD + s1);
 		tooltip.add(s2);
+		tooltip.add(TextFormatting.GOLD + "(Excluding Ember & Wither)");
 	}
 	
 	/**
@@ -61,7 +62,12 @@ public class ThiefsLockPick extends KeyItem {
 	@Override
 	public boolean fitsLock(LockItem lockItem) {
 		if (lockItem.getRarity() == Rarity.COMMON || lockItem.getRarity() == Rarity.UNCOMMON ||
-				lockItem.getRarity() == Rarity.SCARCE) return true;
+				lockItem.getRarity() == Rarity.SCARCE) {
+			if (lockItem == TreasureItems.EMBER_LOCK || lockItem == TreasureItems.WITHER_LOCK) {
+				return false;
+			}
+			else return true;
+		}
 		return false;
 	}	
 
@@ -89,7 +95,10 @@ public class ThiefsLockPick extends KeyItem {
 			else if (lockItem.getRarity() == Rarity.SCARCE) {
 				if (RandomHelper.checkProbability(new Random(), this.getSuccessProbability()/2)) {
 					Treasure.logger.debug("Unlock attempt met probability");
-					return true;
+					if (lockItem == TreasureItems.EMBER_LOCK || lockItem == TreasureItems.WITHER_LOCK) {
+						return false;
+					}
+					else return true;
 				}				
 			}		
 		}

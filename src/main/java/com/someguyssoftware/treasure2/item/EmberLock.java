@@ -37,8 +37,8 @@ public class EmberLock extends LockItem {
 		
 		tooltip.add(
 				I18n.translateToLocalFormatted("tooltip.label.specials", 
-				TextFormatting.GOLD) + I18n.translateToLocal("tooltip.ember_lock.specials")
-			);
+				TextFormatting.GOLD) + I18n.translateToLocal("tooltip.ember_lock.specials"));
+		tooltip.add(TextFormatting.GOLD + "(Excluding Ember & Lightning, Skeleton - random)");
     }
     
     @Override

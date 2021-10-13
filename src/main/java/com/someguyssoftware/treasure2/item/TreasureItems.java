@@ -549,7 +549,7 @@ public class TreasureItems {
 				.setMaxDamage(TreasureConfig.KEYS_LOCKS.metallurgistsKeyMaxUses);
 
 		SKELETON_KEY = new SkeletonKey(Treasure.MODID, TreasureConfig.SKELETON_KEY_ID)
-				.setCategory(Category.ELEMENTAL)
+				.setCategory(Category.UNIQUE)
 				.setRarity(Rarity.RARE)
 				.setBreakable(false)
 				.setCraftable(false)
@@ -570,7 +570,7 @@ public class TreasureItems {
 				.setMaxDamage(TreasureConfig.KEYS_LOCKS.witherKeyMaxUses);
 
 		PILFERERS_LOCK_PICK = new PilferersLockPick(Treasure.MODID, TreasureConfig.PILFERERS_LOCK_PICK_ID)
-				.setCategory(Category.ELEMENTAL)
+				.setCategory(Category.UNIQUE)
 				.setRarity(Rarity.COMMON)
 				.setBreakable(true)
 				.setCraftable(true)
@@ -578,7 +578,7 @@ public class TreasureItems {
 				.setSuccessProbability(32);
 
 		THIEFS_LOCK_PICK = new ThiefsLockPick(Treasure.MODID, TreasureConfig.THIEFS_LOCK_PICK_ID)
-				.setCategory(Category.ELEMENTAL)
+				.setCategory(Category.UNIQUE)
 				.setRarity(Rarity.UNCOMMON)
 				.setBreakable(true)
 				.setCraftable(true)
@@ -595,58 +595,58 @@ public class TreasureItems {
 		MASTERS_POUCH = new PouchItem(Treasure.MODID, TreasureConfig.MASTERS_POUCH_ID).setPouchType(PouchType.ARCANE);
 
 		// LOCKS
-		WOOD_LOCK = new LockItem(Treasure.MODID, TreasureConfig.WOOD_LOCK_ID, new KeyItem[] {WOOD_KEY})
+		WOOD_LOCK = new LockItem(Treasure.MODID, TreasureConfig.WOOD_LOCK_ID, new KeyItem[] {WOOD_KEY, LIGHTNING_KEY, PILFERERS_LOCK_PICK, THIEFS_LOCK_PICK, SKELETON_KEY})
 				.setCategory(Category.ELEMENTAL)
 				.setRarity(Rarity.COMMON);
-		STONE_LOCK = new LockItem(Treasure.MODID, TreasureConfig.STONE_LOCK_ID, new KeyItem[] {STONE_KEY})
+		STONE_LOCK = new LockItem(Treasure.MODID, TreasureConfig.STONE_LOCK_ID, new KeyItem[] {STONE_KEY, LIGHTNING_KEY, PILFERERS_LOCK_PICK, THIEFS_LOCK_PICK, SKELETON_KEY})
 				.setCategory(Category.ELEMENTAL)
 				.setRarity(Rarity.COMMON);
-		EMBER_LOCK = new EmberLock(Treasure.MODID, TreasureConfig.EMBER_LOCK_ID, new KeyItem[] {EMBER_KEY})
+		EMBER_LOCK = new EmberLock(Treasure.MODID, TreasureConfig.EMBER_LOCK_ID, new KeyItem[] {EMBER_KEY, LIGHTNING_KEY, SKELETON_KEY})
 				.setCategory(Category.ELEMENTAL)
 				.setRarity(Rarity.SCARCE);
-		LEAF_LOCK = new LockItem(Treasure.MODID, TreasureConfig.LEAF_LOCK_ID, new KeyItem[] {LEAF_KEY})
+		LEAF_LOCK = new LockItem(Treasure.MODID, TreasureConfig.LEAF_LOCK_ID, new KeyItem[] {LEAF_KEY, LIGHTNING_KEY, PILFERERS_LOCK_PICK, THIEFS_LOCK_PICK, SKELETON_KEY})
 				.setCategory(Category.ELEMENTAL)
 				.setRarity(Rarity.UNCOMMON);
-		IRON_LOCK = new LockItem(Treasure.MODID, TreasureConfig.IRON_LOCK_ID, new KeyItem[] {IRON_KEY})
+		IRON_LOCK = new LockItem(Treasure.MODID, TreasureConfig.IRON_LOCK_ID, new KeyItem[] {IRON_KEY, METALLURGISTS_KEY, PILFERERS_LOCK_PICK, THIEFS_LOCK_PICK, SKELETON_KEY})
 				.setCategory(Category.METALS)
 				.setRarity(Rarity.UNCOMMON);
-		GOLD_LOCK = new LockItem(Treasure.MODID, TreasureConfig.GOLD_LOCK_ID, new KeyItem[] {GOLD_KEY})
+		GOLD_LOCK = new LockItem(Treasure.MODID, TreasureConfig.GOLD_LOCK_ID, new KeyItem[] {GOLD_KEY, METALLURGISTS_KEY, THIEFS_LOCK_PICK, SKELETON_KEY})
 				.setCategory(Category.METALS)
 				.setRarity(Rarity.SCARCE);
-		DIAMOND_LOCK = new LockItem(Treasure.MODID, TreasureConfig.DIAMOND_LOCK_ID, new KeyItem[] {DIAMOND_KEY})
+		DIAMOND_LOCK = new LockItem(Treasure.MODID, TreasureConfig.DIAMOND_LOCK_ID, new KeyItem[] {DIAMOND_KEY, JEWELLED_KEY, SKELETON_KEY})
 				.setCategory(Category.GEMS)
 				.setRarity(Rarity.RARE);
-		EMERALD_LOCK = new LockItem(Treasure.MODID, TreasureConfig.EMERALD_LOCK_ID, new KeyItem[] {EMERALD_KEY})
+		EMERALD_LOCK = new LockItem(Treasure.MODID, TreasureConfig.EMERALD_LOCK_ID, new KeyItem[] {EMERALD_KEY, JEWELLED_KEY, SKELETON_KEY})
 				.setCategory(Category.GEMS)
 				.setRarity(Rarity.RARE);
-		AMBER_LOCK = new LockItem(Treasure.MODID, TreasureConfig.AMBER_LOCK_ID, new KeyItem[] {AMBER_KEY})
+		AMBER_LOCK = new LockItem(Treasure.MODID, TreasureConfig.AMBER_LOCK_ID, new KeyItem[] {AMBER_KEY, JEWELLED_KEY, SKELETON_KEY})
 				.setCategory(Category.GEMS)
 				.setRarity(Rarity.RARE);
-		MALACHITE_LOCK = new LockItem(Treasure.MODID, TreasureConfig.MALACHITE_LOCK_ID, new KeyItem[] {MALACHITE_KEY})
+		MALACHITE_LOCK = new LockItem(Treasure.MODID, TreasureConfig.MALACHITE_LOCK_ID, new KeyItem[] {MALACHITE_KEY, JEWELLED_KEY, SKELETON_KEY})
 				.setCategory(Category.GEMS)
 				.setRarity(Rarity.RARE);
-		RUBY_LOCK = new LockItem(Treasure.MODID, TreasureConfig.RUBY_LOCK_ID, new KeyItem[] {RUBY_KEY})
+		RUBY_LOCK = new LockItem(Treasure.MODID, TreasureConfig.RUBY_LOCK_ID, new KeyItem[] {RUBY_KEY, JEWELLED_KEY})
 				.setCategory(Category.GEMS)
 				.setRarity(Rarity.EPIC);
-		SAPPHIRE_LOCK = new LockItem(Treasure.MODID, TreasureConfig.SAPPHIRE_LOCK_ID, new KeyItem[] {SAPPHIRE_KEY})
+		SAPPHIRE_LOCK = new LockItem(Treasure.MODID, TreasureConfig.SAPPHIRE_LOCK_ID, new KeyItem[] {SAPPHIRE_KEY, JEWELLED_KEY})
 				.setCategory(Category.GEMS)
 				.setRarity(Rarity.EPIC);
-		PERIDOT_LOCK = new LockItem(Treasure.MODID, TreasureConfig.PERIDOT_LOCK_ID, new KeyItem[] {PERIDOT_KEY})
+		PERIDOT_LOCK = new LockItem(Treasure.MODID, TreasureConfig.PERIDOT_LOCK_ID, new KeyItem[] {PERIDOT_KEY, JEWELLED_KEY})
 				.setCategory(Category.GEMS)
 				.setRarity(Rarity.EPIC);
-		AMETHYST_LOCK = new LockItem(Treasure.MODID, TreasureConfig.AMETHYST_LOCK_ID, new KeyItem[] {AMETHYST_KEY})
+		AMETHYST_LOCK = new LockItem(Treasure.MODID, TreasureConfig.AMETHYST_LOCK_ID, new KeyItem[] {AMETHYST_KEY, JEWELLED_KEY})
 				.setCategory(Category.GEMS)
 				.setRarity(Rarity.EPIC);
-		TOPAZ_LOCK = new LockItem(Treasure.MODID, TreasureConfig.TOPAZ_LOCK_ID, new KeyItem[] {TOPAZ_KEY})
+		TOPAZ_LOCK = new LockItem(Treasure.MODID, TreasureConfig.TOPAZ_LOCK_ID, new KeyItem[] {TOPAZ_KEY, JEWELLED_KEY})
 				.setCategory(Category.GEMS)
 				.setRarity(Rarity.EPIC);
-		TANZANITE_LOCK = new LockItem(Treasure.MODID, TreasureConfig.TANZANITE_LOCK_ID, new KeyItem[] {TANZANITE_KEY})
+		TANZANITE_LOCK = new LockItem(Treasure.MODID, TreasureConfig.TANZANITE_LOCK_ID, new KeyItem[] {TANZANITE_KEY, JEWELLED_KEY})
 				.setCategory(Category.GEMS)
 				.setRarity(Rarity.EPIC);
-		ONYX_LOCK = new LockItem(Treasure.MODID, TreasureConfig.ONYX_LOCK_ID, new KeyItem[] {ONYX_KEY})
+		ONYX_LOCK = new LockItem(Treasure.MODID, TreasureConfig.ONYX_LOCK_ID, new KeyItem[] {ONYX_KEY, JEWELLED_KEY})
 				.setCategory(Category.GEMS)
 				.setRarity(Rarity.EPIC);
-		SPIDER_LOCK = new LockItem(Treasure.MODID, TreasureConfig.SPIDER_LOCK_ID, new KeyItem[] {SPIDER_KEY})
+		SPIDER_LOCK = new LockItem(Treasure.MODID, TreasureConfig.SPIDER_LOCK_ID, new KeyItem[] {SPIDER_KEY, THIEFS_LOCK_PICK, SKELETON_KEY})
 				.setCategory(Category.POTION)
 				.setRarity(Rarity.SCARCE);
 		WITHER_LOCK = new LockItem(Treasure.MODID, TreasureConfig.WITHER_LOCK_ID, new KeyItem[] {WITHER_KEY})

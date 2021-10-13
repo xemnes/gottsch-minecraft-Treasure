@@ -252,7 +252,11 @@ public class KeyItem extends ModItem {
 
 						LockItem lock = lockState.getLock();
 						if (lockState.getLock() != null) {
-							((WorldServer) worldIn).spawnParticle(EnumParticleTypes.SMOKE_LARGE, chestPos.getX() + lockState.getSlot().getXOffset(), chestPos.getY() + lockState.getSlot().getYOffset(), chestPos.getZ() + lockState.getSlot().getZOffset(), 12, 0.0D, 0.0D, 0.0D, 0.0D, 255, 250, 0);
+							if (lockState.getLock() == TreasureItems.WOOD_LOCK && heldItemStack.getItem() instanceof EmberKey) {
+								((WorldServer) worldIn).spawnParticle(EnumParticleTypes.FLAME, chestPos.getX() + lockState.getSlot().getXOffset(), chestPos.getY() + lockState.getSlot().getYOffset(), chestPos.getZ() + lockState.getSlot().getZOffset(), 24, 0.0D, 0.1D, 0.0D, 0.1D);
+								worldIn.playSound(null, chestPos, SoundEvents.BLOCK_FIRE_AMBIENT, SoundCategory.BLOCKS, 0.3F, 0.6F);
+							}
+							((WorldServer) worldIn).spawnParticle(EnumParticleTypes.SMOKE_LARGE, chestPos.getX() + lockState.getSlot().getXOffset(), chestPos.getY() + lockState.getSlot().getYOffset(), chestPos.getZ() + lockState.getSlot().getZOffset(), 12, 0.0D, 0.0D, 0.0D, 0.0D);
 						}
 
 						// remove the lock
